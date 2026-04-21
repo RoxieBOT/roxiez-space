@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Club Med 地中海白日方舟 · GEO策略方案</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A2744;
+    --gold: #C9A84C;
+    --blue: #1E6FA3;
+    --beige: #F8F4EE;
+    --red: #E53E3E;
+    --green: #38A169;
+    --orange: #DD6B20;
+    --purple: #805AD5;
+    --light-blue: #EBF4FB;
+    --light-gold: #FBF5E8;
+    --white: #FFFFFF;
+    --gray-100: #F7FAFC;
+    --gray-200: #EDF2F7;
+    --gray-500: #718096;
+    --gray-700: #2D3748;
+    --shadow: 0 4px 20px rgba(0,0,0,0.10);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
+  }
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+    background: #1a1a2e;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0 40px;
+  }
+  /* ── 进度条 ── */
+  #progress-bar-wrap {
+    width: 1200px;
+    height: 5px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 3px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  #progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), #e8c97a);
+    width: 7.14%;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+  /* ── 幻灯片容器 ── */
+  #slideshow {
+    width: 1200px;
+    position: relative;
+  }
+  .slide {
+    width: 1200px;
+    min-height: 675px;
+    display: none;
+    flex-direction: column;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    animation: fadeIn 0.45s ease;
+    position: relative;
+  }
+  .slide.active { display: flex; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  /* ── 底部页脚（所有幻灯片共用） ── */
+  .slide-footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.55);
+    font-size: 11px;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 32px;
+    flex-shrink: 0;
+  }
+  .slide-footer .footer-brand { color: var(--gold); font-weight: 600; }
+  /* ── 导航按钮 ── */
+  #nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .nav-btn {
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    color: #fff;
+    padding: 10px 28px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    letter-spacing: 1px;
+  }
+  .nav-btn:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  #slide-counter { color: rgba(255,255,255,0.65); font-size: 14px; min-width: 80px; text-align: center; }
+  /* ══════════════════════════════════
+     通用内容组件
+  ══════════════════════════════════ */
+  .slide-content { flex: 1; display: flex; flex-direction: column; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+  .section-header .gold-bar {
+    width: 5px;
+    height: 36px;
+    background: var(--gold);
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .section-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 1px;
+  }
+  .section-header .subtitle {
+    font-size: 13px;
+    color: var(--gray-500);
+    margin-top: 3px;
+    letter-spacing: 0.5px;
+  }
+  .card {
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+  }
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .tag-red { background: #FFF5F5; color: var(--red); border: 1px solid #FED7D7; }
+  .tag-yellow { background: #FFFFF0; color: #B7791F; border: 1px solid #FAF089; }
+  .tag-green { background: #F0FFF4; color: var(--green); border: 1px solid #C6F6D5; }
+  .tag-blue { background: #EBF8FF; color: var(--blue); border: 1px solid #BEE3F8; }
+</style>
+</head>
+<body>
+<div id="progress-bar-wrap"><div id="progress-bar"></div></div>
+<div id="slideshow">
+<!-- ══════════════════════════════════
+     SLIDE 1 · 封面
+══════════════════════════════════ -->
+<section class="slide active" id="slide-1" style="background:linear-gradient(135deg,#0A2744 0%,#1E6FA3 100%);min-height:675px;flex-direction:row;overflow:hidden;">
+  <!-- 右侧波浪装饰 -->
+  <div style="position:absolute;right:-60px;top:-40px;width:480px;height:780px;
+    background:rgba(255,255,255,0.07);
+    clip-path:polygon(30% 0%,100% 0%,100% 100%,0% 100%,10% 60%,25% 30%);
+    pointer-events:none;"></div>
+  <div style="position:absolute;right:20px;top:-20px;width:360px;height:720px;
+    background:rgba(255,255,255,0.05);
+    clip-path:polygon(40% 0%,100% 0%,100% 100%,0% 100%,15% 55%);
+    pointer-events:none;"></div>
+
+  <!-- 左侧内容 -->
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;padding:70px 80px;position:relative;z-index:2;">
+    <div style="font-size:12px;color:rgba(255,255,255,0.6);letter-spacing:8px;font-weight:500;margin-bottom:48px;text-transform:uppercase;">CLUB MED</div>
+
+    <h1 style="font-size:58px;font-weight:800;color:#fff;line-height:1.15;letter-spacing:4px;margin-bottom:20px;text-shadow:0 2px 20px rgba(0,0,0,0.3);">
+      地中海白日方舟
+    </h1>
+    <div style="font-size:30px;color:var(--gold);font-weight:600;letter-spacing:8px;margin-bottom:32px;">
+      GEO 策略方案
+    </div>
+
+    <div style="width:80px;height:3px;background:var(--gold);margin-bottom:32px;border-radius:2px;"></div>
+
+    <div style="font-size:14px;color:rgba(255,255,255,0.65);letter-spacing:3px;line-height:2;">
+      衔远科技出品 &nbsp;·&nbsp; 2026年4月
+    </div>
+
+    <div style="margin-top:50px;display:flex;gap:20px;flex-wrap:wrap;">
+      <div style="background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:8px;padding:12px 20px;text-align:center;">
+        <div style="font-size:22px;font-weight:700;color:var(--gold);">14</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:1px;margin-top:2px;">策略章节</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:8px;padding:12px 20px;text-align:center;">
+        <div style="font-size:22px;font-weight:700;color:var(--gold);">4</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:1px;margin-top:2px;">执行阶段</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:8px;padding:12px 20px;text-align:center;">
+        <div style="font-size:22px;font-weight:700;color:var(--gold);">6</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:1px;margin-top:2px;">核心卖点</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.20);border-radius:8px;padding:12px 20px;text-align:center;">
+        <div style="font-size:22px;font-weight:700;color:var(--gold);">7+</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:1px;margin-top:2px;">分发平台</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右侧图形装饰区 -->
+  <div style="width:340px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:40px;position:relative;z-index:2;gap:16px;">
+    <div style="width:180px;height:180px;border-radius:50%;border:3px solid rgba(201,168,76,0.4);display:flex;align-items:center;justify-content:center;position:relative;">
+      <div style="width:140px;height:140px;border-radius:50%;border:2px solid rgba(201,168,76,0.25);display:flex;align-items:center;justify-content:center;">
+        <div style="width:100px;height:100px;border-radius:50%;background:rgba(201,168,76,0.15);display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:42px;">🌊</span>
+        </div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.4);text-align:center;letter-spacing:2px;">GEO · Generative Engine Optimization</div>
+    <div style="font-size:11px;color:rgba(255,255,255,0.3);text-align:center;letter-spacing:1px;">生成式引擎优化策略</div>
+  </div>
+
+  <!-- 底部页脚 -->
+  <div class="slide-footer" style="position:absolute;bottom:0;left:0;right:0;">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>1 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 2 · 目录
+══════════════════════════════════ -->
+<section class="slide" id="slide-2" style="background:var(--beige);flex-direction:column;">
+  <div style="background:var(--navy);padding:28px 40px;flex-shrink:0;">
+    <div style="font-size:11px;color:var(--gold);letter-spacing:6px;margin-bottom:6px;">CONTENTS</div>
+    <h2 style="font-size:26px;color:#fff;font-weight:700;letter-spacing:2px;">目录</h2>
+  </div>
+
+  <div style="flex:1;padding:30px 40px 10px;display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+
+    <div style="background:#fff;border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);border-left:4px solid var(--navy);">
+      <div style="width:34px;height:34px;border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">01</div>
+      <div><div style="font-size:15px;font-weight:700;color:var(--navy);">现状诊断</div><div style="font-size:12px;color:var(--gray-500);margin-top:3px;">品牌GEO健康度全面评估</div></div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);border-left:4px solid var(--blue);">
+      <div style="width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">02</div>
+      <div><div style="font-size:15px;font-weight:700;color:var(--navy);">问题集设计</div><div style="font-size:12px;color:var(--gray-500);margin-top:3px;">用户AI问询全链路拆解</div></div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);border-left:4px solid var(--gold);">
+      <div style="width:34px;height:34px;border-radius:50%;background:var(--gold);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">03</div>
+      <div><div style="font-size:15px;font-weight:700;color:var(--navy);">内容策略</div><div style="font-size:12px;color:var(--gray-500);margin-top:3px;">4大AI友好内容模板</div></div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);border-left:4px solid var(--green);">
+      <div style="width:34px;height:34px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">04</div>
+      <div><div style="font-size:15px;font-weight:700;color:var(--navy);">AI内容框架规范</div><div style="font-size:12px;color:var(--gray-500);margin-top:3px;">关键词植入标准与层级规范</div></div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);border-left:4px solid var(--orange);">
+      <div style="width:34px;height:34px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">05</div>
+      <div><div style="font-size:15px;font-weight:700;color:var(--navy);">核心卖点矩阵</div><div style="font-size:12px;color:var(--gray-500);margin-top:3px;">品牌卖点×AI植入方向</div></div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);border-left:4px solid var(--purple);">
+      <div style="width:34px;height:34px;border-radius:50%;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">06</div>
+      <div><div style="font-size:15px;font-weight:700;color:var(--navy);">分发策略</div><div style="font-size:12px;color:var(--gray-500);margin-top:3px;">平台精准布局·豆包优先模型</div></div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);border-left:4px solid #2B6CB0;">
+      <div style="width:34px;height:34px;border-radius:50%;background:#2B6CB0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">07</div>
+      <div><div style="font-size:15px;font-weight:700;color:var(--navy);">执行SOP</div><div style="font-size:12px;color:var(--gray-500);margin-top:3px;">四阶段全流程作战地图</div></div>
+    </div>
+
+    <div style="background:#fff;border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;box-shadow:0 2px 10px rgba(0,0,0,0.07);border-left:4px solid #B83280;">
+      <div style="width:34px;height:34px;border-radius:50%;background:#B83280;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;">08</div>
+      <div><div style="font-size:15px;font-weight:700;color:var(--navy);">KPI体系</div><div style="font-size:12px;color:var(--gray-500);margin-top:3px;">分阶段目标与监播机制</div></div>
+    </div>
+
+  </div>
+
+  <!-- 底部装饰横条 -->
+  <div style="margin:10px 40px 20px;background:linear-gradient(90deg,var(--navy),var(--blue));border-radius:8px;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;">
+    <span style="color:rgba(255,255,255,0.7);font-size:12px;letter-spacing:1px;">战略目标：让Club Med白日方舟在AI时代被看见、被信任、被选择</span>
+    <span style="color:var(--gold);font-size:12px;font-weight:600;">衔远科技 GEO · 2026</span>
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>2 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 3 · 现状诊断 - 数据看板
+══════════════════════════════════ -->
+<section class="slide" id="slide-3" style="background:var(--beige);flex-direction:column;">
+  <div style="background:var(--navy);padding:22px 40px;flex-shrink:0;display:flex;align-items:center;gap:16px;">
+    <div style="width:4px;height:32px;background:var(--gold);border-radius:2px;"></div>
+    <div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:3px;">DIAGNOSIS · 现状诊断</div>
+      <h2 style="font-size:20px;color:#fff;font-weight:700;">品牌GEO核心指标（近15天）</h2>
+    </div>
+    <div style="margin-left:auto;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:6px;padding:6px 16px;font-size:12px;color:rgba(255,255,255,0.7);">数据采集周期：2026年3月下旬至4月初</div>
+  </div>
+
+  <div style="flex:1;padding:24px 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+
+    <!-- 卡片1：品牌可见度 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);overflow:hidden;">
+      <div style="height:5px;background:linear-gradient(90deg,#1E6FA3,#63B3ED);"></div>
+      <div style="padding:20px;">
+        <div style="font-size:12px;color:var(--gray-500);letter-spacing:1px;margin-bottom:10px;">品牌可见度</div>
+        <div style="font-size:44px;font-weight:800;color:var(--navy);line-height:1;">50.3<span style="font-size:22px;font-weight:600;">%</span></div>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:8px;">
+          <span style="background:#EBF8FF;color:var(--blue);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;">↑ +13.3%</span>
+        </div>
+        <div style="margin-top:10px;height:4px;background:var(--gray-200);border-radius:2px;overflow:hidden;">
+          <div style="width:50.3%;height:100%;background:linear-gradient(90deg,#1E6FA3,#63B3ED);border-radius:2px;"></div>
+        </div>
+        <div style="font-size:11px;color:var(--gray-500);margin-top:10px;line-height:1.5;">AI问答中品牌被提及的问题占比</div>
+      </div>
+    </div>
+
+    <!-- 卡片2：品牌声量 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);overflow:hidden;">
+      <div style="height:5px;background:linear-gradient(90deg,#DD6B20,#F6AD55);"></div>
+      <div style="padding:20px;">
+        <div style="font-size:12px;color:var(--gray-500);letter-spacing:1px;margin-bottom:10px;">品牌声量</div>
+        <div style="font-size:44px;font-weight:800;color:var(--navy);line-height:1;">15.6<span style="font-size:22px;font-weight:600;">%</span></div>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:8px;">
+          <span style="background:#FFFAF0;color:var(--orange);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;">↑ +20%</span>
+        </div>
+        <div style="margin-top:10px;height:4px;background:var(--gray-200);border-radius:2px;overflow:hidden;">
+          <div style="width:15.6%;height:100%;background:linear-gradient(90deg,#DD6B20,#F6AD55);border-radius:2px;"></div>
+        </div>
+        <div style="font-size:11px;color:var(--gray-500);margin-top:10px;line-height:1.5;">品牌内容在AI引用中的实质占比</div>
+      </div>
+    </div>
+
+    <!-- 卡片3：品牌信息准确率 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);overflow:hidden;border:2px solid #FED7D7;">
+      <div style="height:5px;background:linear-gradient(90deg,#E53E3E,#FC8181);"></div>
+      <div style="padding:20px;">
+        <div style="font-size:12px;color:var(--gray-500);letter-spacing:1px;margin-bottom:10px;">品牌信息准确率</div>
+        <div style="font-size:44px;font-weight:800;color:var(--red);line-height:1;">0.0<span style="font-size:22px;font-weight:600;">%</span></div>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:8px;">
+          <span style="background:#FFF5F5;color:var(--red);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;">🔴 急需修复</span>
+        </div>
+        <div style="margin-top:10px;height:4px;background:var(--gray-200);border-radius:2px;overflow:hidden;">
+          <div style="width:2%;height:100%;background:var(--red);border-radius:2px;"></div>
+        </div>
+        <div style="font-size:11px;color:var(--red);margin-top:10px;line-height:1.5;font-weight:500;">AI引用信息存在缺失、过期或不实</div>
+      </div>
+    </div>
+
+    <!-- 卡片4：情绪指数 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);overflow:hidden;">
+      <div style="height:5px;background:linear-gradient(90deg,#38A169,#68D391);"></div>
+      <div style="padding:20px;">
+        <div style="font-size:12px;color:var(--gray-500);letter-spacing:1px;margin-bottom:10px;">情绪指数</div>
+        <div style="font-size:44px;font-weight:800;color:var(--navy);line-height:1;">100<span style="font-size:22px;font-weight:600;">%</span></div>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:8px;">
+          <span style="background:#F0FFF4;color:var(--green);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;">↑ +200%</span>
+        </div>
+        <div style="margin-top:10px;height:4px;background:var(--gray-200);border-radius:2px;overflow:hidden;">
+          <div style="width:100%;height:100%;background:linear-gradient(90deg,#38A169,#68D391);border-radius:2px;"></div>
+        </div>
+        <div style="font-size:11px;color:var(--gray-500);margin-top:10px;line-height:1.5;">品牌相关情感正面率（情绪好评占比）</div>
+      </div>
+    </div>
+
+    <!-- 卡片5：问答总数 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);overflow:hidden;">
+      <div style="height:5px;background:linear-gradient(90deg,#0A2744,#1E6FA3);"></div>
+      <div style="padding:20px;">
+        <div style="font-size:12px;color:var(--gray-500);letter-spacing:1px;margin-bottom:10px;">问答总数</div>
+        <div style="font-size:44px;font-weight:800;color:var(--navy);line-height:1;">159<span style="font-size:22px;font-weight:600;">条</span></div>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:8px;">
+          <span style="background:#EBF8FF;color:var(--blue);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;">↑ +341.7%</span>
+        </div>
+        <div style="margin-top:10px;height:4px;background:var(--gray-200);border-radius:2px;overflow:hidden;">
+          <div style="width:72%;height:100%;background:linear-gradient(90deg,#0A2744,#1E6FA3);border-radius:2px;"></div>
+        </div>
+        <div style="font-size:11px;color:var(--gray-500);margin-top:10px;line-height:1.5;">监控的总AI问答量，快速增长</div>
+      </div>
+    </div>
+
+    <!-- 卡片6：可见总数 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);overflow:hidden;">
+      <div style="height:5px;background:linear-gradient(90deg,#6B46C1,#9F7AEA);"></div>
+      <div style="padding:20px;">
+        <div style="font-size:12px;color:var(--gray-500);letter-spacing:1px;margin-bottom:10px;">可见总数</div>
+        <div style="font-size:44px;font-weight:800;color:var(--navy);line-height:1;">80<span style="font-size:22px;font-weight:600;">次</span></div>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:8px;">
+          <span style="background:#FAF5FF;color:#6B46C1;border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;">↑ +400%</span>
+        </div>
+        <div style="margin-top:10px;height:4px;background:var(--gray-200);border-radius:2px;overflow:hidden;">
+          <div style="width:50%;height:100%;background:linear-gradient(90deg,#6B46C1,#9F7AEA);border-radius:2px;"></div>
+        </div>
+        <div style="font-size:11px;color:var(--gray-500);margin-top:10px;line-height:1.5;">品牌在AI答案中出现的总次数</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>3 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 4 · 三大核心问题诊断
+══════════════════════════════════ -->
+<section class="slide" id="slide-4" style="background:var(--beige);flex-direction:column;">
+  <div style="background:var(--navy);padding:22px 40px;flex-shrink:0;display:flex;align-items:center;gap:16px;">
+    <div style="width:4px;height:32px;background:var(--red);border-radius:2px;"></div>
+    <div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:3px;">DIAGNOSIS · 现状诊断</div>
+      <h2 style="font-size:20px;color:#fff;font-weight:700;">三大核心问题诊断</h2>
+    </div>
+    <div style="margin-left:auto;background:rgba(229,62,62,0.2);border:1px solid rgba(229,62,62,0.4);border-radius:6px;padding:6px 16px;font-size:12px;color:#FC8181;">⚠️ 需立即启动修复行动</div>
+  </div>
+
+  <div style="flex:1;padding:24px 40px;display:flex;flex-direction:column;gap:16px;">
+
+    <!-- 问题一 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);border-left:6px solid var(--red);padding:22px 28px;display:flex;align-items:flex-start;gap:20px;flex:1;">
+      <div style="flex-shrink:0;">
+        <div style="width:50px;height:50px;border-radius:50%;background:#FFF5F5;border:2px solid #FED7D7;display:flex;align-items:center;justify-content:center;font-size:22px;">🔴</div>
+      </div>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <div style="font-size:16px;font-weight:700;color:var(--navy);">问题一：品牌信息准确率为 0%</div>
+          <span style="background:#FFF5F5;color:var(--red);border:1px solid #FED7D7;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;letter-spacing:1px;">优先级：最高</span>
+        </div>
+        <p style="font-size:14px;color:var(--gray-700);line-height:1.8;">
+          AI在提及Club Med白日方舟时，引用信息存在缺失、过期或不实，导致准确率归零。核心危害在于：用户向AI询问品牌信息时，得到的是错误或不完整的答案，直接损害品牌可信度与转化率。
+        </p>
+        <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;">
+          <div style="background:#FFF5F5;border:1px solid #FED7D7;border-radius:6px;padding:6px 14px;font-size:12px;color:var(--red);">🔧 紧急建立品牌权威知识基础层</div>
+          <div style="background:#FFF5F5;border:1px solid #FED7D7;border-radius:6px;padding:6px 14px;font-size:12px;color:var(--red);">📡 向AI模型注入准确品牌信源</div>
+          <div style="background:#FFF5F5;border:1px solid #FED7D7;border-radius:6px;padding:6px 14px;font-size:12px;color:var(--red);">⏱️ 首月核心攻坚目标：达到30%+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 问题二 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);border-left:6px solid #D69E2E;padding:22px 28px;display:flex;align-items:flex-start;gap:20px;flex:1;">
+      <div style="flex-shrink:0;">
+        <div style="width:50px;height:50px;border-radius:50%;background:#FFFFF0;border:2px solid #FAF089;display:flex;align-items:center;justify-content:center;font-size:22px;">🟡</div>
+      </div>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <div style="font-size:16px;font-weight:700;color:var(--navy);">问题二：所有监控问题均为"无品牌倾向"</div>
+          <span style="background:#FFFFF0;color:#B7791F;border:1px solid #FAF089;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;letter-spacing:1px;">优先级：高</span>
+        </div>
+        <p style="font-size:14px;color:var(--gray-700);line-height:1.8;">
+          AI在回答"江浙沪亲子酒店推荐"类问题时，Club Med白日方舟未被作为首要推荐品牌出现，当前处于「有出现 但未被主动推荐」的尴尬状态。需通过系统性GEO布局，从单纯"被提及"升级为"被主动推荐"。
+        </p>
+        <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;">
+          <div style="background:#FFFFF0;border:1px solid #FAF089;border-radius:6px;padding:6px 14px;font-size:12px;color:#B7791F;">📈 目标：从有出现 → 被主动推荐</div>
+          <div style="background:#FFFFF0;border:1px solid #FAF089;border-radius:6px;padding:6px 14px;font-size:12px;color:#B7791F;">🎯 品类词优先布局：江浙沪亲子度假</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 问题三 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);border-left:6px solid var(--orange);padding:22px 28px;display:flex;align-items:flex-start;gap:20px;flex:1;">
+      <div style="flex-shrink:0;">
+        <div style="width:50px;height:50px;border-radius:50%;background:#FFFAF0;border:2px solid #FEEBC8;display:flex;align-items:center;justify-content:center;font-size:22px;">🟡</div>
+      </div>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <div style="font-size:16px;font-weight:700;color:var(--navy);">问题三：品牌声量仅 15.6%，与可见度严重失衡</div>
+          <span style="background:#FFFAF0;color:var(--orange);border:1px solid #FEEBC8;border-radius:20px;padding:3px 12px;font-size:11px;font-weight:700;letter-spacing:1px;">优先级：高</span>
+        </div>
+        <p style="font-size:14px;color:var(--gray-700);line-height:1.8;">
+          品牌可见度已达50.3%，而声量仅15.6%，两者差值高达34.7%，反差悬殊。这说明AI能"看到"Club Med，但引用的实质性品牌内容极少——品牌在AI眼中是"存在感低"的状态。需系统扩大多平台内容布局密度。
+        </p>
+        <div style="margin-top:12px;display:flex;gap:12px;align-items:center;">
+          <div style="background:#fff;border:1px solid var(--gray-200);border-radius:8px;padding:8px 16px;font-size:13px;color:var(--navy);">
+            可见度 <strong style="color:var(--blue);">50.3%</strong> vs 声量 <strong style="color:var(--red);">15.6%</strong>
+            <span style="color:var(--gray-500);font-size:12px;margin-left:8px;">差值 -34.7%</span>
+          </div>
+          <div style="background:#FFFAF0;border:1px solid #FEEBC8;border-radius:6px;padding:6px 14px;font-size:12px;color:var(--orange);">📝 扩大多平台内容布局密度</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>4 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 5 · 问题集设计 - 用户问询路径
+══════════════════════════════════ -->
+<section class="slide" id="slide-5" style="background:var(--beige);flex-direction:column;">
+  <div style="background:var(--navy);padding:22px 40px;flex-shrink:0;display:flex;align-items:center;gap:16px;">
+    <div style="width:4px;height:32px;background:var(--blue);border-radius:2px;"></div>
+    <div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:3px;">QUESTION DESIGN · 问题集设计</div>
+      <h2 style="font-size:20px;color:#fff;font-weight:700;">用户AI问询全链路 · 5级漏斗模型</h2>
+    </div>
+  </div>
+
+  <div style="flex:1;padding:20px 40px 10px;display:flex;flex-direction:column;gap:10px;">
+
+    <!-- 级别1 -->
+    <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;border:2px solid #0A2744;">
+      <div style="width:140px;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;flex-shrink:0;gap:4px;">
+        <div style="font-size:10px;color:rgba(255,255,255,0.6);letter-spacing:2px;">级别</div>
+        <div style="font-size:28px;font-weight:800;color:var(--gold);">1</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.8);text-align:center;margin-top:2px;">品类范围锁定</div>
+        <div style="font-size:14px;margin-top:4px;">⭐⭐⭐⭐⭐</div>
+      </div>
+      <div style="flex:1;padding:14px 20px;display:flex;gap:20px;align-items:center;">
+        <div style="flex:1.4;">
+          <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:5px;">典型AI问题</div>
+          <div style="font-size:13px;color:var(--navy);font-weight:500;line-height:1.7;">
+            「江浙沪亲子度假酒店选什么好」<br>
+            「江浙沪有哪些好的亲子酒店」<br>
+            「江浙沪短途游亲子酒店推荐」
+          </div>
+        </div>
+        <div style="width:1px;background:var(--gray-200);height:60px;flex-shrink:0;"></div>
+        <div style="flex:1.6;">
+          <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:5px;">GEO策略角色</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">抢占品类流量最大入口，在泛类推荐中植入白日方舟核心曝光，AI答案覆盖多品牌时争夺首位提及</div>
+        </div>
+        <div style="flex-shrink:0;">
+          <span style="background:#EBF4FB;color:var(--navy);border-radius:6px;padding:5px 14px;font-size:12px;font-weight:700;">🔥 重点布局</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 级别2 -->
+    <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+      <div style="width:140px;background:#1E6FA3;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;flex-shrink:0;gap:4px;">
+        <div style="font-size:10px;color:rgba(255,255,255,0.6);letter-spacing:2px;">级别</div>
+        <div style="font-size:28px;font-weight:800;color:#fff;">2</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.85);text-align:center;margin-top:2px;">属性维度筛选</div>
+        <div style="font-size:14px;margin-top:4px;">⭐⭐⭐⭐</div>
+      </div>
+      <div style="flex:1;padding:14px 20px;display:flex;gap:20px;align-items:center;">
+        <div style="flex:1.4;">
+          <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:5px;">典型AI问题</div>
+          <div style="font-size:13px;color:var(--navy);font-weight:500;line-height:1.7;">
+            「高端亲子度假酒店哪家好」<br>
+            「上海周边亲子主题度假村推荐」<br>
+            「全家带娃短途游哪里好」
+          </div>
+        </div>
+        <div style="width:1px;background:var(--gray-200);height:60px;flex-shrink:0;"></div>
+        <div style="flex:1.6;">
+          <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:5px;">GEO策略角色</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">强化Club Med差异化卖点（国际化品质、全包式服务、专业儿童俱乐部），精准命中高端属性筛选</div>
+        </div>
+        <div style="flex-shrink:0;">
+          <span style="background:#EBF8FF;color:var(--blue);border-radius:6px;padding:5px 14px;font-size:12px;font-weight:700;">优先布局</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 级别3 -->
+    <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+      <div style="width:140px;background:#C9A84C;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;flex-shrink:0;gap:4px;">
+        <div style="font-size:10px;color:rgba(0,0,0,0.5);letter-spacing:2px;">级别</div>
+        <div style="font-size:28px;font-weight:800;color:var(--navy);">3</div>
+        <div style="font-size:10px;color:rgba(0,0,0,0.6);text-align:center;margin-top:2px;">目标品牌对标</div>
+        <div style="font-size:14px;margin-top:4px;">⭐⭐⭐⭐</div>
+      </div>
+      <div style="flex:1;padding:14px 20px;display:flex;gap:20px;align-items:center;">
+        <div style="flex:1.4;">
+          <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:5px;">典型AI问题</div>
+          <div style="font-size:13px;color:var(--navy);font-weight:500;line-height:1.7;">
+            「Club Med和开元森泊哪个好」<br>
+            「Club Med白日方舟值不值得去」<br>
+            「Club Med适合几岁孩子」
+          </div>
+        </div>
+        <div style="width:1px;background:var(--gray-200);height:60px;flex-shrink:0;"></div>
+        <div style="flex:1.6;">
+          <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:5px;">GEO策略角色</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">挤压竞品心智空间，强化正向品牌形象，在横向对比中占据明显优势地位</div>
+        </div>
+        <div style="flex-shrink:0;">
+          <span style="background:#FBF5E8;color:#B7791F;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:700;">优先布局</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 级别4 -->
+    <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+      <div style="width:140px;background:#38A169;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;flex-shrink:0;gap:4px;">
+        <div style="font-size:10px;color:rgba(255,255,255,0.6);letter-spacing:2px;">级别</div>
+        <div style="font-size:28px;font-weight:800;color:#fff;">4</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.85);text-align:center;margin-top:2px;">单品深度剖析</div>
+        <div style="font-size:14px;margin-top:4px;">⭐⭐⭐</div>
+      </div>
+      <div style="flex:1;padding:14px 20px;display:flex;gap:20px;align-items:center;">
+        <div style="flex:1.4;">
+          <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:5px;">典型AI问题</div>
+          <div style="font-size:13px;color:var(--navy);font-weight:500;line-height:1.7;">
+            「Club Med白日方舟亲子设施怎么样」<br>
+            「Club Med价格贵吗」<br>
+            「Club Med儿童俱乐部几岁可以参加」
+          </div>
+        </div>
+        <div style="width:1px;background:var(--gray-200);height:60px;flex-shrink:0;"></div>
+        <div style="flex:1.6;">
+          <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:5px;">GEO策略角色</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">修正不实信息，深植核心产品卖点，通过详细结构化内容推动用户决策闭环</div>
+        </div>
+        <div style="flex-shrink:0;">
+          <span style="background:#F0FFF4;color:var(--green);border-radius:6px;padding:5px 14px;font-size:12px;font-weight:700;">针对性布局</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 级别5 -->
+    <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+      <div style="width:140px;background:#718096;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;flex-shrink:0;gap:4px;">
+        <div style="font-size:10px;color:rgba(255,255,255,0.6);letter-spacing:2px;">级别</div>
+        <div style="font-size:28px;font-weight:800;color:#fff;">5</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.85);text-align:center;margin-top:2px;">购买决策敲定</div>
+        <div style="font-size:14px;margin-top:4px;">⭐⭐</div>
+      </div>
+      <div style="flex:1;padding:14px 20px;display:flex;gap:20px;align-items:center;">
+        <div style="flex:1.4;">
+          <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:5px;">典型AI问题</div>
+          <div style="font-size:13px;color:var(--navy);font-weight:500;line-height:1.7;">
+            「五一暑假亲子游哪里好」<br>
+            「带娃短途游推荐」
+          </div>
+        </div>
+        <div style="width:1px;background:var(--gray-200);height:60px;flex-shrink:0;"></div>
+        <div style="flex:1.6;">
+          <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:5px;">GEO策略角色</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">季节性内容布局，长尾辐射效果，以监测为主，借助前4级内容形成口碑辐射</div>
+        </div>
+        <div style="flex-shrink:0;">
+          <span style="background:var(--gray-200);color:var(--gray-500);border-radius:6px;padding:5px 14px;font-size:12px;font-weight:700;">辐射监测</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>5 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 6 · 内容策略 - 4大模板
+══════════════════════════════════ -->
+<section class="slide" id="slide-6" style="background:var(--beige);flex-direction:column;">
+  <div style="background:var(--navy);padding:22px 40px;flex-shrink:0;display:flex;align-items:center;gap:16px;">
+    <div style="width:4px;height:32px;background:var(--gold);border-radius:2px;"></div>
+    <div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:3px;">CONTENT STRATEGY · 内容策略</div>
+      <h2 style="font-size:20px;color:#fff;font-weight:700;">4大AI友好内容模板</h2>
+    </div>
+  </div>
+
+  <div style="flex:1;padding:24px 40px;display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+
+    <!-- 模板1：体验解析类 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:24px;display:flex;flex-direction:column;gap:12px;border-top:4px solid var(--navy);">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:var(--light-blue);display:flex;align-items:center;justify-content:center;font-size:22px;">📖</div>
+        <div>
+          <div style="font-size:16px;font-weight:700;color:var(--navy);">体验解析类</div>
+          <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">Template 01 · 产品体验深度拆解</div>
+        </div>
+      </div>
+      <div style="background:#F8FAFC;border-radius:8px;padding:12px 14px;">
+        <div style="font-size:11px;color:var(--blue);font-weight:600;letter-spacing:1px;margin-bottom:4px;">🤖 AI偏好原因</div>
+        <div style="font-size:13px;color:var(--gray-700);line-height:1.6;">具体真实的产品体验细节，可直接被AI引用为"客观评价"，权威性高</div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:6px;">适用内容方向</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="background:#EBF4FB;color:var(--navy);border-radius:4px;padding:3px 10px;font-size:12px;">亲子设施全拆解</span>
+          <span style="background:#EBF4FB;color:var(--navy);border-radius:4px;padding:3px 10px;font-size:12px;">儿童俱乐部年龄段详解</span>
+          <span style="background:#EBF4FB;color:var(--navy);border-radius:4px;padding:3px 10px;font-size:12px;">度假服务全流程</span>
+        </div>
+      </div>
+      <div style="background:var(--light-gold);border:1px solid #E8C97A;border-radius:8px;padding:10px 14px;">
+        <div style="font-size:11px;color:#B7791F;font-weight:600;letter-spacing:1px;margin-bottom:4px;">示例标题</div>
+        <div style="font-size:13px;color:var(--navy);font-weight:500;line-height:1.5;">《Club Med白日方舟亲子设施全攻略：Mini/Petit/Kids Club年龄段深度体验》</div>
+      </div>
+    </div>
+
+    <!-- 模板2：品牌对比类 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:24px;display:flex;flex-direction:column;gap:12px;border-top:4px solid var(--blue);">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:#EBF8FF;display:flex;align-items:center;justify-content:center;font-size:22px;">⚖️</div>
+        <div>
+          <div style="font-size:16px;font-weight:700;color:var(--navy);">品牌对比类</div>
+          <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">Template 02 · 横向品牌竞品对比</div>
+        </div>
+      </div>
+      <div style="background:#F8FAFC;border-radius:8px;padding:12px 14px;">
+        <div style="font-size:11px;color:var(--blue);font-weight:600;letter-spacing:1px;margin-bottom:4px;">🤖 AI偏好原因</div>
+        <div style="font-size:13px;color:var(--gray-700);line-height:1.6;">提供多维度横向数据，AI在回答"哪家更好"时会直接引用对比内容</div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:6px;">适用内容方向</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="background:#EBF8FF;color:var(--blue);border-radius:4px;padding:3px 10px;font-size:12px;">vs 开元森泊全维度PK</span>
+          <span style="background:#EBF8FF;color:var(--blue);border-radius:4px;padding:3px 10px;font-size:12px;">vs 裸心谷/迪士尼</span>
+          <span style="background:#EBF8FF;color:var(--blue);border-radius:4px;padding:3px 10px;font-size:12px;">性价比横向分析</span>
+        </div>
+      </div>
+      <div style="background:var(--light-gold);border:1px solid #E8C97A;border-radius:8px;padding:10px 14px;">
+        <div style="font-size:11px;color:#B7791F;font-weight:600;letter-spacing:1px;margin-bottom:4px;">示例标题</div>
+        <div style="font-size:13px;color:var(--navy);font-weight:500;line-height:1.5;">《2026江浙沪高端亲子度假酒店对比：Club Med vs 开元森泊 vs 裸心谷，哪家更值？》</div>
+      </div>
+    </div>
+
+    <!-- 模板3：场景需求类 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:24px;display:flex;flex-direction:column;gap:12px;border-top:4px solid var(--green);">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:#F0FFF4;display:flex;align-items:center;justify-content:center;font-size:22px;">🎯</div>
+        <div>
+          <div style="font-size:16px;font-weight:700;color:var(--navy);">场景需求类</div>
+          <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">Template 03 · 用户场景精准绑定</div>
+        </div>
+      </div>
+      <div style="background:#F8FAFC;border-radius:8px;padding:12px 14px;">
+        <div style="font-size:11px;color:var(--green);font-weight:600;letter-spacing:1px;margin-bottom:4px;">🤖 AI偏好原因</div>
+        <div style="font-size:13px;color:var(--gray-700);line-height:1.6;">绑定用户具体需求与品牌特性，降低AI对"模糊需求"的解读成本，精准命中</div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:6px;">适用内容方向</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="background:#F0FFF4;color:var(--green);border-radius:4px;padding:3px 10px;font-size:12px;">不同年龄孩子出行</span>
+          <span style="background:#F0FFF4;color:var(--green);border-radius:4px;padding:3px 10px;font-size:12px;">家长+孩子双满足</span>
+          <span style="background:#F0FFF4;color:var(--green);border-radius:4px;padding:3px 10px;font-size:12px;">暑假/五一场景</span>
+        </div>
+      </div>
+      <div style="background:var(--light-gold);border:1px solid #E8C97A;border-radius:8px;padding:10px 14px;">
+        <div style="font-size:11px;color:#B7791F;font-weight:600;letter-spacing:1px;margin-bottom:4px;">示例标题</div>
+        <div style="font-size:13px;color:var(--navy);font-weight:500;line-height:1.5;">《带2岁和7岁孩子一起去，Club Med白日方舟全家场景适配指南》</div>
+      </div>
+    </div>
+
+    <!-- 模板4：数据盘点类 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:24px;display:flex;flex-direction:column;gap:12px;border-top:4px solid var(--orange);">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:44px;height:44px;border-radius:10px;background:#FFFAF0;display:flex;align-items:center;justify-content:center;font-size:22px;">📊</div>
+        <div>
+          <div style="font-size:16px;font-weight:700;color:var(--navy);">数据盘点类</div>
+          <div style="font-size:11px;color:var(--gray-500);margin-top:2px;">Template 04 · 结构化榜单数据</div>
+        </div>
+      </div>
+      <div style="background:#F8FAFC;border-radius:8px;padding:12px 14px;">
+        <div style="font-size:11px;color:var(--orange);font-weight:600;letter-spacing:1px;margin-bottom:4px;">🤖 AI偏好原因</div>
+        <div style="font-size:13px;color:var(--gray-700);line-height:1.6;">结构清晰的榜单/数据降低AI提取难度，被直接引用概率极高，传播效果最好</div>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-bottom:6px;">适用内容方向</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="background:#FFFAF0;color:var(--orange);border-radius:4px;padding:3px 10px;font-size:12px;">TOP10亲子度假榜单</span>
+          <span style="background:#FFFAF0;color:var(--orange);border-radius:4px;padding:3px 10px;font-size:12px;">核心指标数据盘点</span>
+          <span style="background:#FFFAF0;color:var(--orange);border-radius:4px;padding:3px 10px;font-size:12px;">全维度对比数据</span>
+        </div>
+      </div>
+      <div style="background:var(--light-gold);border:1px solid #E8C97A;border-radius:8px;padding:10px 14px;">
+        <div style="font-size:11px;color:#B7791F;font-weight:600;letter-spacing:1px;margin-bottom:4px;">示例标题</div>
+        <div style="font-size:13px;color:var(--navy);font-weight:500;line-height:1.5;">《2026年江浙沪亲子度假酒店TOP10丨亲子设施×服务体系×性价比全维度盘点》</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>6 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 7 · AI内容框架规范
+══════════════════════════════════ -->
+<section class="slide" id="slide-7" style="background:var(--beige);flex-direction:column;">
+  <div style="background:var(--navy);padding:22px 40px;flex-shrink:0;display:flex;align-items:center;gap:16px;">
+    <div style="width:4px;height:32px;background:var(--green);border-radius:2px;"></div>
+    <div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:3px;">FRAMEWORK · AI内容框架规范</div>
+      <h2 style="font-size:20px;color:#fff;font-weight:700;">关键词植入标准 · 四层结构</h2>
+    </div>
+  </div>
+
+  <div style="flex:1;padding:22px 40px;display:flex;gap:24px;">
+
+    <!-- 左侧规范说明 -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+
+      <!-- 标题层 -->
+      <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);padding:16px 20px;display:flex;gap:16px;align-items:flex-start;border-left:5px solid var(--gold);">
+        <div style="width:36px;height:36px;border-radius:8px;background:var(--light-gold);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">T</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <span style="font-size:14px;font-weight:700;color:var(--navy);">标题层</span>
+            <span style="background:var(--light-gold);color:#B7791F;border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">黄金15字符</span>
+          </div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.6;">前15字符内植入核心关键词，搭配数字/场景词增加可读性，AI识别权重最高</div>
+          <div style="margin-top:8px;background:#FBF5E8;border-radius:6px;padding:8px 12px;font-size:12px;color:var(--navy);">
+            <span style="background:var(--gold);color:var(--navy);border-radius:3px;padding:1px 6px;font-size:11px;font-weight:700;">示例：</span>
+            <span style="margin-left:6px;">《<u style="color:var(--gold);">江浙沪亲子度假酒店</u>TOP5！2026带娃出行全攻略》</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 首段层 -->
+      <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);padding:16px 20px;display:flex;gap:16px;align-items:flex-start;border-left:5px solid var(--blue);">
+        <div style="width:36px;height:36px;border-radius:8px;background:var(--light-blue);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">P1</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <span style="font-size:14px;font-weight:700;color:var(--navy);">首段层</span>
+            <span style="background:var(--light-blue);color:var(--blue);border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">前100字必现</span>
+          </div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.6;">前100字必现核心关键词，定调品牌价值主张，为全文奠定AI解读基础</div>
+          <div style="margin-top:8px;background:#EBF4FB;border-radius:6px;padding:8px 12px;font-size:12px;color:var(--navy);">
+            <span style="background:var(--blue);color:#fff;border-radius:3px;padding:1px 6px;font-size:11px;font-weight:700;">示例：</span>
+            <span style="margin-left:6px;"><u style="color:var(--blue);">江浙沪亲子度假酒店</u>怎么选？Club Med白日方舟以全包式服务体系…</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 正文层 -->
+      <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);padding:16px 20px;display:flex;gap:16px;align-items:flex-start;border-left:5px solid var(--green);">
+        <div style="width:36px;height:36px;border-radius:8px;background:#F0FFF4;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">正</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <span style="font-size:14px;font-weight:700;color:var(--navy);">正文层</span>
+            <span style="background:#F0FFF4;color:var(--green);border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">每150-200字1次</span>
+          </div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.6;">1000字文章布局6-7次核心关键词，均匀分布，避免堆砌，自然嵌入场景描述中</div>
+          <!-- 密度可视化 -->
+          <div style="margin-top:8px;display:flex;gap:4px;align-items:center;">
+            <div style="flex:1;height:6px;background:var(--gray-200);border-radius:3px;position:relative;overflow:hidden;">
+              <div style="position:absolute;left:0%;width:10%;height:100%;background:var(--green);border-radius:3px;opacity:0.8;"></div>
+              <div style="position:absolute;left:15%;width:10%;height:100%;background:var(--green);border-radius:3px;opacity:0.8;"></div>
+              <div style="position:absolute;left:30%;width:10%;height:100%;background:var(--green);border-radius:3px;opacity:0.8;"></div>
+              <div style="position:absolute;left:46%;width:10%;height:100%;background:var(--green);border-radius:3px;opacity:0.8;"></div>
+              <div style="position:absolute;left:62%;width:10%;height:100%;background:var(--green);border-radius:3px;opacity:0.8;"></div>
+              <div style="position:absolute;left:78%;width:10%;height:100%;background:var(--green);border-radius:3px;opacity:0.8;"></div>
+            </div>
+            <span style="font-size:11px;color:var(--green);flex-shrink:0;">均匀分布×6</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 尾段层 -->
+      <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);padding:16px 20px;display:flex;gap:16px;align-items:flex-start;border-left:5px solid var(--purple);">
+        <div style="width:36px;height:36px;border-radius:8px;background:#FAF5FF;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">尾</div>
+        <div style="flex:1;">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+            <span style="font-size:14px;font-weight:700;color:var(--navy);">尾段层</span>
+            <span style="background:#FAF5FF;color:var(--purple);border-radius:4px;padding:2px 8px;font-size:11px;font-weight:600;">首句植入+行动建议</span>
+          </div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.6;">首句植入核心关键词，搭配"总结+行动建议"，引导用户决策，AI引用尾段概率高</div>
+          <div style="margin-top:8px;background:#FAF5FF;border-radius:6px;padding:8px 12px;font-size:12px;color:var(--navy);">
+            <span style="background:var(--purple);color:#fff;border-radius:3px;padding:1px 6px;font-size:11px;font-weight:700;">示例：</span>
+            <span style="margin-left:6px;"><u style="color:var(--purple);">选江浙沪亲子度假酒店</u>，优先考虑出行时间与孩子年龄段，Club Med白日方舟…</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 右侧文章结构示意图 -->
+    <div style="width:300px;flex-shrink:0;display:flex;flex-direction:column;gap:10px;">
+      <div style="font-size:12px;color:var(--gray-500);letter-spacing:1px;text-align:center;margin-bottom:4px;">文章结构示意图</div>
+      <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);padding:16px;flex:1;display:flex;flex-direction:column;gap:8px;">
+        <div style="background:var(--light-gold);border:2px solid var(--gold);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:10px;color:#B7791F;font-weight:700;margin-bottom:4px;">📌 TITLE — 标题</div>
+          <div style="height:6px;background:var(--gold);border-radius:3px;width:85%;opacity:0.6;margin-bottom:3px;"></div>
+          <div style="height:6px;background:var(--gold);border-radius:3px;width:70%;opacity:0.4;"></div>
+        </div>
+        <div style="background:var(--light-blue);border:2px solid var(--blue);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:10px;color:var(--blue);font-weight:700;margin-bottom:4px;">📍 INTRO — 首段（100字内）</div>
+          <div style="height:5px;background:var(--blue);border-radius:3px;width:100%;opacity:0.5;margin-bottom:3px;"></div>
+          <div style="height:5px;background:var(--blue);border-radius:3px;width:90%;opacity:0.3;margin-bottom:3px;"></div>
+          <div style="height:5px;background:var(--blue);border-radius:3px;width:75%;opacity:0.3;"></div>
+        </div>
+        <div style="background:#F0FFF4;border:2px solid var(--green);border-radius:6px;padding:10px 12px;flex:1;">
+          <div style="font-size:10px;color:var(--green);font-weight:700;margin-bottom:4px;">📄 BODY — 正文（关键词×6）</div>
+          <div style="display:flex;flex-direction:column;gap:3px;">
+            <div style="height:5px;background:var(--green);border-radius:3px;width:100%;opacity:0.3;"></div>
+            <div style="height:5px;background:var(--green);border-radius:3px;width:88%;opacity:0.5;"></div>
+            <div style="height:5px;background:var(--green);border-radius:3px;width:100%;opacity:0.3;"></div>
+            <div style="height:5px;background:var(--green);border-radius:3px;width:92%;opacity:0.5;"></div>
+            <div style="height:5px;background:var(--green);border-radius:3px;width:85%;opacity:0.3;"></div>
+            <div style="height:5px;background:var(--green);border-radius:3px;width:100%;opacity:0.5;"></div>
+          </div>
+        </div>
+        <div style="background:#FAF5FF;border:2px solid var(--purple);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:10px;color:var(--purple);font-weight:700;margin-bottom:4px;">🎯 OUTRO — 尾段+行动建议</div>
+          <div style="height:5px;background:var(--purple);border-radius:3px;width:100%;opacity:0.5;margin-bottom:3px;"></div>
+          <div style="height:5px;background:var(--purple);border-radius:3px;width:60%;opacity:0.3;"></div>
+        </div>
+      </div>
+      <!-- 原则横幅 -->
+      <div style="background:var(--navy);border-radius:8px;padding:12px 14px;text-align:center;">
+        <div style="font-size:11px;color:var(--gold);font-weight:600;letter-spacing:1px;margin-bottom:4px;">关键原则</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.8;">
+          结构化 · 场景化 · 参数完整 · 多平台适配
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>7 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 8 · 核心卖点矩阵
+══════════════════════════════════ -->
+<section class="slide" id="slide-8" style="background:var(--beige);flex-direction:column;">
+  <div style="background:var(--navy);padding:22px 40px;flex-shrink:0;display:flex;align-items:center;gap:16px;">
+    <div style="width:4px;height:32px;background:var(--orange);border-radius:2px;"></div>
+    <div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:3px;">USP MATRIX · 核心卖点矩阵</div>
+      <h2 style="font-size:20px;color:#fff;font-weight:700;">品牌价值 × AI植入方向</h2>
+    </div>
+  </div>
+
+  <div style="flex:1;padding:22px 40px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:14px;">
+
+    <!-- 卖点1：全包式度假 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:10px;border-top:4px solid var(--navy);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:var(--light-blue);display:flex;align-items:center;justify-content:center;font-size:20px;">🎁</div>
+        <div style="font-size:15px;font-weight:700;color:var(--navy);">全包式度假</div>
+      </div>
+      <div style="font-size:12px;color:var(--gray-500);background:var(--gray-100);border-radius:4px;padding:4px 8px;display:inline-block;width:fit-content;">一价全含，无隐形消费</div>
+      <div style="background:var(--light-blue);border-radius:6px;padding:8px 10px;">
+        <div style="font-size:10px;color:var(--blue);font-weight:600;margin-bottom:3px;">🤖 AI植入角度</div>
+        <div style="font-size:12px;color:var(--navy);line-height:1.5;">「无隐形消费、带娃无压力、全家解放双手」</div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:4px;">命中问题类型</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <span style="background:#EBF4FB;color:var(--navy);border-radius:3px;padding:2px 7px;font-size:11px;">亲子度假性价比</span>
+          <span style="background:#EBF4FB;color:var(--navy);border-radius:3px;padding:2px 7px;font-size:11px;">度假推荐</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卖点2：专业儿童俱乐部 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:10px;border-top:4px solid var(--gold);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:var(--light-gold);display:flex;align-items:center;justify-content:center;font-size:20px;">👶</div>
+        <div style="font-size:15px;font-weight:700;color:var(--navy);">专业儿童俱乐部</div>
+      </div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;">
+        <span style="background:#EBF4FB;color:var(--navy);border-radius:4px;padding:3px 8px;font-size:11px;font-weight:600;">Mini 2-3岁</span>
+        <span style="background:#FBF5E8;color:#B7791F;border-radius:4px;padding:3px 8px;font-size:11px;font-weight:600;">Petit 4-5岁</span>
+        <span style="background:#F0FFF4;color:var(--green);border-radius:4px;padding:3px 8px;font-size:11px;font-weight:600;">Kids 6-10岁</span>
+      </div>
+      <div style="background:var(--light-gold);border-radius:6px;padding:8px 10px;">
+        <div style="font-size:10px;color:#B7791F;font-weight:600;margin-bottom:3px;">🤖 AI植入角度</div>
+        <div style="font-size:12px;color:var(--navy);line-height:1.5;">「按年龄段细分专业服务，AI可提取结构化数据」</div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:4px;">命中问题类型</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <span style="background:#FBF5E8;color:#B7791F;border-radius:3px;padding:2px 7px;font-size:11px;">几岁孩子适合</span>
+          <span style="background:#FBF5E8;color:#B7791F;border-radius:3px;padding:2px 7px;font-size:11px;">亲子设施对比</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卖点3：多元运动体验 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:10px;border-top:4px solid var(--green);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:#F0FFF4;display:flex;align-items:center;justify-content:center;font-size:20px;">⛷️</div>
+        <div style="font-size:15px;font-weight:700;color:var(--navy);">多元运动体验</div>
+      </div>
+      <div style="font-size:12px;color:var(--gray-500);background:var(--gray-100);border-radius:4px;padding:4px 8px;">攀岩 / 射箭 / 水上项目 / 更多活动</div>
+      <div style="background:#F0FFF4;border-radius:6px;padding:8px 10px;">
+        <div style="font-size:10px;color:var(--green);font-weight:600;margin-bottom:3px;">🤖 AI植入角度</div>
+        <div style="font-size:12px;color:var(--navy);line-height:1.5;">「具体活动数量化描述，丰富度背书，有据可查」</div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:4px;">命中问题类型</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <span style="background:#F0FFF4;color:var(--green);border-radius:3px;padding:2px 7px;font-size:11px;">亲子户外活动</span>
+          <span style="background:#F0FFF4;color:var(--green);border-radius:3px;padding:2px 7px;font-size:11px;">度假地推荐</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卖点4：国际化品质 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:10px;border-top:4px solid var(--blue);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:var(--light-blue);display:flex;align-items:center;justify-content:center;font-size:20px;">🌍</div>
+        <div style="font-size:15px;font-weight:700;color:var(--navy);">国际化品质+本土服务</div>
+      </div>
+      <div style="font-size:12px;color:var(--gray-500);background:var(--gray-100);border-radius:4px;padding:4px 8px;">全球连锁背书 + 本土化落地运营</div>
+      <div style="background:var(--light-blue);border-radius:6px;padding:8px 10px;">
+        <div style="font-size:10px;color:var(--blue);font-weight:600;margin-bottom:3px;">🤖 AI植入角度</div>
+        <div style="font-size:12px;color:var(--navy);line-height:1.5;">「权威国际品质认证，复星集团背书，信赖度高」</div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:4px;">命中问题类型</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <span style="background:var(--light-blue);color:var(--blue);border-radius:3px;padding:2px 7px;font-size:11px;">高端亲子度假</span>
+          <span style="background:var(--light-blue);color:var(--blue);border-radius:3px;padding:2px 7px;font-size:11px;">品质推荐</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卖点5：地理位置 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:10px;border-top:4px solid var(--red);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:#FFF5F5;display:flex;align-items:center;justify-content:center;font-size:20px;">📍</div>
+        <div style="font-size:15px;font-weight:700;color:var(--navy);">地理位置优势</div>
+      </div>
+      <div style="font-size:12px;color:var(--gray-500);background:var(--gray-100);border-radius:4px;padding:4px 8px;">距上海/杭州/宁波具体车程描述</div>
+      <div style="background:#FFF5F5;border-radius:6px;padding:8px 10px;">
+        <div style="font-size:10px;color:var(--red);font-weight:600;margin-bottom:3px;">🤖 AI植入角度</div>
+        <div style="font-size:12px;color:var(--navy);line-height:1.5;">「场景化出行距离描述：X小时直达，零压力短途」</div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:4px;">命中问题类型</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <span style="background:#FFF5F5;color:var(--red);border-radius:3px;padding:2px 7px;font-size:11px;">上海周边推荐</span>
+          <span style="background:#FFF5F5;color:var(--red);border-radius:3px;padding:2px 7px;font-size:11px;">浙江亲子游</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 卖点6：家长度假体验 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:20px;display:flex;flex-direction:column;gap:10px;border-top:4px solid var(--purple);">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:40px;height:40px;border-radius:10px;background:#FAF5FF;display:flex;align-items:center;justify-content:center;font-size:20px;">👨‍👩‍👧</div>
+        <div style="font-size:15px;font-weight:700;color:var(--navy);">家长度假体验</div>
+      </div>
+      <div style="font-size:12px;color:var(--gray-500);background:var(--gray-100);border-radius:4px;padding:4px 8px;">大人同样有丰富活动，双向满足</div>
+      <div style="background:#FAF5FF;border-radius:6px;padding:8px 10px;">
+        <div style="font-size:10px;color:var(--purple);font-weight:600;margin-bottom:3px;">🤖 AI植入角度</div>
+        <div style="font-size:12px;color:var(--navy);line-height:1.5;">「全家老少各有所乐，孩子托管+大人解放」</div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:4px;">命中问题类型</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;">
+          <span style="background:#FAF5FF;color:var(--purple);border-radius:3px;padding:2px 7px;font-size:11px;">适合全家度假</span>
+          <span style="background:#FAF5FF;color:var(--purple);border-radius:3px;padding:2px 7px;font-size:11px;">老少皆宜</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>8 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 9 · 分发策略
+══════════════════════════════════ -->
+<section class="slide" id="slide-9" style="background:var(--beige);flex-direction:column;">
+  <div style="background:var(--navy);padding:22px 40px;flex-shrink:0;display:flex;align-items:center;gap:16px;">
+    <div style="width:4px;height:32px;background:var(--purple);border-radius:2px;"></div>
+    <div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:3px;">DISTRIBUTION · 分发策略</div>
+      <h2 style="font-size:20px;color:#fff;font-weight:700;">平台精准布局 · 豆包优先模型</h2>
+    </div>
+    <div style="margin-left:auto;background:rgba(201,168,76,0.2);border:1px solid var(--gold);border-radius:6px;padding:6px 16px;font-size:12px;color:var(--gold);">🎯 主攻模型：豆包（字节跳动）</div>
+  </div>
+
+  <div style="flex:1;padding:22px 40px;display:flex;gap:24px;">
+
+    <!-- 左侧：豆包偏好分析 -->
+    <div style="width:280px;flex-shrink:0;display:flex;flex-direction:column;gap:12px;">
+      <div style="background:var(--navy);border-radius:12px;padding:20px;color:#fff;">
+        <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:12px;">🤖 豆包信源偏好分析</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.75);line-height:1.9;">
+          ✅ 字节系UGC内容（头条/抖音）<br>
+          ✅ 垂类生活/消费内容<br>
+          ✅ 真实用户体验类内容<br>
+          ✅ 结构化攻略/测评文<br>
+          ⚡ 新鲜内容（5天引用周期）<br>
+          ⚡ 高互动量的平台内容
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:16px;">
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;">📋 内容生产原则</div>
+        <div style="font-size:12px;color:var(--gray-700);line-height:1.9;">
+          <div style="padding:4px 0;border-bottom:1px solid var(--gray-200);">🥇 头条/抖音 → 主战场</div>
+          <div style="padding:4px 0;border-bottom:1px solid var(--gray-200);">📰 门户资讯 → DeepSeek补充</div>
+          <div style="padding:4px 0;border-bottom:1px solid var(--gray-200);">⏱️ 引用周期 → 5天更新</div>
+          <div style="padding:4px 0;">📊 动态调整 → 每周复盘</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧：三层金字塔 -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:14px;">
+
+      <!-- 核心层 -->
+      <div style="background:linear-gradient(135deg,#0A2744,#1E3A5F);border-radius:12px;padding:20px 24px;border:2px solid var(--gold);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+          <span style="font-size:20px;">🥇</span>
+          <div>
+            <div style="font-size:15px;font-weight:700;color:var(--gold);">核心层</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:1px;margin-top:1px;">每周高频投放</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+          <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:22px;margin-bottom:6px;">📱</div>
+            <div style="font-size:13px;font-weight:600;color:#fff;">今日头条</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">每周2篇长图文</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);">攻略/游记/种草</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:22px;margin-bottom:6px;">🎵</div>
+            <div style="font-size:13px;font-weight:600;color:#fff;">抖音</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">每周1-2条</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);">度假vlog/带娃攻略</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.1);border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:22px;margin-bottom:6px;">🛍️</div>
+            <div style="font-size:13px;font-weight:600;color:#fff;">什么值得买</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:4px;">每周1篇</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.5);">亲子测评/开箱</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 重要层 -->
+      <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:18px 24px;border:1.5px solid #CBD5E0;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+          <span style="font-size:18px;">🥈</span>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:var(--navy);">重要层</div>
+            <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-top:1px;">每周持续维护</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="background:var(--gray-100);border-radius:8px;padding:10px 14px;display:flex;gap:10px;align-items:center;">
+            <span style="font-size:18px;">✈️</span>
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--navy);">携程 / Trip.com</div>
+              <div style="font-size:11px;color:var(--gray-500);">酒店详情页优化 · 评价管理</div>
+            </div>
+          </div>
+          <div style="background:var(--gray-100);border-radius:8px;padding:10px 14px;display:flex;gap:10px;align-items:center;">
+            <span style="font-size:18px;">📰</span>
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--navy);">网易 / 新浪 / 搜狐</div>
+              <div style="font-size:11px;color:var(--gray-500);">门户级品牌公关稿 · 每月4篇</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 补充层 -->
+      <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:16px 24px;border:1.5px solid var(--gray-200);">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px;">
+          <span style="font-size:16px;">🥉</span>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--navy);">补充层</div>
+            <div style="font-size:11px;color:var(--gray-500);letter-spacing:1px;margin-top:1px;">按需投放，权威背书</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <div style="flex:1;background:var(--gray-100);border-radius:8px;padding:8px 12px;display:flex;gap:8px;align-items:center;">
+            <span style="font-size:16px;">🦅</span>
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--navy);">凤凰网 / 潮新闻</div>
+              <div style="font-size:11px;color:var(--gray-500);">区域旅游推荐 · 每月2篇</div>
+            </div>
+          </div>
+          <div style="flex:1;background:var(--gray-100);border-radius:8px;padding:8px 12px;display:flex;gap:8px;align-items:center;">
+            <span style="font-size:16px;">🏛️</span>
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--navy);">沪浙文旅局官方渠道</div>
+              <div style="font-size:11px;color:var(--gray-500);">权威背书推荐名单</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 底部说明条 -->
+  <div style="margin:0 40px 14px;background:linear-gradient(90deg,var(--navy),var(--blue));border-radius:8px;padding:10px 20px;display:flex;gap:24px;align-items:center;">
+    <span style="font-size:12px;color:rgba(255,255,255,0.8);">⏱️ 引用来源周期：5天</span>
+    <span style="font-size:12px;color:rgba(255,255,255,0.6);">|</span>
+    <span style="font-size:12px;color:rgba(255,255,255,0.8);">📊 每周更新最新AI信源采样</span>
+    <span style="font-size:12px;color:rgba(255,255,255,0.6);">|</span>
+    <span style="font-size:12px;color:rgba(255,255,255,0.8);">🔄 动态调整分发优先级</span>
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>9 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 10 · 执行SOP
+══════════════════════════════════ -->
+<section class="slide" id="slide-10" style="background:var(--beige);flex-direction:column;">
+  <div style="background:var(--navy);padding:22px 40px;flex-shrink:0;display:flex;align-items:center;gap:16px;">
+    <div style="width:4px;height:32px;background:#2B6CB0;border-radius:2px;"></div>
+    <div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:3px;">EXECUTION SOP · 执行作战地图</div>
+      <h2 style="font-size:20px;color:#fff;font-weight:700;">四阶段全流程 · 持续滚动优化</h2>
+    </div>
+  </div>
+
+  <div style="flex:1;padding:22px 40px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
+
+    <!-- Phase 1 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden;">
+      <div style="background:var(--navy);padding:14px 16px;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:2px;margin-bottom:4px;">PHASE 01</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">🔍</span>
+          <div style="font-size:15px;font-weight:700;color:#fff;">监控分析</div>
+        </div>
+        <div style="font-size:11px;color:var(--gold);margin-top:4px;letter-spacing:1px;">Day 1 – 14</div>
+      </div>
+      <div style="flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:8px;">
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 问题挖掘</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">挖掘亲子度假全链路高频词<br><span style="color:var(--blue);">→ 完整关键词问题集</span></div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 现状评估</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">评估各词AI提及率&准确率<br><span style="color:var(--blue);">→ 现状基线报告</span></div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 竞品分析</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">开元森泊/裸心谷AI表现<br><span style="color:var(--blue);">→ 竞品GEO对比表</span></div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 信源分析</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">识别豆包/DeepSeek核心信源<br><span style="color:var(--blue);">→ 信源权重报告</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden;">
+      <div style="background:#1E6FA3;padding:14px 16px;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:2px;margin-bottom:4px;">PHASE 02</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">📋</span>
+          <div style="font-size:15px;font-weight:700;color:#fff;">策略制定</div>
+        </div>
+        <div style="font-size:11px;color:var(--gold);margin-top:4px;letter-spacing:1px;">Day 15 – 30</div>
+      </div>
+      <div style="flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:8px;">
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 关键词分层</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">重点/针对性/监测三级分类<br><span style="color:var(--blue);">→ 优先级关键词矩阵</span></div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 内容方向确定</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">4类模板设计+卖点匹配<br><span style="color:var(--blue);">→ 内容创作指引</span></div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 平台排期计划</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">各平台发稿节奏&内容类型<br><span style="color:var(--blue);">→ 内容发布排期表</span></div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 KPI确认</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">分阶段KPI目标对齐<br><span style="color:var(--blue);">→ KPI承诺文件</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden;">
+      <div style="background:var(--green);padding:14px 16px;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:2px;margin-bottom:4px;">PHASE 03</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">✍️</span>
+          <div style="font-size:15px;font-weight:700;color:#fff;">内容优化</div>
+        </div>
+        <div style="font-size:11px;color:#fff;margin-top:4px;letter-spacing:1px;opacity:0.8;">Day 30+ 持续滚动</div>
+      </div>
+      <div style="flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:8px;">
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 内容创编</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">4类模板AI友好内容生产<br><span style="color:var(--green);">→ 每批2-4篇稿件</span></div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 AI模拟验证</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">衔远GEO平台模拟引用效果<br><span style="color:var(--green);">→ 模拟测试报告</span></div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 客户审核</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">稿件经客户侧确认定稿<br><span style="color:var(--green);">→ 审核通过稿件</span></div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 多平台分发</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">按信源权重优先级发布<br><span style="color:var(--green);">→ 发稿记录+链接</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden;">
+      <div style="background:#805AD5;padding:14px 16px;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:2px;margin-bottom:4px;">PHASE 04</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:18px;">📊</span>
+          <div style="font-size:15px;font-weight:700;color:#fff;">传播验证</div>
+        </div>
+        <div style="font-size:11px;color:#fff;margin-top:4px;letter-spacing:1px;opacity:0.8;">Always On · 常态化</div>
+      </div>
+      <div style="flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:8px;">
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 每周效果跟踪</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">三大核心指标变化监测<br><span style="color:#805AD5;">→ 周报（每周五）</span></div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 索引验证</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">确认内容被AI平台收录引用<br><span style="color:#805AD5;">→ 收录确认截图</span></div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 月度复盘</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">KPI达成对比+策略调整<br><span style="color:#805AD5;">→ 月报+优化建议</span></div>
+        </div>
+        <div style="background:var(--gray-100);border-radius:6px;padding:10px 12px;">
+          <div style="font-size:11px;font-weight:600;color:var(--navy);margin-bottom:3px;">📌 负面清除</div>
+          <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">不实内容及时覆盖修正<br><span style="color:#805AD5;">→ 负面修正记录</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>10 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 11 · KPI体系
+══════════════════════════════════ -->
+<section class="slide" id="slide-11" style="background:var(--beige);flex-direction:column;">
+  <div style="background:var(--navy);padding:22px 40px;flex-shrink:0;display:flex;align-items:center;gap:16px;">
+    <div style="width:4px;height:32px;background:#B83280;border-radius:2px;"></div>
+    <div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:3px;">KPI SYSTEM · 绩效体系</div>
+      <h2 style="font-size:20px;color:#fff;font-weight:700;">分阶段优化目标 · 监播机制</h2>
+    </div>
+  </div>
+
+  <div style="flex:1;padding:20px 40px;display:flex;flex-direction:column;gap:16px;">
+
+    <!-- 三大核心指标 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:20px 28px;">
+      <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px;">
+        <span style="width:4px;height:16px;background:var(--gold);border-radius:2px;display:inline-block;"></span>
+        三大核心指标进度路线图
+      </div>
+
+      <!-- 指标标题行 -->
+      <div style="display:grid;grid-template-columns:160px 1fr 80px 80px 80px 80px;gap:10px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--gray-200);">
+        <div style="font-size:11px;color:var(--gray-500);">指标</div>
+        <div style="font-size:11px;color:var(--gray-500);">进度可视化</div>
+        <div style="font-size:11px;color:var(--gray-500);text-align:center;">当前值</div>
+        <div style="font-size:11px;color:var(--gray-500);text-align:center;">1个月</div>
+        <div style="font-size:11px;color:var(--gray-500);text-align:center;">3个月</div>
+        <div style="font-size:11px;color:var(--gray-500);text-align:center;">长期目标</div>
+      </div>
+
+      <!-- 品牌可见度 -->
+      <div style="display:grid;grid-template-columns:160px 1fr 80px 80px 80px 80px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--gray-100);">
+        <div style="font-size:13px;font-weight:600;color:var(--navy);">品牌可见度</div>
+        <div style="position:relative;height:20px;background:var(--gray-200);border-radius:10px;overflow:visible;">
+          <div style="position:absolute;left:0;top:0;height:100%;width:50.3%;background:linear-gradient(90deg,#0A2744,#1E6FA3);border-radius:10px;"></div>
+          <div style="position:absolute;left:60%;top:-3px;width:2px;height:26px;background:#1E6FA3;opacity:0.5;"></div>
+          <div style="position:absolute;left:70%;top:-3px;width:2px;height:26px;background:#1E6FA3;opacity:0.5;"></div>
+          <div style="position:absolute;left:80%;top:-3px;width:2px;height:26px;background:#1E6FA3;opacity:0.5;"></div>
+        </div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--navy);">50.3%</div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--blue);">60%+</div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--blue);">70%+</div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--gold);">80%+</div>
+      </div>
+
+      <!-- 品牌信息准确率 -->
+      <div style="display:grid;grid-template-columns:160px 1fr 80px 80px 80px 80px;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--gray-100);">
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--red);">品牌信息准确率</div>
+          <div style="font-size:10px;color:var(--red);margin-top:2px;">⭐ 核心攻坚目标</div>
+        </div>
+        <div style="position:relative;height:20px;background:var(--gray-200);border-radius:10px;overflow:visible;">
+          <div style="position:absolute;left:0;top:0;height:100%;width:2%;background:var(--red);border-radius:10px;"></div>
+          <div style="position:absolute;left:30%;top:0;height:100%;width:0;border-left:2px dashed var(--orange);"></div>
+          <div style="position:absolute;left:60%;top:0;height:100%;width:0;border-left:2px dashed var(--gold);"></div>
+          <div style="position:absolute;left:85%;top:0;height:100%;width:0;border-left:2px dashed var(--green);"></div>
+        </div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--red);">0.0%</div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--orange);">30%+</div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--gold);">60%+</div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--green);">85%+</div>
+      </div>
+
+      <!-- 品牌声量 -->
+      <div style="display:grid;grid-template-columns:160px 1fr 80px 80px 80px 80px;gap:10px;align-items:center;padding:10px 0;">
+        <div style="font-size:13px;font-weight:600;color:var(--navy);">品牌声量</div>
+        <div style="position:relative;height:20px;background:var(--gray-200);border-radius:10px;overflow:visible;">
+          <div style="position:absolute;left:0;top:0;height:100%;width:15.6%;background:linear-gradient(90deg,#DD6B20,#F6AD55);border-radius:10px;"></div>
+          <div style="position:absolute;left:25%;top:-3px;width:2px;height:26px;background:var(--orange);opacity:0.5;"></div>
+          <div style="position:absolute;left:40%;top:-3px;width:2px;height:26px;background:var(--orange);opacity:0.5;"></div>
+          <div style="position:absolute;left:55%;top:-3px;width:2px;height:26px;background:var(--orange);opacity:0.5;"></div>
+        </div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--navy);">15.6%</div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--orange);">25%+</div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--orange);">40%+</div>
+        <div style="text-align:center;font-size:13px;font-weight:700;color:var(--gold);">55%+</div>
+      </div>
+
+    </div>
+
+    <!-- 下半部分：过程指标 + 监播机制 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+      <!-- 过程指标 -->
+      <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:18px 22px;">
+        <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+          <span style="width:4px;height:16px;background:var(--blue);border-radius:2px;display:inline-block;"></span>
+          过程指标月度标准
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;">
+          <tr style="background:var(--gray-100);">
+            <td style="padding:8px 12px;border-radius:6px 0 0 6px;font-weight:600;color:var(--navy);">内容发布量</td>
+            <td style="padding:8px 12px;border-radius:0 6px 6px 0;color:var(--gray-700);">每月 ≥ <strong style="color:var(--blue);">12篇</strong>（4类型各≥3篇）</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 12px;font-weight:600;color:var(--navy);">关键词覆盖数</td>
+            <td style="padding:8px 12px;color:var(--gray-700);">重点词 <strong style="color:var(--blue);">20个+</strong>  · 监控词 <strong style="color:var(--blue);">50个+</strong></td>
+          </tr>
+          <tr style="background:var(--gray-100);">
+            <td style="padding:8px 12px;border-radius:6px 0 0 6px;font-weight:600;color:var(--navy);">平台覆盖</td>
+            <td style="padding:8px 12px;border-radius:0 6px 6px 0;color:var(--gray-700);">核心 <strong style="color:var(--blue);">3平台</strong> + 重要 <strong style="color:var(--blue);">2门户</strong></td>
+          </tr>
+          <tr>
+            <td style="padding:8px 12px;font-weight:600;color:var(--navy);">周报交付</td>
+            <td style="padding:8px 12px;color:var(--gray-700);">每周 <strong style="color:var(--blue);">周五前</strong> 准时交付</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 监播机制 -->
+      <div style="background:var(--navy);border-radius:12px;padding:18px 22px;">
+        <div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+          <span style="font-size:16px;">🔭</span>
+          监播验证机制
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;">
+            <span style="font-size:14px;flex-shrink:0;">📡</span>
+            <div style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;">每周通过衔远GEO平台固定AI提问，记录答案截图备案存档</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;">
+            <span style="font-size:14px;flex-shrink:0;">📱</span>
+            <div style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;">建议多IP设备（<strong style="color:var(--gold);">5台以上</strong>）同时验证，避免单一IP缓存干扰</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:10px 14px;display:flex;gap:10px;align-items:flex-start;">
+            <span style="font-size:14px;flex-shrink:0;">💰</span>
+            <div style="font-size:12px;color:rgba(255,255,255,0.85);line-height:1.6;">按监测结果梯级化结算，负面结果须在规定日期内纠正</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>11 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 12 · 竞品围剿策略
+══════════════════════════════════ -->
+<section class="slide" id="slide-12" style="background:var(--beige);flex-direction:column;">
+  <div style="background:var(--navy);padding:22px 40px;flex-shrink:0;display:flex;align-items:center;gap:16px;">
+    <div style="width:4px;height:32px;background:var(--red);border-radius:2px;"></div>
+    <div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:3px;">COMPETITIVE STRATEGY · 竞品围剿</div>
+      <h2 style="font-size:20px;color:#fff;font-weight:700;">差异化话语体系 · AI心智争夺</h2>
+    </div>
+  </div>
+
+  <!-- 策略说明横条 -->
+  <div style="background:linear-gradient(90deg,#1a2e4a,#0A2744);padding:10px 40px;display:flex;gap:30px;align-items:center;">
+    <span style="font-size:12px;color:rgba(255,255,255,0.7);">策略核心：在AI横向比较场景中，建立Club Med不可替代的认知壁垒</span>
+    <span style="margin-left:auto;font-size:12px;color:var(--gold);">⚔️ 挤压竞品空间 · 强化正向心智</span>
+  </div>
+
+  <div style="flex:1;padding:20px 40px;display:flex;flex-direction:column;gap:12px;">
+
+    <!-- 竞品1：开元森泊 -->
+    <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+      <div style="width:160px;background:var(--gray-100);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;gap:4px;border-right:1px solid var(--gray-200);">
+        <span style="font-size:22px;">🏨</span>
+        <div style="font-size:13px;font-weight:700;color:var(--navy);">开元森泊</div>
+        <span style="background:#EBF8FF;color:var(--blue);border-radius:4px;padding:2px 8px;font-size:10px;">本土高端亲子</span>
+      </div>
+      <div style="flex:1;display:flex;gap:0;align-items:stretch;">
+        <div style="flex:1;padding:14px 18px;border-right:1px solid var(--gray-200);">
+          <div style="font-size:10px;color:var(--gray-500);letter-spacing:1px;margin-bottom:6px;">🤖 AI当前认知优势</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.6;background:#FFF5F5;border-radius:6px;padding:8px 10px;border-left:3px solid var(--red);">
+            本土品牌认知度高，用户更熟悉，在AI问答中频繁被推荐
+          </div>
+        </div>
+        <div style="flex:1.4;padding:14px 18px;background:linear-gradient(135deg,#EBF4FB,#fff);">
+          <div style="font-size:10px;color:var(--blue);letter-spacing:1px;margin-bottom:6px;font-weight:600;">🛡️ Club Med反制话语策略</div>
+          <div style="font-size:13px;color:var(--navy);line-height:1.6;font-weight:500;">强化「<strong>国际品质×全包服务×亲子专业体系</strong>」差异化——开元森泊是本土选择，Club Med是国际标准的专业度假</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 竞品2：裸心谷 -->
+    <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+      <div style="width:160px;background:var(--gray-100);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;gap:4px;border-right:1px solid var(--gray-200);">
+        <span style="font-size:22px;">🌿</span>
+        <div style="font-size:13px;font-weight:700;color:var(--navy);">裸心谷</div>
+        <span style="background:#F0FFF4;color:var(--green);border-radius:4px;padding:2px 8px;font-size:10px;">自然生态营地</span>
+      </div>
+      <div style="flex:1;display:flex;gap:0;align-items:stretch;">
+        <div style="flex:1;padding:14px 18px;border-right:1px solid var(--gray-200);">
+          <div style="font-size:10px;color:var(--gray-500);letter-spacing:1px;margin-bottom:6px;">🤖 AI当前认知优势</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.6;background:#FFF5F5;border-radius:6px;padding:8px 10px;border-left:3px solid var(--red);">
+            自然营地生态特色鲜明，在"亲近自然""树屋住宿"场景中高频推荐
+          </div>
+        </div>
+        <div style="flex:1.4;padding:14px 18px;background:linear-gradient(135deg,#EBF4FB,#fff);">
+          <div style="font-size:10px;color:var(--blue);letter-spacing:1px;margin-bottom:6px;font-weight:600;">🛡️ Club Med反制话语策略</div>
+          <div style="font-size:13px;color:var(--navy);line-height:1.6;font-weight:500;">突出Club Med「<strong>运动+自然+专业儿童俱乐部</strong>」综合优势——裸心谷只有自然，Club Med有自然还有专业服务</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 竞品3：迪士尼 -->
+    <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+      <div style="width:160px;background:var(--gray-100);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;gap:4px;border-right:1px solid var(--gray-200);">
+        <span style="font-size:22px;">🏰</span>
+        <div style="font-size:13px;font-weight:700;color:var(--navy);">迪士尼</div>
+        <span style="background:#FFFAF0;color:var(--orange);border-radius:4px;padding:2px 8px;font-size:10px;">IP主题乐园</span>
+      </div>
+      <div style="flex:1;display:flex;gap:0;align-items:stretch;">
+        <div style="flex:1;padding:14px 18px;border-right:1px solid var(--gray-200);">
+          <div style="font-size:10px;color:var(--gray-500);letter-spacing:1px;margin-bottom:6px;">🤖 AI当前认知优势</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.6;background:#FFF5F5;border-radius:6px;padding:8px 10px;border-left:3px solid var(--red);">
+            IP品牌极强，几乎是"亲子游"的代名词，AI提及率极高
+          </div>
+        </div>
+        <div style="flex:1.4;padding:14px 18px;background:linear-gradient(135deg,#EBF4FB,#fff);">
+          <div style="font-size:10px;color:var(--blue);letter-spacing:1px;margin-bottom:6px;font-weight:600;">🛡️ Club Med反制话语策略</div>
+          <div style="font-size:13px;color:var(--navy);line-height:1.6;font-weight:500;">强调Club Med「<strong>身心放松+亲子互动</strong>」区别于「主题公园式娱乐消耗」——迪士尼是消耗，Club Med是充电</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 竞品4+5：并排 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+        <div style="width:130px;background:var(--gray-100);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;gap:3px;border-right:1px solid var(--gray-200);">
+          <span style="font-size:20px;">🦕</span>
+          <div style="font-size:12px;font-weight:700;color:var(--navy);text-align:center;">恐龙人/长颈鹿庄园</div>
+          <span style="background:#FFFFF0;color:#B7791F;border-radius:4px;padding:1px 6px;font-size:10px;">细分主题</span>
+        </div>
+        <div style="flex:1;padding:12px 14px;">
+          <div style="font-size:11px;color:var(--gray-500);margin-bottom:4px;">AI优势：细分主题新颖，圈层口碑强</div>
+          <div style="font-size:12px;color:var(--navy);font-weight:500;background:#EBF4FB;border-radius:6px;padding:6px 8px;">对比Club Med全年龄段专业服务体系的系统性优势，主题酒店难以企及</div>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:10px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+        <div style="width:130px;background:var(--gray-100);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;gap:3px;border-right:1px solid var(--gray-200);">
+          <span style="font-size:20px;">🌾</span>
+          <div style="font-size:12px;font-weight:700;color:var(--navy);text-align:center;">乌村稻舍</div>
+          <span style="background:#F0FFF4;color:var(--green);border-radius:4px;padding:1px 6px;font-size:10px;">乡村亲子</span>
+        </div>
+        <div style="flex:1;padding:12px 14px;">
+          <div style="font-size:11px;color:var(--gray-500);margin-bottom:4px;">AI优势：乡村田园亲子感强，小而美</div>
+          <div style="font-size:12px;color:var(--navy);font-weight:500;background:#EBF4FB;border-radius:6px;padding:6px 8px;">强化Club Med高端设施+全包服务的品质壁垒，田园感无法匹敌专业级亲子体系</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>12 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 13 · 下一步行动计划
+══════════════════════════════════ -->
+<section class="slide" id="slide-13" style="background:var(--beige);flex-direction:column;">
+  <div style="background:var(--navy);padding:22px 40px;flex-shrink:0;display:flex;align-items:center;gap:16px;">
+    <div style="width:4px;height:32px;background:var(--gold);border-radius:2px;"></div>
+    <div>
+      <div style="font-size:11px;color:var(--gold);letter-spacing:4px;margin-bottom:3px;">NEXT STEPS · 下一步行动</div>
+      <h2 style="font-size:20px;color:#fff;font-weight:700;">五步启动计划 · 立即行动</h2>
+    </div>
+  </div>
+
+  <div style="flex:1;padding:24px 40px;display:flex;flex-direction:column;gap:14px;">
+
+    <!-- 步骤1 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;border:2px solid var(--navy);">
+      <div style="width:120px;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;gap:4px;flex-shrink:0;">
+        <div style="width:38px;height:38px;border-radius:50%;background:var(--gold);color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;">①</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.7);text-align:center;margin-top:4px;">客户卖点确认</div>
+        <div style="background:var(--red);color:#fff;border-radius:4px;padding:2px 8px;font-size:10px;font-weight:700;margin-top:4px;">立即</div>
+      </div>
+      <div style="flex:1;padding:16px 24px;display:flex;align-items:center;gap:20px;">
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;">提供最新产品核心资料</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">请客户方提供：儿童俱乐部完整年龄段设置（Mini/Petit/Kids具体规则）、活动项目数量清单、特色服务列表、最新价格体系、近期开放状态</div>
+        </div>
+        <div style="flex-shrink:0;width:120px;">
+          <div style="text-align:center;background:var(--light-gold);border-radius:8px;padding:10px 14px;">
+            <div style="font-size:12px;color:#B7791F;font-weight:600;">交付物</div>
+            <div style="font-size:11px;color:var(--navy);margin-top:4px;line-height:1.5;">品牌卖点确认文档</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 步骤2 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+      <div style="width:120px;background:#1E6FA3;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;gap:4px;flex-shrink:0;">
+        <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;">②</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.8);text-align:center;margin-top:4px;">问题集细化</div>
+        <div style="background:rgba(255,255,255,0.2);color:#fff;border-radius:4px;padding:2px 8px;font-size:10px;margin-top:4px;">Day 3-7</div>
+      </div>
+      <div style="flex:1;padding:16px 24px;display:flex;align-items:center;gap:20px;">
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;">完整关键词矩阵输出</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">基于衔远GEO平台实时数据+百度指数+相关平台搜索指数，输出带优先级的完整关键词矩阵，覆盖品类词/属性词/品牌词/场景词全链路</div>
+        </div>
+        <div style="flex-shrink:0;width:120px;">
+          <div style="text-align:center;background:var(--light-blue);border-radius:8px;padding:10px 14px;">
+            <div style="font-size:12px;color:var(--blue);font-weight:600;">交付物</div>
+            <div style="font-size:11px;color:var(--navy);margin-top:4px;line-height:1.5;">优先级关键词矩阵</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 步骤3 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+      <div style="width:120px;background:var(--green);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;gap:4px;flex-shrink:0;">
+        <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;">③</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.8);text-align:center;margin-top:4px;">首批内容创作</div>
+        <div style="background:rgba(255,255,255,0.2);color:#fff;border-radius:4px;padding:2px 8px;font-size:10px;margin-top:4px;">Day 7-10</div>
+      </div>
+      <div style="flex:1;padding:16px 24px;display:flex;align-items:center;gap:20px;">
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;">针对高优先词产出首批AI友好内容</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">聚焦"品类范围锁定"类高优先词（如"江浙沪亲子度假酒店"），产出4篇符合AI框架规范的内容，覆盖体验解析+品牌对比+场景需求+数据盘点，约2-3工作日完成</div>
+        </div>
+        <div style="flex-shrink:0;width:120px;">
+          <div style="text-align:center;background:#F0FFF4;border-radius:8px;padding:10px 14px;">
+            <div style="font-size:12px;color:var(--green);font-weight:600;">交付物</div>
+            <div style="font-size:11px;color:var(--navy);margin-top:4px;line-height:1.5;">首批4篇AI友好内容稿</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 步骤4 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+      <div style="width:120px;background:var(--orange);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;gap:4px;flex-shrink:0;">
+        <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;">④</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.8);text-align:center;margin-top:4px;">KPI基线锁定</div>
+        <div style="background:rgba(255,255,255,0.2);color:#fff;border-radius:4px;padding:2px 8px;font-size:10px;margin-top:4px;">发布前</div>
+      </div>
+      <div style="flex:1;padding:16px 24px;display:flex;align-items:center;gap:20px;">
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;">完整记录优化起始基准值</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">首批内容发布前，完整记录各目标关键词下AI提及率、准确率、声量现状数据，锁定优化起始基准值，作为后续KPI计算基础</div>
+        </div>
+        <div style="flex-shrink:0;width:120px;">
+          <div style="text-align:center;background:#FFFAF0;border-radius:8px;padding:10px 14px;">
+            <div style="font-size:12px;color:var(--orange);font-weight:600;">交付物</div>
+            <div style="font-size:11px;color:var(--navy);margin-top:4px;line-height:1.5;">KPI基线数据快照</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 步骤5 -->
+    <div style="background:#fff;border-radius:12px;box-shadow:var(--shadow);display:flex;align-items:stretch;overflow:hidden;">
+      <div style="width:120px;background:#805AD5;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;gap:4px;flex-shrink:0;">
+        <div style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;">⑤</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.8);text-align:center;margin-top:4px;">方案评审确认</div>
+        <div style="background:rgba(255,255,255,0.2);color:#fff;border-radius:4px;padding:2px 8px;font-size:10px;margin-top:4px;">Day 10-14</div>
+      </div>
+      <div style="flex:1;padding:16px 24px;display:flex;align-items:center;gap:20px;">
+        <div style="flex:1;">
+          <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px;">全流程对齐确认</div>
+          <div style="font-size:13px;color:var(--gray-700);line-height:1.7;">与客户完成执行排期对齐、审核流程确认、周报格式审定、KPI目标确认签字，正式启动持续滚动优化阶段</div>
+        </div>
+        <div style="flex-shrink:0;width:120px;">
+          <div style="text-align:center;background:#FAF5FF;border-radius:8px;padding:10px 14px;">
+            <div style="font-size:12px;color:#805AD5;font-weight:600;">交付物</div>
+            <div style="font-size:11px;color:var(--navy);margin-top:4px;line-height:1.5;">执行SOP确认文件</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="slide-footer">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>13 / 14</span>
+  </div>
+</section>
+<!-- ══════════════════════════════════
+     SLIDE 14 · 结束页
+══════════════════════════════════ -->
+<section class="slide" id="slide-14" style="background:linear-gradient(135deg,#0A2744 0%,#0d3660 60%,#1E6FA3 100%);flex-direction:column;min-height:675px;position:relative;overflow:hidden;">
+
+  <!-- 背景装饰 -->
+  <div style="position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;border:2px solid rgba(201,168,76,0.1);pointer-events:none;"></div>
+  <div style="position:absolute;top:-60px;right:-60px;width:380px;height:380px;border-radius:50%;border:1px solid rgba(201,168,76,0.08);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:60px;right:60px;width:200px;height:200px;border-radius:50%;background:rgba(201,168,76,0.05);pointer-events:none;"></div>
+
+  <!-- 主要内容 -->
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 80px;position:relative;z-index:2;text-align:center;">
+
+    <!-- CLUB MED 大字 -->
+    <div style="font-size:13px;color:rgba(255,255,255,0.4);letter-spacing:10px;font-weight:400;margin-bottom:20px;text-transform:uppercase;">— CLUB MED —</div>
+
+    <h1 style="font-size:46px;font-weight:800;color:var(--gold);letter-spacing:3px;margin-bottom:8px;text-shadow:0 2px 20px rgba(201,168,76,0.3);">
+      地中海白日方舟
+    </h1>
+    <div style="font-size:18px;color:rgba(255,255,255,0.75);letter-spacing:4px;margin-bottom:32px;">GEO 策略方案</div>
+
+    <!-- 金色分割线 -->
+    <div style="width:120px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin-bottom:32px;"></div>
+
+    <!-- 核心主张 -->
+    <div style="font-size:22px;color:#fff;font-style:italic;letter-spacing:2px;line-height:1.7;margin-bottom:40px;max-width:700px;">
+      "让品牌在AI时代<br>被看见、被信任、被选择"
+    </div>
+
+    <!-- 三大成果预期 -->
+    <div style="display:flex;gap:40px;margin-bottom:48px;">
+      <div style="text-align:center;">
+        <div style="font-size:32px;font-weight:800;color:var(--gold);">80%+</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;letter-spacing:1px;">品牌可见度目标</div>
+      </div>
+      <div style="width:1px;background:rgba(255,255,255,0.15);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:32px;font-weight:800;color:var(--gold);">85%+</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;letter-spacing:1px;">信息准确率目标</div>
+      </div>
+      <div style="width:1px;background:rgba(255,255,255,0.15);"></div>
+      <div style="text-align:center;">
+        <div style="font-size:32px;font-weight:800;color:var(--gold);">55%+</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;letter-spacing:1px;">品牌声量目标</div>
+      </div>
+    </div>
+
+    <!-- 品牌出品 -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:3px;">—— 衔远科技 出品 ——</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.35);letter-spacing:2px;">GEO · Generative Engine Optimization · 2026</div>
+    </div>
+
+  </div>
+
+  <!-- 底部页脚 -->
+  <div class="slide-footer" style="background:rgba(0,0,0,0.3);position:relative;z-index:2;">
+    <span class="footer-brand">CLUB MED 白日方舟</span>
+    <span>衔远科技 GEO策略方案</span>
+    <span>14 / 14</span>
+  </div>
+</section>
+
+</div><!-- /#slideshow -->
+
+<!-- 导航控制 -->
+<div id="nav-controls">
+  <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)" disabled>← 上一张</button>
+  <span id="slide-counter">1 / 14</span>
+  <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">下一张 →</button>
+</div>
+
+<script>
+  const totalSlides = 14;
+  let current = 1;
+
+  function showSlide(n) {
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach((s, i) => {
+      s.classList.remove('active');
+      s.style.display = 'none';
+    });
+    const target = document.getElementById('slide-' + n);
+    if (target) {
+      target.style.display = 'flex';
+      target.classList.add('active');
+    }
+    // 更新进度条
+    const pct = (n / totalSlides * 100).toFixed(2);
+    document.getElementById('progress-bar').style.width = pct + '%';
+    // 更新计数器
+    document.getElementById('slide-counter').textContent = n + ' / ' + totalSlides;
+    // 更新按钮状态
+    document.getElementById('prev-btn').disabled = (n === 1);
+    document.getElementById('next-btn').disabled = (n === totalSlides);
+  }
+
+  function changeSlide(dir) {
+    const next = current + dir;
+    if (next >= 1 && next <= totalSlides) {
+      current = next;
+      showSlide(current);
+    }
+  }
+
+  // 键盘控制
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault();
+      changeSlide(1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      changeSlide(-1);
+    } else if (e.key === 'Home') {
+      current = 1;
+      showSlide(current);
+    } else if (e.key === 'End') {
+      current = totalSlides;
+      showSlide(current);
+    }
+  });
+
+  // 初始化
+  showSlide(1);
+</script>
+
+<script>
+(function(){
+  function fit(){
+    var vw = document.documentElement.clientWidth;
+    var scale = Math.min(1.6, Math.max(0.4, (vw - 40) / 1240));
+    document.body.style.zoom = scale;
+  }
+  window.addEventListener('resize', fit);
+  fit();
+})();
+</script>
+
+</body>
+</html>

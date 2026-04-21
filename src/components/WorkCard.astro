@@ -1,9 +1,86 @@
 ---
-interface Props { title: string; description: string; url: string; tags: string[]; }
-const { title, description, url, tags } = Astro.props;
+type WorkType = 'report' | 'video' | 'game' | 'project' | 'article';
+
+interface Props {
+  title: string;
+  description: string;
+  type: WorkType;
+  url: string;
+  cover?: string;
+  coverGradient?: string;
+  coverIcon?: string;
+  repo?: string;
+  embed?: string;
+  tags?: string[];
+  featured?: boolean;
+  year?: number;
+}
+
+const { title, description, type, url, cover, coverGradient, coverIcon, repo, tags = [], featured = false, year } = Astro.props;
+
+const TYPE_META: Record<WorkType, { label: string; icon: string; cta: string; gradient: string }> = {
+  report:  { label: '洞察报告', icon: '📊', cta: '阅读报告', gradient: 'linear-gradient(135deg, #FCE1CD, #F1B889)' },
+  video:   { label: 'AIGC 视频', icon: '🎬', cta: '观看视频', gradient: 'linear-gradient(135deg, #F4D8C2, #D9A47A)' },
+  game:    { label: '小游戏',   icon: '🎮', cta: '立即试玩', gradient: 'linear-gradient(135deg, #FFE2B8, #E8A557)' },
+  project: { label: '项目',     icon: '🚀', cta: '查看作品', gradient: 'linear-gradient(135deg, #FBE4D0, #C97A3F)' },
+  article: { label: '文章',     icon: '✍️', cta: '阅读全文', gradient: 'linear-gradient(135deg, #F2DDC4, #B58659)' },
+};
+const meta = TYPE_META[type] ?? TYPE_META.project;
+
+const PLACEHOLDER_VARIANTS: { icon: string; gradient: string }[] = [
+  { icon: '🚀', gradient: 'linear-gradient(135deg, #FBE4D0, #C97A3F)' },
+  { icon: '✨', gradient: 'linear-gradient(135deg, #FCE1CD, #E8A557)' },
+  { icon: '🎨', gradient: 'linear-gradient(135deg, #F4D8C2, #B58659)' },
+  { icon: '📈', gradient: 'linear-gradient(135deg, #FFE2B8, #D9A47A)' },
+  { icon: '🧪', gradient: 'linear-gradient(135deg, #F2DDC4, #C97A3F)' },
+  { icon: '🌱', gradient: 'linear-gradient(135deg, #E8D5BE, #A87246)' },
+  { icon: '💡', gradient: 'linear-gradient(135deg, #FBE7CE, #E0975A)' },
+  { icon: '🔭', gradient: 'linear-gradient(135deg, #EFD4B6, #B07546)' },
+];
+
+let hash = 0;
+for (let i = 0; i < title.length; i++) hash = (hash * 31 + title.charCodeAt(i)) >>> 0;
+const variant = PLACEHOLDER_VARIANTS[hash % PLACEHOLDER_VARIANTS.length];
+const placeholderIcon = coverIcon ?? variant.icon;
+const placeholderGradient = coverGradient ?? variant.gradient;
+
+const isExternal = /^https?:\/\//.test(url);
+const linkAttrs = isExternal
+  ? { target: '_blank', rel: 'noopener noreferrer' }
+  : {};
 ---
-<a href={url} target="_blank" rel="noopener" class="card">
-  <h3>{title}</h3>
-  <p>{description}</p>
-  <div>{tags.map(t => <span class="tag">{t}</span>)}</div>
-</a>
+
+<article class={`work-card${featured ? ' is-featured' : ''}`}>
+  <a href={url} class="work-cover-link" {...linkAttrs} aria-label={`打开 ${title}`}>
+    {cover ? (
+      <img src={cover} alt={title} class="work-cover-img" loading="lazy" />
+    ) : (
+      <div class="work-cover-placeholder" style={`background: ${placeholderGradient};`}>
+        <span class="work-cover-icon" aria-hidden="true">{placeholderIcon}</span>
+      </div>
+    )}
+    <span class="work-type-badge">{meta.label}</span>
+    {featured && <span class="work-featured-badge" title="精选">★</span>}
+  </a>
+
+  <div class="work-body">
+    <h3 class="work-title">
+      <a href={url} {...linkAttrs}>{title}</a>
+    </h3>
+    <p class="work-desc">{description}</p>
+
+    {tags.length > 0 && (
+      <div class="work-tags">
+        {tags.map(t => <span class="tag">{t}</span>)}
+      </div>
+    )}
+
+    <div class="work-actions">
+      <a class="work-cta primary" href={url} {...linkAttrs}>{meta.cta} →</a>
+      {repo && (
+        <a class="work-cta ghost" href={repo} target="_blank" rel="noopener noreferrer">GitHub</a>
+      )}
+      {year && <span class="work-year">{year}</span>}
+    </div>
+  </div>
+</article>

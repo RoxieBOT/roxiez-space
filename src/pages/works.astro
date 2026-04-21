@@ -1,12 +1,39 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
-import works from '../content/works/works.json';
+import worksData from '../content/works/works.json';
+
+type Work = {
+  title: string;
+  description: string;
+  type: 'report' | 'video' | 'game' | 'project' | 'article';
+  url: string;
+  cover?: string;
+  coverGradient?: string;
+  coverIcon?: string;
+  repo?: string;
+  embed?: string;
+  tags?: string[];
+  featured?: boolean;
+  year?: number;
+};
+
+const works = worksData as Work[];
+
+const sorted = [...works].sort((a, b) => {
+  if ((b.featured ? 1 : 0) !== (a.featured ? 1 : 0)) return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+  return (b.year ?? 0) - (a.year ?? 0);
+});
 ---
 <BaseLayout title="作品集 · Roxie's Space">
   <h1 class="page-title">作品集</h1>
-  <p class="page-subtitle">这些是我做过的、还在做的，以及打算继续做的事。</p>
-  <div class="card-grid">
-    {works.map(w => <WorkCard {...w} />)}
+  <p class="page-subtitle">这些是我做过的、还在做的，以及打算继续做的事 —— 报告、视频、项目、小玩意儿。</p>
+
+  <div class="works-grid">
+    {sorted.map(w => <WorkCard {...w} />)}
   </div>
+
+  {works.length === 1 && (
+    <p class="works-hint">更多作品陆续上架中。</p>
+  )}
 </BaseLayout>
