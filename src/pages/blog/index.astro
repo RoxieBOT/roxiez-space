@@ -9,8 +9,9 @@ const posts = Object.entries(postFiles).map(([path, mod]) => ({
 }));
 posts.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
 ---
-<BaseLayout title="博客 - MySpace">
+<BaseLayout title="博客 · Roxie's Space">
   <h1 class="page-title">博客</h1>
+  <p class="page-subtitle">技术、产品和日常的随笔。</p>
   <div class="card-grid">
     {posts.map(post => (
       <BlogCard

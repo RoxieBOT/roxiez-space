@@ -3,11 +3,11 @@
 <button class="chat-bubble" id="chat-toggle" aria-label="打开聊天">💬</button>
 <div class="chat-window hidden" id="chat-window">
   <div class="chat-header">
-    <span>AI 助手</span>
+    <span>Roxiez 的 AI 分身</span>
     <button id="chat-close" aria-label="关闭">&times;</button>
   </div>
   <div class="chat-messages" id="chat-messages">
-    <div class="chat-msg assistant">你好！我是站长的 AI 分身，有什么想聊的吗？</div>
+    <div class="chat-msg assistant">嗨，我是 Roxiez 的 AI 分身。营销、GEO、AI 部署 —— 想聊什么直接说。</div>
   </div>
   <div class="chat-input-area">
     <input id="chat-input" type="text" placeholder="输入消息..." autocomplete="off" />
@@ -111,20 +111,22 @@
         }
       } catch (streamErr) {
         if (gotAny) {
-          assistantDiv.textContent = full + '\n\n（连接已断开，请重试）';
+          assistantDiv.textContent = full + '（连接中断）';
         } else {
           throw streamErr;
         }
       }
 
       if (full) history.push({ role: 'assistant', content: full });
-      else assistantDiv.textContent = '（无响应）';
+      else assistantDiv.textContent = '出错了，请重试';
     } catch (e: any) {
-      const isNetwork = e instanceof TypeError;
-      assistantDiv.textContent = isNetwork
-        ? '连接已断开，请重试'
-        : `出错了：${e?.message || '请稍后再试'}`;
-      history.pop();
+      if (gotAny) {
+        assistantDiv.textContent = full + '（连接中断）';
+        history.push({ role: 'assistant', content: full });
+      } else {
+        assistantDiv.textContent = '出错了，请重试';
+        history.pop();
+      }
     } finally {
       setSending(false);
       input.focus();

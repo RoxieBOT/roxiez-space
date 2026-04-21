@@ -11,11 +11,15 @@ const mod = entry[1] as any;
 const Content = mod.Content;
 const { title, pubDate } = mod.frontmatter;
 ---
-<BaseLayout title={`${title} - MySpace`}>
+<BaseLayout title={`${title} · Roxie's Space`}>
   <article class="prose">
     <h1>{title}</h1>
-    <time style="color: var(--text-muted); font-size: .85rem;">{new Date(pubDate).toLocaleDateString('zh-CN')}</time>
-    <hr style="border-color: var(--border); margin: 1.5rem 0;" />
+    <div class="post-meta">
+      <time datetime={new Date(pubDate).toISOString()}>
+        {new Date(pubDate).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </time>
+    </div>
+    <hr class="divider" />
     <Content />
   </article>
 </BaseLayout>

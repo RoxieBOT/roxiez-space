@@ -2,18 +2,49 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const links = [
-  { name: 'GitHub', url: 'https://github.com', icon: '🐙', description: '我的开源项目' },
-  { name: 'Twitter / X', url: 'https://x.com', icon: '🐦', description: '日常想法和技术分享' },
-  { name: 'Email', url: 'mailto:hello@example.com', icon: '✉️', description: 'hello@example.com' },
-  { name: 'Telegram', url: 'https://t.me', icon: '💬', description: '即时交流' },
+  {
+    name: 'Gmail',
+    url: 'mailto:roxiezhao999@gmail.com',
+    icon: '✉️',
+    description: 'roxiezhao999@gmail.com',
+    action: 'link',
+  },
+  {
+    name: 'GitHub',
+    url: 'https://github.com/RoxieBOT',
+    icon: '🐙',
+    description: '@RoxieBOT — 我的开源项目',
+    action: 'external',
+  },
+  {
+    name: 'WeChat',
+    url: '#wechat',
+    icon: '💬',
+    description: '点击查看二维码 · ID 16621670830',
+    action: 'wechat',
+  },
+  {
+    name: 'AIRoxie',
+    url: '#airoxie',
+    icon: '🤖',
+    description: '和我的 AI 分身聊聊 — 点这里直接打开',
+    action: 'open-chat',
+  },
 ];
 ---
-<BaseLayout title="链接 - MySpace">
+<BaseLayout title="链接 · Roxie's Space">
   <h1 class="page-title">社交链接</h1>
+  <p class="page-subtitle">在这些地方都能找到我。</p>
   <div class="card-grid">
     {links.map(l => (
-      <a href={l.url} target="_blank" rel="noopener" class="card link-card">
-        <span class="icon">{l.icon}</span>
+      <a
+        href={l.url}
+        class="card link-card"
+        target={l.action === 'external' ? '_blank' : undefined}
+        rel={l.action === 'external' ? 'noopener noreferrer' : undefined}
+        data-action={l.action}
+      >
+        <span class="icon" aria-hidden="true">{l.icon}</span>
         <div>
           <h3>{l.name}</h3>
           <p>{l.description}</p>
@@ -21,4 +52,76 @@ const links = [
       </a>
     ))}
   </div>
+
+  <!-- WeChat QR Modal -->
+  <div id="wechat-modal" class="qr-modal hidden" role="dialog" aria-modal="true" aria-labelledby="wechat-modal-title">
+    <div class="qr-backdrop" data-close="1"></div>
+    <div class="qr-panel">
+      <button class="qr-close" aria-label="关闭" data-close="1">&times;</button>
+      <h3 id="wechat-modal-title">扫码加我微信</h3>
+      <img src="/wechat-qr.png" alt="WeChat QR Code · 星星Roxy" class="qr-img" />
+      <button class="qr-copy" data-copy="16621670830">复制微信号 16621670830</button>
+    </div>
+  </div>
+
+  <div id="link-toast" class="link-toast" role="status" aria-live="polite"></div>
 </BaseLayout>
+
+<script>
+  const toast = document.getElementById('link-toast')!;
+  const wechatModal = document.getElementById('wechat-modal')!;
+  let toastTimer: number | undefined;
+
+  function showToast(text: string) {
+    toast.textContent = text;
+    toast.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+
+  function openWechat() {
+    wechatModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeWechat() {
+    wechatModal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>('a.link-card').forEach((card) => {
+    const action = card.dataset.action;
+
+    if (action === 'wechat') {
+      card.addEventListener('click', (e) => { e.preventDefault(); openWechat(); });
+    }
+
+    if (action === 'open-chat') {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
+        const toggle = document.getElementById('chat-toggle');
+        const win = document.getElementById('chat-window');
+        if (win?.classList.contains('hidden')) toggle?.click();
+      });
+    }
+  });
+
+  // Modal close handlers
+  wechatModal.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement;
+    if (t.dataset.close) closeWechat();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !wechatModal.classList.contains('hidden')) closeWechat();
+  });
+
+  // Copy WeChat ID inside modal
+  wechatModal.querySelector<HTMLButtonElement>('.qr-copy')?.addEventListener('click', async (e) => {
+    const text = (e.currentTarget as HTMLButtonElement).dataset.copy || '';
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast(`已复制：${text}`);
+    } catch {
+      showToast('复制失败，请手动选取');
+    }
+  });
+</script>

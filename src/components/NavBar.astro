@@ -6,12 +6,20 @@ const links = [
   { href: '/blog', label: '博客' },
   { href: '/links', label: '链接' },
 ];
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
 ---
-<nav class="navbar">
-  <a class="logo" href="/">MySpace</a>
+<nav class="navbar" aria-label="主导航">
+  <a class="logo" href="/">Roxiez<span class="logo-tail"> · Roxie's Space</span></a>
   <ul class="nav-links">
     {links.map(l => (
-      <li><a href={l.href} class={currentPath === l.href ? 'active' : ''}>{l.label}</a></li>
+      <li>
+        <a
+          href={l.href}
+          class={isActive(l.href) ? 'active' : ''}
+          aria-current={isActive(l.href) ? 'page' : undefined}
+        >{l.label}</a>
+      </li>
     ))}
   </ul>
 </nav>

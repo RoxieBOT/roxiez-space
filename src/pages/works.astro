@@ -3,8 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import works from '../content/works/works.json';
 ---
-<BaseLayout title="作品集 - MySpace">
+<BaseLayout title="作品集 · Roxie's Space">
   <h1 class="page-title">作品集</h1>
+  <p class="page-subtitle">这些是我做过的、还在做的，以及打算继续做的事。</p>
   <div class="card-grid">
     {works.map(w => <WorkCard {...w} />)}
   </div>
