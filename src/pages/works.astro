@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WorkCard from '../components/WorkCard.astro';
+import works from '../content/works/works.json';
+---
+<BaseLayout title="作品集 - MySpace">
+  <h1 class="page-title">作品集</h1>
+  <div class="card-grid">
+    {works.map(w => <WorkCard {...w} />)}
+  </div>
+</BaseLayout>

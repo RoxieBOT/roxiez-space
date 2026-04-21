@@ -1,0 +1,17 @@
+---
+const currentPath = Astro.url.pathname;
+const links = [
+  { href: '/', label: '首页' },
+  { href: '/works', label: '作品集' },
+  { href: '/blog', label: '博客' },
+  { href: '/links', label: '链接' },
+];
+---
+<nav class="navbar">
+  <a class="logo" href="/">MySpace</a>
+  <ul class="nav-links">
+    {links.map(l => (
+      <li><a href={l.href} class={currentPath === l.href ? 'active' : ''}>{l.label}</a></li>
+    ))}
+  </ul>
+</nav>

@@ -1,0 +1,20 @@
+[
+  {
+    "title": "项目 Alpha",
+    "description": "一个基于 AI 的智能工具，帮助开发者提高效率。",
+    "url": "https://github.com/example/alpha",
+    "tags": ["AI", "TypeScript", "开源"]
+  },
+  {
+    "title": "项目 Beta",
+    "description": "极简的个人知识管理应用，支持 Markdown 和全文搜索。",
+    "url": "https://github.com/example/beta",
+    "tags": ["React", "Node.js", "全栈"]
+  },
+  {
+    "title": "项目 Gamma",
+    "description": "高性能的静态站点生成器插件。",
+    "url": "https://github.com/example/gamma",
+    "tags": ["Astro", "Plugin"]
+  }
+]

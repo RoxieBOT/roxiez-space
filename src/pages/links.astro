@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const links = [
+  { name: 'GitHub', url: 'https://github.com', icon: '🐙', description: '我的开源项目' },
+  { name: 'Twitter / X', url: 'https://x.com', icon: '🐦', description: '日常想法和技术分享' },
+  { name: 'Email', url: 'mailto:hello@example.com', icon: '✉️', description: 'hello@example.com' },
+  { name: 'Telegram', url: 'https://t.me', icon: '💬', description: '即时交流' },
+];
+---
+<BaseLayout title="链接 - MySpace">
+  <h1 class="page-title">社交链接</h1>
+  <div class="card-grid">
+    {links.map(l => (
+      <a href={l.url} target="_blank" rel="noopener" class="card link-card">
+        <span class="icon">{l.icon}</span>
+        <div>
+          <h3>{l.name}</h3>
+          <p>{l.description}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+</BaseLayout>

@@ -1,0 +1,136 @@
+---
+---
+<button class="chat-bubble" id="chat-toggle" aria-label="打开聊天">💬</button>
+<div class="chat-window hidden" id="chat-window">
+  <div class="chat-header">
+    <span>AI 助手</span>
+    <button id="chat-close" aria-label="关闭">&times;</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="chat-msg assistant">你好！我是站长的 AI 分身，有什么想聊的吗？</div>
+  </div>
+  <div class="chat-input-area">
+    <input id="chat-input" type="text" placeholder="输入消息..." autocomplete="off" />
+    <button id="chat-send">➤</button>
+  </div>
+</div>
+
+<script>
+  const toggle = document.getElementById('chat-toggle')!;
+  const win = document.getElementById('chat-window')!;
+  const closeBtn = document.getElementById('chat-close')!;
+  const input = document.getElementById('chat-input') as HTMLInputElement;
+  const sendBtn = document.getElementById('chat-send')!;
+  const msgContainer = document.getElementById('chat-messages')!;
+
+  let history: { role: string; content: string }[] = [];
+
+  toggle.addEventListener('click', () => {
+    win.classList.toggle('hidden');
+    if (!win.classList.contains('hidden')) input.focus();
+  });
+  closeBtn.addEventListener('click', () => win.classList.add('hidden'));
+
+  function addMsg(role: string, text: string) {
+    const div = document.createElement('div');
+    div.className = `chat-msg ${role}`;
+    div.textContent = text;
+    msgContainer.appendChild(div);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
+    return div;
+  }
+
+  let sending = false;
+
+  function setSending(state: boolean) {
+    sending = state;
+    input.disabled = state;
+    (sendBtn as HTMLButtonElement).disabled = state;
+  }
+
+  async function send() {
+    if (sending) return;
+    const text = input.value.trim();
+    if (!text) return;
+    setSending(true);
+    input.value = '';
+    addMsg('user', text);
+    history.push({ role: 'user', content: text });
+
+    const assistantDiv = addMsg('assistant', '');
+    let full = '';
+    let gotAny = false;
+
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: history }),
+      });
+
+      if (!res.ok) {
+        let detail = '';
+        try { detail = (await res.json()).error || ''; } catch {}
+        throw new Error(detail || `请求失败（${res.status}）`);
+      }
+      if (!res.body) throw new Error('无响应数据');
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue;
+            const data = line.slice(6).trim();
+            if (!data || data === '[DONE]') continue;
+            try {
+              const parsed = JSON.parse(data);
+              if (parsed.type === 'error') {
+                throw new Error(parsed.error?.message || parsed.error || '上游错误');
+              }
+              if (parsed.type === 'content_block_delta' && parsed.delta?.text) {
+                full += parsed.delta.text;
+                gotAny = true;
+                assistantDiv.textContent = full;
+                msgContainer.scrollTop = msgContainer.scrollHeight;
+              }
+            } catch (parseErr) {
+              if (parseErr instanceof Error && parseErr.message !== 'Unexpected end of JSON input') {
+                throw parseErr;
+              }
+            }
+          }
+        }
+      } catch (streamErr) {
+        if (gotAny) {
+          assistantDiv.textContent = full + '\n\n（连接已断开，请重试）';
+        } else {
+          throw streamErr;
+        }
+      }
+
+      if (full) history.push({ role: 'assistant', content: full });
+      else assistantDiv.textContent = '（无响应）';
+    } catch (e: any) {
+      const isNetwork = e instanceof TypeError;
+      assistantDiv.textContent = isNetwork
+        ? '连接已断开，请重试'
+        : `出错了：${e?.message || '请稍后再试'}`;
+      history.pop();
+    } finally {
+      setSending(false);
+      input.focus();
+    }
+  }
+
+  sendBtn.addEventListener('click', send);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !sending) send(); });
+</script>
