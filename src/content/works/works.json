@@ -1,5 +1,16 @@
 [
   {
+    "title": "自然堂 · 出海增长 + AI 私域营销双引擎战略",
+    "description": "为自然堂提供的深度战略报告，围绕东南亚出海增长与 AI 驱动的私域营销双引擎展开。",
+    "type": "report",
+    "url": "/works/chando_strategy_report.html",
+    "coverGradient": "linear-gradient(135deg, #0D2B4E 0%, #1E88E5 100%)",
+    "coverIcon": "🏔️",
+    "tags": ["品牌战略", "出海增长", "AI 私域", "自然堂"],
+    "featured": true,
+    "year": 2026
+  },
+  {
     "title": "Club Med · GEO 战略提案",
     "description": "面向 Club Med 中国市场的 GEO（生成式引擎优化）战略提案，覆盖渠道洞察、内容策略与落地路径。",
     "type": "report",

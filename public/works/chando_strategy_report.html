@@ -1,0 +1,2733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自然堂：出海增长 × AI私域营销双引擎战略 · 深度报告 v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   CSS 变量系统
+═══════════════════════════════════════════ */
+:root {
+  --deep:       #0D2B4E;
+  --core:       #1565C0;
+  --mid:        #1E88E5;
+  --light:      #42A5F5;
+  --pale:       #90CAF9;
+  --glacier1:   #E3F2FD;
+  --glacier2:   #BBDEFB;
+  --glacier3:   #C8E6F9;
+  --ice:        #F0F8FF;
+  --mist:       #EAF4FD;
+  --fog:        #F5FAFF;
+  --gold:       #C9A84C;
+  --gold-lt:    #F0D080;
+  --gold-pale:  #FDF6E3;
+  --txt-dark:   #0D1E35;
+  --txt-mid:    #2C4A6E;
+  --txt-soft:   #5A7A9E;
+  --txt-muted:  #8AAAC4;
+  --white:      #FFFFFF;
+  --border:     #C5DCF0;
+  --border-lt:  #D8EBF8;
+  --shadow-sm:  0 2px 12px rgba(21,101,192,0.08);
+  --shadow-md:  0 6px 24px rgba(21,101,192,0.13);
+  --shadow-lg:  0 12px 40px rgba(21,101,192,0.18);
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  20px;
+}
+
+/* ═══════════════════════════════════════════
+   全局重置
+═══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:15px; }
+body {
+  font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  background:var(--ice);
+  color:var(--txt-dark);
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+p { color:var(--txt-mid); margin-bottom:16px; line-height:1.9; }
+strong { color:var(--deep); font-weight:600; }
+ul,ol { padding-left:20px; }
+
+/* ═══════════════════════════════════════════
+   封面
+═══════════════════════════════════════════ */
+.cover {
+  position:relative;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:linear-gradient(165deg, #050E1A 0%, #0A1F3A 20%, #0D3060 45%, #1250A0 65%, #1565C0 80%, #1E88E5 100%);
+}
+
+/* 大气光晕层 */
+.cover-glow {
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 90%, rgba(66,165,245,0.20) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 85% 15%, rgba(30,136,229,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 35% at 10% 25%, rgba(13,48,96,0.55) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 30% at 50% 100%, rgba(144,202,249,0.12) 0%, transparent 50%);
+}
+
+/* 星点层 */
+.cover-stars {
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle 1.5px at 12% 12%, rgba(255,255,255,0.75) 0%, transparent 100%),
+    radial-gradient(circle 1px at 28% 8%, rgba(255,255,255,0.60) 0%, transparent 100%),
+    radial-gradient(circle 2px at 72% 6%, rgba(255,255,255,0.55) 0%, transparent 100%),
+    radial-gradient(circle 1px at 88% 18%, rgba(255,255,255,0.45) 0%, transparent 100%),
+    radial-gradient(circle 1.5px at 48% 14%, rgba(255,255,255,0.65) 0%, transparent 100%),
+    radial-gradient(circle 1px at 60% 22%, rgba(255,255,255,0.40) 0%, transparent 100%),
+    radial-gradient(circle 1px at 8% 35%, rgba(255,255,255,0.35) 0%, transparent 100%),
+    radial-gradient(circle 2px at 95% 8%, rgba(255,255,255,0.50) 0%, transparent 100%),
+    radial-gradient(circle 1px at 35% 30%, rgba(255,255,255,0.30) 0%, transparent 100%),
+    radial-gradient(circle 1.5px at 82% 30%, rgba(255,255,255,0.40) 0%, transparent 100%),
+    radial-gradient(circle 1px at 18% 55%, rgba(255,255,255,0.25) 0%, transparent 100%),
+    radial-gradient(circle 1px at 55% 5%, rgba(255,255,255,0.55) 0%, transparent 100%),
+    radial-gradient(circle 1.5px at 40% 20%, rgba(201,168,76,0.50) 0%, transparent 100%),
+    radial-gradient(circle 1px at 75% 14%, rgba(201,168,76,0.40) 0%, transparent 100%);
+}
+
+/* 封面内容 */
+.cover-content {
+  position:relative;
+  z-index:10;
+  text-align:center;
+  padding:48px 60px;
+  max-width:920px;
+  width:100%;
+}
+
+.cover-badge {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:rgba(255,255,255,0.09);
+  border:1px solid rgba(255,255,255,0.22);
+  border-radius:24px;
+  padding:7px 24px;
+  font-size:11px;
+  color:var(--pale);
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:40px;
+  backdrop-filter:blur(10px);
+}
+
+.cover-badge::before {
+  content:'';
+  width:7px; height:7px;
+  border-radius:50%;
+  background:var(--gold-lt);
+  box-shadow:0 0 10px var(--gold-lt), 0 0 20px rgba(240,208,128,0.4);
+  animation:pulse-gold 2s ease-in-out infinite;
+}
+
+@keyframes pulse-gold {
+  0%,100%{ opacity:1; transform:scale(1); }
+  50%{ opacity:0.7; transform:scale(1.3); }
+}
+
+.cover-title {
+  font-family:'Noto Serif SC',serif;
+  font-size:56px;
+  font-weight:700;
+  color:var(--white);
+  line-height:1.15;
+  letter-spacing:4px;
+  margin-bottom:6px;
+  text-shadow:0 4px 30px rgba(0,0,0,0.45), 0 0 60px rgba(66,165,245,0.2);
+}
+
+.cover-title .accent { color:var(--gold-lt); }
+
+.cover-subtitle {
+  font-size:22px;
+  color:rgba(187,222,251,0.90);
+  font-weight:300;
+  letter-spacing:8px;
+  margin-bottom:44px;
+}
+
+.cover-divider {
+  width:100px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold-lt),transparent);
+  margin:0 auto 44px;
+}
+
+.cover-tagline {
+  font-size:16px;
+  color:rgba(255,255,255,0.68);
+  font-weight:300;
+  line-height:2;
+  max-width:640px;
+  margin:0 auto 52px;
+}
+
+.cover-meta {
+  display:flex;
+  justify-content:center;
+  gap:0;
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  backdrop-filter:blur(8px);
+  background:rgba(255,255,255,0.05);
+  max-width:680px;
+  margin:0 auto;
+}
+
+.cover-meta-item {
+  flex:1;
+  padding:18px 20px;
+  text-align:center;
+  border-right:1px solid rgba(255,255,255,0.10);
+}
+
+.cover-meta-item:last-child { border-right:none; }
+
+.cover-meta-item .cm-label {
+  font-size:10px;
+  color:rgba(144,202,249,0.70);
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:5px;
+}
+
+.cover-meta-item .cm-value {
+  font-size:14px;
+  color:rgba(255,255,255,0.88);
+  font-weight:500;
+}
+
+/* ═══════════════════════════════════════════
+   粘性导航
+═══════════════════════════════════════════ */
+.toc-nav {
+  background:var(--deep);
+  position:sticky;
+  top:0;
+  z-index:200;
+  box-shadow:0 2px 24px rgba(5,15,30,0.55);
+}
+
+.toc-nav-inner {
+  max-width:1160px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  padding:0 40px;
+}
+
+.nav-brand {
+  font-family:'Noto Serif SC',serif;
+  font-size:14px;
+  color:rgba(255,255,255,0.75);
+  letter-spacing:3px;
+  margin-right:32px;
+  flex-shrink:0;
+  padding:14px 0;
+  border-right:1px solid rgba(255,255,255,0.10);
+  padding-right:28px;
+}
+
+.toc-nav ul {
+  display:flex;
+  list-style:none;
+  overflow-x:auto;
+  flex:1;
+}
+
+.toc-nav ul::-webkit-scrollbar { display:none; }
+
+.toc-nav li a {
+  display:block;
+  padding:15px 18px;
+  color:rgba(255,255,255,0.55);
+  text-decoration:none;
+  font-size:12.5px;
+  white-space:nowrap;
+  border-bottom:2px solid transparent;
+  transition:all 0.25s;
+  letter-spacing:0.5px;
+}
+
+.toc-nav li a:hover,
+.toc-nav li a.active {
+  color:var(--white);
+  border-bottom-color:var(--light);
+  background:rgba(255,255,255,0.04);
+}
+
+/* ═══════════════════════════════════════════
+   页面布局
+═══════════════════════════════════════════ */
+.page-wrapper {
+  max-width:1160px;
+  margin:0 auto;
+  padding:0 48px;
+}
+
+/* ═══════════════════════════════════════════
+   执行摘要
+═══════════════════════════════════════════ */
+.exec-summary {
+  background:linear-gradient(145deg, #07192E 0%, #0D2B4E 40%, #1565C0 100%);
+  padding:90px 0 80px;
+  position:relative;
+  overflow:hidden;
+}
+
+.exec-summary::before {
+  content:'';
+  position:absolute;
+  top:-120px; right:-120px;
+  width:600px; height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(66,165,245,0.10) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+.exec-summary::after {
+  content:'';
+  position:absolute;
+  bottom:-100px; left:-100px;
+  width:480px; height:480px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(144,202,249,0.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+.exec-eyebrow {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-size:11px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--pale);
+  margin-bottom:28px;
+}
+
+.exec-eyebrow::before {
+  content:'';
+  display:block;
+  width:30px; height:1px;
+  background:linear-gradient(90deg,var(--pale),transparent);
+}
+
+.exec-headline {
+  font-family:'Noto Serif SC',serif;
+  font-size:36px;
+  color:var(--white);
+  font-weight:600;
+  margin-bottom:28px;
+  line-height:1.3;
+}
+
+.exec-headline span { color:var(--pale); }
+
+.exec-intro {
+  font-size:16.5px;
+  color:rgba(255,255,255,0.80);
+  line-height:2;
+  margin-bottom:40px;
+  max-width:880px;
+}
+
+.exec-intro strong { color:var(--pale); }
+
+/* 核心引用块 */
+.core-quote {
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  border-left:3px solid var(--gold-lt);
+  border-radius:0 var(--radius-md) var(--radius-md) 0;
+  padding:26px 34px;
+  margin-bottom:52px;
+  backdrop-filter:blur(6px);
+  position:relative;
+}
+
+.core-quote::before {
+  content:'"';
+  position:absolute;
+  top:-10px; left:20px;
+  font-size:60px;
+  color:var(--gold);
+  opacity:0.35;
+  font-family:'Noto Serif SC',serif;
+  line-height:1;
+}
+
+.core-quote p {
+  color:rgba(255,255,255,0.88);
+  font-size:15.5px;
+  line-height:1.95;
+  margin:0;
+}
+
+.core-quote strong { color:var(--gold-lt); }
+
+/* KPI 网格 */
+.kpi-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.kpi-card {
+  background:rgba(255,255,255,0.07);
+  border:1px solid rgba(255,255,255,0.11);
+  border-radius:var(--radius-lg);
+  padding:28px 22px;
+  text-align:center;
+  backdrop-filter:blur(6px);
+  transition:transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.kpi-card::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-lt),var(--gold));
+  opacity:0.6;
+}
+
+.kpi-card:hover {
+  transform:translateY(-6px);
+  background:rgba(255,255,255,0.13);
+  box-shadow:0 16px 40px rgba(0,0,0,0.35);
+}
+
+.kpi-icon {
+  font-size:28px;
+  margin-bottom:12px;
+  display:block;
+}
+
+.kpi-value {
+  font-size:38px;
+  font-weight:700;
+  color:var(--white);
+  line-height:1;
+  margin-bottom:8px;
+  font-family:'Noto Serif SC',serif;
+}
+
+.kpi-unit {
+  font-size:16px;
+  font-weight:400;
+  color:var(--pale);
+}
+
+.kpi-label {
+  font-size:12px;
+  color:rgba(255,255,255,0.50);
+  margin-bottom:12px;
+  letter-spacing:0.5px;
+}
+
+.kpi-badge {
+  display:inline-block;
+  font-size:11px;
+  font-weight:600;
+  padding:4px 12px;
+  border-radius:20px;
+  background:rgba(76,175,80,0.18);
+  color:#81C784;
+  border:1px solid rgba(76,175,80,0.25);
+}
+
+/* ═══════════════════════════════════════════
+   章节通用
+═══════════════════════════════════════════ */
+.section {
+  padding:88px 0;
+  position:relative;
+}
+
+.section--white { background:var(--white); }
+.section--ice   { background:var(--ice); }
+.section--mist  { background:var(--mist); }
+.section--fog   { background:var(--fog); }
+
+.section--gradient {
+  background:linear-gradient(180deg, var(--ice) 0%, var(--glacier1) 100%);
+}
+
+/* 章节标题 */
+.section-header {
+  display:flex;
+  align-items:flex-start;
+  gap:26px;
+  margin-bottom:56px;
+}
+
+.chap-num {
+  flex-shrink:0;
+  width:58px; height:58px;
+  border-radius:var(--radius-md);
+  background:linear-gradient(135deg, var(--core), var(--mid));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:700;
+  color:var(--white);
+  font-family:'Noto Serif SC',serif;
+  box-shadow:0 6px 20px rgba(21,101,192,0.40), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.section-title-group { flex:1; }
+
+.section-eyebrow {
+  font-size:11px;
+  letter-spacing:3.5px;
+  text-transform:uppercase;
+  color:var(--mid);
+  margin-bottom:8px;
+  opacity:0.85;
+}
+
+.section-title {
+  font-family:'Noto Serif SC',serif;
+  font-size:30px;
+  font-weight:600;
+  color:var(--deep);
+  line-height:1.25;
+}
+
+.section-title span { color:var(--mid); }
+
+/* 分割线 */
+.divider {
+  width:100%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+  margin:48px 0;
+}
+
+/* 子节标题 */
+.subsection { margin-bottom:56px; }
+.subsection:last-child { margin-bottom:0; }
+
+.sub-title {
+  font-size:18px;
+  font-weight:600;
+  color:var(--deep);
+  margin-bottom:20px;
+  padding-bottom:12px;
+  border-bottom:1.5px solid var(--glacier3);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.sub-title::before {
+  content:'';
+  width:4px; height:20px;
+  border-radius:2px;
+  background:linear-gradient(180deg,var(--core),var(--light));
+  flex-shrink:0;
+}
+
+/* ═══════════════════════════════════════════
+   Insight / Alert 框
+═══════════════════════════════════════════ */
+.insight-box {
+  background:linear-gradient(135deg,#E8F4FD,#D4ECFA);
+  border-left:3px solid var(--mid);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:22px 28px;
+  margin:24px 0;
+}
+
+.insight-box p { color:var(--txt-mid); margin:0; }
+.insight-box strong { color:var(--core); }
+
+.alert-box {
+  background:linear-gradient(135deg,#FFF8E1,#FFF3CD);
+  border-left:3px solid var(--gold);
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:22px 28px;
+  margin:24px 0;
+}
+
+.alert-box p { color:#5D4037; margin:0; }
+.alert-box strong { color:#4E342E; }
+
+.danger-box {
+  background:linear-gradient(135deg,#FFEBEE,#FFCDD2);
+  border-left:3px solid #E53935;
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:22px 28px;
+  margin:24px 0;
+}
+
+.danger-box p { color:#B71C1C; margin:0; }
+.danger-box strong { color:#7F0000; }
+
+/* ═══════════════════════════════════════════
+   表格
+═══════════════════════════════════════════ */
+.data-table {
+  width:100%;
+  border-collapse:collapse;
+  margin:24px 0;
+  border-radius:var(--radius-md);
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+
+.data-table thead tr {
+  background:linear-gradient(90deg, var(--core), var(--mid));
+}
+
+.data-table thead th {
+  padding:15px 20px;
+  color:var(--white);
+  font-weight:500;
+  font-size:13px;
+  letter-spacing:0.5px;
+  text-align:left;
+}
+
+.data-table tbody tr {
+  border-bottom:1px solid var(--glacier2);
+  transition:background 0.15s;
+}
+
+.data-table tbody tr:last-child { border-bottom:none; }
+
+.data-table tbody tr:nth-child(even) {
+  background:var(--glacier1);
+}
+
+.data-table tbody tr:hover { background:var(--glacier3); }
+
+.data-table td {
+  padding:14px 20px;
+  color:var(--txt-mid);
+  font-size:14px;
+  vertical-align:top;
+  line-height:1.75;
+}
+
+.data-table td strong { color:var(--core); }
+
+/* ═══════════════════════════════════════════
+   指标卡片行
+═══════════════════════════════════════════ */
+.metrics-row {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  margin:32px 0;
+}
+
+.metric-card {
+  background:var(--white);
+  border:1px solid var(--border-lt);
+  border-top:3px solid var(--mid);
+  border-radius:var(--radius-md);
+  padding:22px 18px;
+  text-align:center;
+  box-shadow:var(--shadow-sm);
+  transition:transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.metric-card:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-md);
+}
+
+.metric-card .m-value {
+  font-size:28px;
+  font-weight:700;
+  color:var(--core);
+  line-height:1.1;
+  margin-bottom:6px;
+  font-family:'Noto Serif SC',serif;
+}
+
+.metric-card .m-label {
+  font-size:12px;
+  color:var(--txt-soft);
+  line-height:1.45;
+}
+
+/* ═══════════════════════════════════════════
+   第一章：毛利率 SVG 阶梯图
+═══════════════════════════════════════════ */
+.margin-steps {
+  margin:36px 0;
+  background:var(--white);
+  border:1px solid var(--border-lt);
+  border-radius:var(--radius-lg);
+  padding:36px 32px 28px;
+  box-shadow:var(--shadow-sm);
+}
+
+.margin-steps-title {
+  font-size:14px;
+  font-weight:600;
+  color:var(--deep);
+  text-align:center;
+  margin-bottom:28px;
+  letter-spacing:0.5px;
+}
+
+/* ═══════════════════════════════════════════
+   第二章：系统流程卡片
+═══════════════════════════════════════════ */
+.sys-flow {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  margin:32px 0;
+  position:relative;
+}
+
+.sys-flow::before {
+  content:'';
+  position:absolute;
+  top:50px; left:calc(33.33% - 0px);
+  width:calc(66.66%);
+  height:2px;
+  background:linear-gradient(90deg,var(--glacier2),var(--pale),var(--glacier2));
+  z-index:0;
+  top:40px;
+}
+
+.sys-card {
+  background:var(--white);
+  border:1px solid var(--border-lt);
+  border-radius:var(--radius-lg);
+  padding:30px 24px;
+  margin:0 10px;
+  position:relative;
+  z-index:1;
+  box-shadow:var(--shadow-sm);
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+  overflow:hidden;
+}
+
+.sys-card::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:4px;
+  background:linear-gradient(90deg, var(--core), var(--light));
+}
+
+.sys-card:hover {
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-lg);
+}
+
+.sys-num {
+  width:52px; height:52px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--core), var(--mid));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:700;
+  color:var(--white);
+  font-family:'Noto Serif SC',serif;
+  margin-bottom:18px;
+  box-shadow:0 4px 16px rgba(21,101,192,0.35);
+  position:relative;
+  z-index:2;
+}
+
+.sys-card-title {
+  font-size:15px;
+  font-weight:600;
+  color:var(--deep);
+  margin-bottom:12px;
+}
+
+.sys-pte {
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-top:16px;
+}
+
+.pte-item {
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.pte-tag {
+  flex-shrink:0;
+  padding:2px 8px;
+  border-radius:4px;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.5px;
+}
+
+.pte-tag.pain { background:#FFCDD2; color:#C62828; }
+.pte-tag.ai   { background:#E3F2FD; color:#1565C0; }
+.pte-tag.effect { background:#C8E6C9; color:#2E7D32; }
+
+.pte-text { color:var(--txt-soft); }
+
+.sys-stat-pill {
+  display:inline-block;
+  margin-top:18px;
+  background:linear-gradient(135deg,var(--glacier1),var(--glacier2));
+  border:1px solid var(--border-lt);
+  border-radius:20px;
+  padding:8px 16px;
+  font-size:13px;
+  font-weight:600;
+  color:var(--core);
+}
+
+/* SVG 水平条形图 */
+.hbar-wrap {
+  background:var(--white);
+  border:1px solid var(--border-lt);
+  border-radius:var(--radius-lg);
+  padding:32px 28px 24px;
+  box-shadow:var(--shadow-sm);
+  margin:32px 0;
+}
+
+.hbar-title {
+  font-size:14px;
+  font-weight:600;
+  color:var(--deep);
+  text-align:center;
+  margin-bottom:24px;
+  letter-spacing:0.5px;
+}
+
+.hbar-row {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:16px;
+}
+
+.hbar-label {
+  width:160px;
+  font-size:12.5px;
+  color:var(--txt-mid);
+  text-align:right;
+  flex-shrink:0;
+  line-height:1.4;
+}
+
+.hbar-track {
+  flex:1;
+  height:32px;
+  background:var(--glacier1);
+  border-radius:6px;
+  overflow:hidden;
+  position:relative;
+}
+
+.hbar-fill {
+  height:100%;
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  padding:0 14px;
+  animation:barGrow 1.2s cubic-bezier(0.4,0,0.2,1) forwards;
+  transform-origin:left;
+}
+
+@keyframes barGrow {
+  from { width:0 !important; }
+}
+
+.hbar-fill span {
+  font-size:12.5px;
+  font-weight:600;
+  color:var(--white);
+  white-space:nowrap;
+}
+
+/* ═══════════════════════════════════════════
+   第三章：漏斗式私域转化
+═══════════════════════════════════════════ */
+.funnel-svg-wrap {
+  margin:32px 0;
+  text-align:center;
+}
+
+.funnel-steps {
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  margin:32px 0;
+  max-width:680px;
+}
+
+.f-step {
+  display:flex;
+  align-items:stretch;
+  gap:0;
+}
+
+.f-num {
+  width:52px;
+  background:linear-gradient(180deg, var(--core), var(--mid));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:15px;
+  font-weight:700;
+  color:var(--white);
+  border-radius:var(--radius-sm) 0 0 var(--radius-sm);
+  flex-shrink:0;
+}
+
+.f-body {
+  flex:1;
+  background:var(--white);
+  border:1px solid var(--border-lt);
+  border-left:none;
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  padding:18px 24px;
+  box-shadow:var(--shadow-sm);
+}
+
+.f-body h4 {
+  font-size:15px;
+  font-weight:600;
+  color:var(--deep);
+  margin-bottom:6px;
+}
+
+.f-body p { font-size:13px; color:var(--txt-soft); margin:0; line-height:1.6; }
+
+.f-arrow {
+  text-align:center;
+  color:var(--pale);
+  font-size:22px;
+  padding:2px 0 2px 26px;
+}
+
+/* 对比表格标签 */
+.tag-better { color:#2E7D32; font-weight:600; }
+.tag-worse  { color:#C62828; }
+
+/* ═══════════════════════════════════════════
+   第四章：CSS漏斗
+═══════════════════════════════════════════ */
+.css-funnel {
+  margin:32px auto;
+  max-width:680px;
+}
+
+.css-funnel-layer {
+  border-radius:var(--radius-sm);
+  padding:20px 28px;
+  margin-bottom:3px;
+  position:relative;
+  transition:transform 0.2s;
+}
+
+.css-funnel-layer:hover { transform:scale(1.01); }
+
+.cfl-1 {
+  background:linear-gradient(135deg,#1565C0,#1E88E5);
+  color:var(--white);
+  clip-path:polygon(0 0, 100% 0, 94% 100%, 6% 100%);
+}
+
+.cfl-2 {
+  background:linear-gradient(135deg,#0D47A1,#1565C0);
+  color:var(--white);
+  clip-path:polygon(6% 0, 94% 0, 88% 100%, 12% 100%);
+}
+
+.cfl-3 {
+  background:linear-gradient(135deg,#0A2D6A,#0D47A1);
+  color:var(--white);
+  clip-path:polygon(12% 0, 88% 0, 80% 100%, 20% 100%);
+}
+
+.cfl-label {
+  font-size:13px;
+  font-weight:600;
+  opacity:0.95;
+  letter-spacing:0.5px;
+}
+
+.cfl-desc {
+  font-size:12px;
+  opacity:0.75;
+  margin-top:3px;
+}
+
+/* 用户分层 */
+.user-tiers {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+  margin:20px 0;
+}
+
+.tier-card {
+  border-radius:var(--radius-md);
+  padding:20px 18px;
+  text-align:center;
+  transition:transform 0.2s;
+}
+
+.tier-card:hover { transform:translateY(-3px); }
+
+.tier-card.high {
+  background:linear-gradient(135deg,var(--glacier1),var(--glacier2));
+  border:1px solid var(--pale);
+}
+
+.tier-card.mid {
+  background:linear-gradient(135deg,#E8F5E9,#C8E6C9);
+  border:1px solid #A5D6A7;
+}
+
+.tier-card.low {
+  background:linear-gradient(135deg,#FFF3E0,#FFE0B2);
+  border:1px solid #FFCC80;
+}
+
+.tier-name {
+  font-size:13px;
+  font-weight:600;
+  color:var(--deep);
+  margin-bottom:6px;
+}
+
+.tier-action {
+  font-size:12px;
+  color:var(--txt-soft);
+  line-height:1.5;
+}
+
+/* 前后对比柱状图 */
+.compare-chart-wrap {
+  background:var(--white);
+  border:1px solid var(--border-lt);
+  border-radius:var(--radius-lg);
+  padding:32px 28px 24px;
+  box-shadow:var(--shadow-sm);
+  margin:32px 0;
+}
+
+/* ═══════════════════════════════════════════
+   第五章：双引擎架构图
+═══════════════════════════════════════════ */
+.engine-diagram {
+  margin:32px 0;
+  background:var(--white);
+  border:1px solid var(--border-lt);
+  border-radius:var(--radius-xl);
+  padding:40px 36px;
+  box-shadow:var(--shadow-sm);
+}
+
+.engine-top {
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:24px;
+  align-items:center;
+  margin-bottom:32px;
+}
+
+.engine-panel {
+  background:linear-gradient(135deg,var(--glacier1),var(--mist));
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:24px 20px;
+}
+
+.engine-panel-title {
+  font-size:14px;
+  font-weight:600;
+  color:var(--deep);
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.engine-panel-title .dot {
+  width:8px; height:8px;
+  border-radius:50%;
+  background:var(--mid);
+  flex-shrink:0;
+}
+
+.engine-list {
+  list-style:none;
+  padding:0;
+}
+
+.engine-list li {
+  font-size:12.5px;
+  color:var(--txt-mid);
+  padding:6px 0;
+  border-bottom:1px dashed var(--border-lt);
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  line-height:1.45;
+}
+
+.engine-list li:last-child { border-bottom:none; }
+
+.engine-list li::before {
+  content:'▸';
+  color:var(--light);
+  font-size:10px;
+  flex-shrink:0;
+  margin-top:3px;
+}
+
+.engine-arrows {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  font-size:28px;
+  color:var(--pale);
+  font-weight:300;
+}
+
+.shared-base-panel {
+  background:linear-gradient(135deg,#E3F2FD,#BBDEFB);
+  border:1.5px solid var(--pale);
+  border-radius:var(--radius-lg);
+  padding:28px 28px;
+  text-align:center;
+}
+
+.shared-base-title {
+  font-size:15px;
+  font-weight:600;
+  color:var(--core);
+  margin-bottom:20px;
+  letter-spacing:0.5px;
+}
+
+.tags-cloud {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+}
+
+.tag-chip {
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:7px 18px;
+  font-size:13px;
+  color:var(--core);
+  font-weight:500;
+  transition:all 0.2s;
+}
+
+.tag-chip:hover {
+  background:var(--core);
+  color:var(--white);
+  border-color:var(--core);
+}
+
+/* ═══════════════════════════════════════════
+   第六章：风险矩阵
+═══════════════════════════════════════════ */
+.risk-tag {
+  display:inline-block;
+  padding:3px 11px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.5px;
+}
+
+.risk-tag.high { background:#FFCDD2; color:#C62828; border:1px solid #EF9A9A; }
+.risk-tag.mid  { background:#FFF9C4; color:#F57F17; border:1px solid #FFF176; }
+.risk-tag.low  { background:#C8E6C9; color:#2E7D32; border:1px solid #A5D6A7; }
+
+/* ═══════════════════════════════════════════
+   第七章：时间轴
+═══════════════════════════════════════════ */
+.roadmap {
+  position:relative;
+  margin:36px 0;
+  padding-left:0;
+}
+
+.roadmap-line {
+  position:absolute;
+  left:28px;
+  top:24px; bottom:24px;
+  width:2px;
+  background:linear-gradient(180deg, var(--core), var(--light), var(--pale));
+}
+
+.phase {
+  position:relative;
+  padding-left:80px;
+  margin-bottom:52px;
+}
+
+.phase:last-child { margin-bottom:0; }
+
+.phase-dot {
+  position:absolute;
+  left:18px;
+  top:6px;
+  width:24px; height:24px;
+  border-radius:50%;
+  background:var(--white);
+  border:3px solid var(--core);
+  box-shadow:0 0 0 5px rgba(21,101,192,0.12), 0 4px 12px rgba(21,101,192,0.25);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  font-weight:700;
+  color:var(--core);
+  z-index:1;
+}
+
+.phase-header {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:18px;
+}
+
+.phase-tag {
+  background:linear-gradient(90deg, var(--core), var(--mid));
+  color:var(--white);
+  padding:5px 18px;
+  border-radius:24px;
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:0.5px;
+}
+
+.phase-title {
+  font-size:18px;
+  font-weight:600;
+  color:var(--deep);
+}
+
+/* ═══════════════════════════════════════════
+   页脚
+═══════════════════════════════════════════ */
+.report-footer {
+  background:linear-gradient(160deg, var(--deep) 0%, #061828 100%);
+  padding:60px 0 36px;
+  text-align:center;
+}
+
+.footer-logo {
+  font-family:'Noto Serif SC',serif;
+  font-size:22px;
+  color:var(--white);
+  margin-bottom:8px;
+  letter-spacing:6px;
+}
+
+.footer-tagline {
+  font-size:11px;
+  color:rgba(255,255,255,0.35);
+  letter-spacing:2px;
+  margin-bottom:28px;
+}
+
+.footer-gold-line {
+  width:80px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:0 auto 24px;
+}
+
+.footer-note {
+  font-size:11.5px;
+  color:rgba(255,255,255,0.28);
+  max-width:600px;
+  margin:0 auto;
+  line-height:1.9;
+}
+
+/* ═══════════════════════════════════════════
+   响应式
+═══════════════════════════════════════════ */
+@media (max-width:900px) {
+  .cover-title { font-size:36px; }
+  .kpi-grid { grid-template-columns:repeat(2,1fr); }
+  .metrics-row { grid-template-columns:repeat(2,1fr); }
+  .sys-flow { grid-template-columns:1fr; }
+  .sys-flow::before { display:none; }
+  .sys-card { margin:0 0 16px; }
+  .engine-top { grid-template-columns:1fr; }
+  .user-tiers { grid-template-columns:1fr; }
+  .page-wrapper { padding:0 24px; }
+  .cover-content { padding:36px 24px; }
+  .cover-meta { flex-wrap:wrap; }
+  .cover-meta-item { flex:1 1 45%; border-right:none; border-bottom:1px solid rgba(255,255,255,0.10); }
+}
+
+@media (max-width:600px) {
+  .section-title { font-size:22px; }
+  .exec-headline { font-size:26px; }
+  .kpi-grid { grid-template-columns:1fr 1fr; }
+  .hbar-label { width:110px; font-size:11px; }
+}
+
+/* ═══════════════════════════════════════════
+   打印
+═══════════════════════════════════════════ */
+@media print {
+  .toc-nav { display:none; }
+  .cover { min-height:auto; padding:60px; page-break-after:always; }
+  .section { page-break-inside:avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     封面
+══════════════════════════════════════════ -->
+<div class="cover" id="top">
+  <!-- 喜马拉雅山轮廓 SVG -->
+  <svg style="position:absolute;bottom:0;left:0;right:0;height:46%;pointer-events:none;"
+       viewBox="0 0 1440 360" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- 远山渐变 -->
+      <linearGradient id="farMtn" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="rgba(100,160,220,0.15)"/>
+        <stop offset="100%" stop-color="rgba(13,43,78,0.70)"/>
+      </linearGradient>
+      <!-- 主山渐变 -->
+      <linearGradient id="mainMtn" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="rgba(20,60,110,0.55)"/>
+        <stop offset="100%" stop-color="rgba(7,20,40,0.92)"/>
+      </linearGradient>
+      <!-- 雪线渐变 -->
+      <linearGradient id="snowLine" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.98)"/>
+        <stop offset="50%" stop-color="rgba(210,235,255,0.75)"/>
+        <stop offset="100%" stop-color="rgba(144,202,249,0)"/>
+      </linearGradient>
+      <!-- 冰川光晕 -->
+      <radialGradient id="glacierGlow1" cx="57%" cy="30%" r="18%">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.30)"/>
+        <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+      </radialGradient>
+      <radialGradient id="glacierGlow2" cx="28%" cy="55%" r="14%">
+        <stop offset="0%" stop-color="rgba(200,230,255,0.22)"/>
+        <stop offset="100%" stop-color="rgba(200,230,255,0)"/>
+      </radialGradient>
+      <!-- 最前景山渐变 -->
+      <linearGradient id="fgMtn" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="rgba(8,22,45,0.80)"/>
+        <stop offset="100%" stop-color="rgba(5,14,28,0.98)"/>
+      </linearGradient>
+    </defs>
+
+    <!-- 最远山脉（淡蓝轮廓） -->
+    <path d="M0,360 L0,290 L70,250 L150,275 L230,210 L310,250 L400,195
+             L490,240 L580,185 L660,225 L740,170 L820,210 L900,155 L980,195
+             L1060,165 L1140,210 L1220,175 L1320,220 L1380,195 L1440,215 L1440,360 Z"
+          fill="url(#farMtn)" opacity="0.55"/>
+
+    <!-- 中间山脉 -->
+    <path d="M0,360 L0,310 L90,275 L180,295 L290,235 L390,275 L480,230
+             L570,270 L650,195 L720,240 L800,165 L870,215 L940,175 L1020,235
+             L1100,190 L1180,255 L1260,205 L1360,265 L1440,240 L1440,360 Z"
+          fill="url(#mainMtn)" opacity="0.85"/>
+
+    <!-- 主峰群（高峰） -->
+    <path d="M0,360 L0,330 L100,300 L200,318 L320,265 L410,300 L490,268
+             L570,305 L640,225 L700,265 L760,190 L820,168 L880,205 L950,185
+             L1010,228 L1080,200 L1150,245 L1230,218 L1310,260 L1390,238 L1440,255 L1440,360 Z"
+          fill="url(#fgMtn)"/>
+
+    <!-- 雪线高光：珠峰主峰区域 -->
+    <path d="M760,190 L775,202 L790,195 L806,180 L820,168 L834,178 L848,172 L862,188 L876,182 L890,200"
+          stroke="url(#snowLine)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.95"/>
+
+    <!-- 雪线高光：次峰区域 -->
+    <path d="M640,225 L655,238 L668,230 L680,218 L695,210 L710,222 L725,215 L740,228"
+          stroke="url(#snowLine)" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.85"/>
+
+    <!-- 雪线高光：左侧山群 -->
+    <path d="M310,265 L325,278 L340,270 L355,260 L370,252 L385,264 L400,255 L415,268"
+          stroke="url(#snowLine)" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.75"/>
+
+    <!-- 冰川雪面区 -->
+    <path d="M805,175 L820,168 L835,180 L848,172 L840,185 L820,192 L805,185 Z"
+          fill="rgba(255,255,255,0.38)" opacity="0.80"/>
+    <path d="M679,215 L694,207 L706,218 L695,228 L680,222 Z"
+          fill="rgba(255,255,255,0.28)" opacity="0.75"/>
+
+    <!-- 冰川光晕效果 -->
+    <ellipse cx="820" cy="180" rx="40" ry="12" fill="url(#glacierGlow1)" opacity="0.70"/>
+    <ellipse cx="695" cy="218" rx="28" ry="8" fill="url(#glacierGlow2)" opacity="0.60"/>
+    <ellipse cx="490" cy="268" rx="22" ry="6" fill="rgba(200,230,255,0.15)" opacity="0.55"/>
+
+    <!-- 山脊线细节 -->
+    <path d="M760,190 L820,168 L880,205" stroke="rgba(144,202,249,0.25)" stroke-width="1.5" fill="none"/>
+    <path d="M640,225 L695,210 L740,228" stroke="rgba(144,202,249,0.20)" stroke-width="1" fill="none"/>
+  </svg>
+
+  <div class="cover-glow"></div>
+  <div class="cover-stars"></div>
+
+  <div class="cover-content">
+    <div class="cover-badge">战略深度报告 · 2026</div>
+    <div class="cover-title">自然堂<span class="accent">·</span>双引擎增长</div>
+    <div class="cover-subtitle">出海增长 × AI私域营销</div>
+    <div class="cover-divider"></div>
+    <div class="cover-tagline">
+      以喜马拉雅天际蓝的清透力量为锚<br>
+      AI底座重构出海竞争格局与千人千面私域价值
+    </div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="cm-label">报告定位</div>
+        <div class="cm-value">管理层决策参考</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cm-label">战略周期</div>
+        <div class="cm-value">18个月执行路线</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cm-label">预期ROI</div>
+        <div class="cm-value">5 – 10 倍</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cm-label">发布时间</div>
+        <div class="cm-value">2026年4月</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     粘性导航
+══════════════════════════════════════════ -->
+<nav class="toc-nav">
+  <div class="toc-nav-inner">
+    <div class="nav-brand">自然堂</div>
+    <ul>
+      <li><a href="#exec">执行摘要</a></li>
+      <li><a href="#ch1">一 · 时机判断</a></li>
+      <li><a href="#ch2">二 · AI三套系统</a></li>
+      <li><a href="#ch3">三 · 欧莱雅路径</a></li>
+      <li><a href="#ch4">四 · 私域落地</a></li>
+      <li><a href="#ch5">五 · AI底座</a></li>
+      <li><a href="#ch6">六 · 风险策略</a></li>
+      <li><a href="#ch7">七 · 执行路线图</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     执行摘要
+══════════════════════════════════════════ -->
+<section class="exec-summary" id="exec">
+  <div class="page-wrapper">
+    <div class="exec-eyebrow">Executive Summary</div>
+    <div class="exec-headline">战略全景——<span>两大引擎，一个飞轮</span></div>
+    <p class="exec-intro">
+      自然堂正站在一个罕见的历史窗口前：外部，TikTok Shop将内容电商基础设施输出全球，东南亚与中东美妆市场进入高速成长期；内部，欧莱雅战略资源可直接复用，AI技术成本曲线已跌至可规模落地的拐点。本报告将两大引擎拆解至执行层：<strong>出海增长</strong>主打毛利率套利+AI系统加速，<strong>AI私域</strong>主打数据资产沉淀+千人千面转化。两者共享同一AI底座，构成协同飞轮。
+    </p>
+
+    <div class="core-quote">
+      <p>
+        保守测算，出海+私域双引擎若在18个月内完成关键系统搭建，可实现年营收增量 <strong>5–8亿元</strong>，投入产出比达 <strong>5–10倍</strong>。这不是一场试错，而是一次有欧莱雅护航、有AI加速的<strong>确定性跨越</strong>。
+      </p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <span class="kpi-icon">🛒</span>
+        <div class="kpi-label">TikTok Shop美国GMV</div>
+        <div class="kpi-value">90<span class="kpi-unit">亿$</span></div>
+        <div class="kpi-badge">同比 +650%</div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-icon">📈</span>
+        <div class="kpi-label">中东市场毛利率</div>
+        <div class="kpi-value">40<span class="kpi-unit">–50%</span></div>
+        <div class="kpi-badge">国内仅 10%</div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-icon">🤖</span>
+        <div class="kpi-label">AI内容本地化降本</div>
+        <div class="kpi-value">95<span class="kpi-unit">%</span></div>
+        <div class="kpi-badge">几千万→20万/年</div>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-icon">⚡</span>
+        <div class="kpi-label">私域AI导购效率</div>
+        <div class="kpi-value">20<span class="kpi-unit">倍</span></div>
+        <div class="kpi-badge">1人服务万级用户</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     第一章：时机判断
+══════════════════════════════════════════ -->
+<section class="section section--white" id="ch1">
+  <div class="page-wrapper">
+    <div class="section-header">
+      <div class="chap-num">一</div>
+      <div class="section-title-group">
+        <div class="section-eyebrow">Chapter 01 · Window of Opportunity</div>
+        <div class="section-title">时机判断——<span>为什么是现在</span></div>
+      </div>
+    </div>
+
+    <!-- 1.1 基础设施成熟度 -->
+    <div class="subsection">
+      <div class="sub-title">窗口的本质：基础设施成熟度</div>
+      <p>很多人误读TikTok Shop的机会，以为这只是"多了一个电商渠道"。实际上，<strong>TikTok Shop的出现意味着内容电商基础设施的完整输出</strong>——从流量分发机制、达人生态、支付结算到履约体系，一套在中国验证过的内容电商飞轮被整体复制到了全球。</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>核心指标</th>
+            <th>数据</th>
+            <th>战略含义</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TikTok Shop美国市场GMV（2024年）</td>
+            <td><strong>约90亿美元</strong></td>
+            <td>同比增长约650%，规模化可能性已验证</td>
+          </tr>
+          <tr>
+            <td>东南亚TikTok Shop GMV（2024年）</td>
+            <td><strong>约160亿美元</strong></td>
+            <td>已超越Lazada，成东南亚最大社交电商</td>
+          </tr>
+          <tr>
+            <td>TikTok Shop品牌活跃商家数</td>
+            <td><strong>超50万家</strong></td>
+            <td>已形成竞争生态和可复用的成功案例</td>
+          </tr>
+          <tr>
+            <td>达人带货GMV占比</td>
+            <td><strong>约70%</strong></td>
+            <td>内容驱动是核心，正是中国品牌的优势</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="insight-box">
+        <p><strong>关键洞察：</strong>2025年的TikTok Shop，基础设施已成熟，进入成本大幅降低，但<strong>先发优势的窗口仍然存在且正在收窄</strong>。对比2019年Lazada时期需要独立搭建大量基础能力，今天的机会窗口建设成本已降低80%以上。</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 1.2 毛利率套利 SVG阶梯图 -->
+    <div class="subsection">
+      <div class="sub-title">毛利率套利：结构性机会而非周期性红利</div>
+      <p>这个毛利率差异的底层逻辑是：<strong>中国美妆品牌在东南亚/中东是"降维打击"</strong>。当地消费者的参照系是欧美高端品牌（贵）或本地低端品牌（不好），中国品牌的品质/价格组合恰好填补了中间位置的空白。</p>
+
+      <!-- SVG 阶梯上升图 -->
+      <div class="margin-steps">
+        <div class="margin-steps-title">毛利率阶梯对比图 — 国内 → 东南亚 → 中东</div>
+        <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+          <defs>
+            <linearGradient id="barDomestic" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#78909C"/>
+              <stop offset="100%" stop-color="#546E7A"/>
+            </linearGradient>
+            <linearGradient id="barSEA" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#1E88E5"/>
+              <stop offset="100%" stop-color="#1565C0"/>
+            </linearGradient>
+            <linearGradient id="barMideast" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#42A5F5"/>
+              <stop offset="100%" stop-color="#0D47A1"/>
+            </linearGradient>
+            <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#90CAF9" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#42A5F5" stop-opacity="0.8"/>
+            </linearGradient>
+            <filter id="barShadow">
+              <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="rgba(21,101,192,0.20)"/>
+            </filter>
+          </defs>
+
+          <!-- 背景网格线 -->
+          <line x1="80" y1="40" x2="840" y2="40" stroke="#E3F2FD" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="80" y1="90" x2="840" y2="90" stroke="#E3F2FD" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="80" y1="140" x2="840" y2="140" stroke="#E3F2FD" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="80" y1="190" x2="840" y2="190" stroke="#E3F2FD" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="80" y1="230" x2="840" y2="230" stroke="#BBDEFB" stroke-width="1"/>
+
+          <!-- Y轴标签 -->
+          <text x="72" y="44" text-anchor="end" font-size="11" fill="#8AAAC4">50%</text>
+          <text x="72" y="94" text-anchor="end" font-size="11" fill="#8AAAC4">40%</text>
+          <text x="72" y="144" text-anchor="end" font-size="11" fill="#8AAAC4">30%</text>
+          <text x="72" y="194" text-anchor="end" font-size="11" fill="#8AAAC4">20%</text>
+          <text x="72" y="234" text-anchor="end" font-size="11" fill="#8AAAC4">0%</text>
+
+          <!-- 国内柱 -->
+          <rect x="130" y="182" width="160" height="48" rx="6" fill="url(#barDomestic)" filter="url(#barShadow)"/>
+          <!-- 国内高光 -->
+          <rect x="130" y="182" width="160" height="8" rx="6" fill="rgba(255,255,255,0.18)"/>
+          <text x="210" y="163" text-anchor="middle" font-size="26" font-weight="700" fill="#546E7A" font-family="Georgia,serif">10%</text>
+          <text x="210" y="178" text-anchor="middle" font-size="12" fill="#78909C">毛利率</text>
+          <text x="210" y="252" text-anchor="middle" font-size="13" font-weight="600" fill="#546E7A">🇨🇳 中国国内</text>
+          <text x="210" y="268" text-anchor="middle" font-size="11" fill="#8AAAC4">高度内卷·价格透明</text>
+
+          <!-- 上升箭头1 -->
+          <path d="M310,158 Q360,130 400,120" stroke="url(#arrowGrad)" stroke-width="2" fill="none" stroke-dasharray="6,3"/>
+          <polygon points="400,115 408,125 393,124" fill="#42A5F5" opacity="0.7"/>
+
+          <!-- 东南亚柱 -->
+          <rect x="340" y="105" width="160" height="125" rx="6" fill="url(#barSEA)" filter="url(#barShadow)"/>
+          <rect x="340" y="105" width="160" height="8" rx="6" fill="rgba(255,255,255,0.22)"/>
+          <text x="420" y="86" text-anchor="middle" font-size="26" font-weight="700" fill="#1565C0" font-family="Georgia,serif">25–35%</text>
+          <text x="420" y="101" text-anchor="middle" font-size="12" fill="#1E88E5">毛利率</text>
+          <text x="420" y="252" text-anchor="middle" font-size="13" font-weight="600" fill="#1565C0">🌏 东南亚市场</text>
+          <text x="420" y="268" text-anchor="middle" font-size="11" fill="#8AAAC4">竞争格局尚未充分内卷</text>
+
+          <!-- 上升箭头2 -->
+          <path d="M520,82 Q565,58 605,48" stroke="url(#arrowGrad)" stroke-width="2" fill="none" stroke-dasharray="6,3"/>
+          <polygon points="606,43 613,53 598,52" fill="#42A5F5" opacity="0.7"/>
+
+          <!-- 中东柱 -->
+          <rect x="550" y="43" width="160" height="187" rx="6" fill="url(#barMideast)" filter="url(#barShadow)"/>
+          <rect x="550" y="43" width="160" height="8" rx="6" fill="rgba(255,255,255,0.25)"/>
+          <text x="630" y="24" text-anchor="middle" font-size="26" font-weight="700" fill="#0D2B4E" font-family="Georgia,serif">40–50%</text>
+          <text x="630" y="39" text-anchor="middle" font-size="12" fill="#1565C0">毛利率</text>
+          <text x="630" y="252" text-anchor="middle" font-size="13" font-weight="600" fill="#0D2B4E">🌙 中东市场</text>
+          <text x="630" y="268" text-anchor="middle" font-size="11" fill="#8AAAC4">高端定位·消费能力强</text>
+
+          <!-- 阶梯连线 -->
+          <path d="M290,206 L340,230 L290,206" stroke="none"/>
+          <!-- 阶梯轮廓线（淡蓝虚线） -->
+          <path d="M130,230 L290,230 L290,105 L500,105 L500,43 L760,43"
+                stroke="#90CAF9" stroke-width="1.5" fill="none" stroke-dasharray="5,4" opacity="0.5"/>
+
+          <!-- 右侧说明标注 -->
+          <rect x="758" y="43" width="6" height="187" rx="3" fill="url(#barMideast)" opacity="0.4"/>
+          <text x="772" y="140" font-size="11" fill="#5A7A9E" dominant-baseline="middle">毛利空间</text>
+          <text x="772" y="155" font-size="11" fill="#5A7A9E" dominant-baseline="middle">差距4倍+</text>
+        </svg>
+      </div>
+
+      <div class="insight-box">
+        <p><strong>战略意义：</strong>毛利率套利不是短暂红利，而是中国制造业成本优势在全球市场的<strong>结构性释放</strong>。先进入者享有3–5年的超额利润期，随着竞争加剧，窗口将逐步收窄。</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 1.3 自然堂禀赋 -->
+    <div class="subsection">
+      <div class="sub-title">自然堂的禀赋：不是从零起步</div>
+      <table class="data-table">
+        <thead>
+          <tr><th>核心禀赋</th><th>具体内容</th><th>战略价值</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>欧莱雅战略资源</strong></td>
+            <td>全球渠道网络、本地化运营know-how、合规体系</td>
+            <td>跳过3–5年基础建设期</td>
+          </tr>
+          <tr>
+            <td><strong>出海基础积累</strong></td>
+            <td>已在东南亚/日韩有2–3年布局，有品牌知名度</td>
+            <td>不是0到1，是1到10的加速</td>
+          </tr>
+          <tr>
+            <td><strong>成分差异化标签</strong></td>
+            <td>喜马拉雅活泉系列、冰肌水系列</td>
+            <td>故事可讲，成分可验证，溢价空间清晰</td>
+          </tr>
+          <tr>
+            <td><strong>国内数字化积累</strong></td>
+            <td>已有用户数据中台、内容生产能力</td>
+            <td>可直接复用，大幅降低出海成本</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     第二章：AI三套系统
+══════════════════════════════════════════ -->
+<section class="section section--mist" id="ch2">
+  <div class="page-wrapper">
+    <div class="section-header">
+      <div class="chap-num">二</div>
+      <div class="section-title-group">
+        <div class="section-eyebrow">Chapter 02 · AI Acceleration Systems</div>
+        <div class="section-title">AI三套核心系统——<span>出海加速器</span></div>
+      </div>
+    </div>
+
+    <!-- 三系统横向流程卡片 -->
+    <div class="sys-flow">
+      <!-- 系统一 -->
+      <div class="sys-card">
+        <div class="sys-num">01</div>
+        <div class="sys-card-title">AI市场情报中台</div>
+        <p style="font-size:13px;color:var(--txt-soft);line-height:1.65;margin-bottom:12px;">
+          实时爬取TikTok/Amazon/Lazada竞品数据+VOC评论，输出"国家×品类"机会评分矩阵（0–100分），覆盖竞争强度、内容传播窗口、价格带建议。
+        </p>
+        <div class="sys-pte">
+          <div class="pte-item">
+            <span class="pte-tag pain">痛点</span>
+            <span class="pte-text">选国决策需5人团队耗时6个月</span>
+          </div>
+          <div class="pte-item">
+            <span class="pte-tag ai">AI解法</span>
+            <span class="pte-text">72小时自动输出多维情报矩阵</span>
+          </div>
+          <div class="pte-item">
+            <span class="pte-tag effect">效果</span>
+            <span class="pte-text">决策周期压缩至2–4周（↓80%）</span>
+          </div>
+        </div>
+        <div class="sys-stat-pill">⏱ 选国周期压缩 80%</div>
+      </div>
+
+      <!-- 系统二 -->
+      <div class="sys-card">
+        <div class="sys-num">02</div>
+        <div class="sys-card-title">AI赛马选品机制</div>
+        <p style="font-size:13px;color:var(--txt-soft);line-height:1.65;margin-bottom:12px;">
+          同时测试20–50个SKU，每轮总成本仅3000–5000元。7–14天数据反馈：传播率、加购率、转化率、复购信号，top3 SKU进入规模化备货。
+        </p>
+        <div class="sys-pte">
+          <div class="pte-item">
+            <span class="pte-tag pain">痛点</span>
+            <span class="pte-text">传统选品试错成本高、周期长</span>
+          </div>
+          <div class="pte-item">
+            <span class="pte-tag ai">AI解法</span>
+            <span class="pte-text">小批量并行赛马，数据驱动决策</span>
+          </div>
+          <div class="pte-item">
+            <span class="pte-tag effect">效果</span>
+            <span class="pte-text">试错成本节省80%，年迭代4–6轮</span>
+          </div>
+        </div>
+        <div class="sys-stat-pill">💰 试错成本节省 80%</div>
+      </div>
+
+      <!-- 系统三 -->
+      <div class="sys-card">
+        <div class="sys-num">03</div>
+        <div class="sys-card-title">AI内容本地化工厂</div>
+        <p style="font-size:13px;color:var(--txt-soft);line-height:1.65;margin-bottom:12px;">
+          复用国内素材，AI自动翻译+配音（自然度>90%）+视觉本地化+合规检查，支持印尼语、阿拉伯语、泰语等20+语言，2周完成首批内容上线。
+        </p>
+        <div class="sys-pte">
+          <div class="pte-item">
+            <span class="pte-tag pain">痛点</span>
+            <span class="pte-text">多语言内容生产成本数千万/年</span>
+          </div>
+          <div class="pte-item">
+            <span class="pte-tag ai">AI解法</span>
+            <span class="pte-text">国内素材自动化改造，2周交付</span>
+          </div>
+          <div class="pte-item">
+            <span class="pte-tag effect">效果</span>
+            <span class="pte-text">成本降至10–20万/年（↓95%）</span>
+          </div>
+        </div>
+        <div class="sys-stat-pill">📉 内容成本降低 95%</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- SVG水平条形图 -->
+    <div class="subsection">
+      <div class="sub-title">各系统核心效率提升对比</div>
+
+      <div class="hbar-wrap">
+        <div class="hbar-title">AI三套系统效率提升可视化（基准值=传统方式）</div>
+
+        <!-- SVG条形图 -->
+        <svg viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+          <defs>
+            <linearGradient id="bar1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#1565C0"/>
+              <stop offset="100%" stop-color="#42A5F5"/>
+            </linearGradient>
+            <linearGradient id="bar2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0D47A1"/>
+              <stop offset="100%" stop-color="#1E88E5"/>
+            </linearGradient>
+            <linearGradient id="bar3" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0A2D6A"/>
+              <stop offset="100%" stop-color="#1565C0"/>
+            </linearGradient>
+            <linearGradient id="bar4" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#1565C0"/>
+              <stop offset="100%" stop-color="#42A5F5"/>
+            </linearGradient>
+            <linearGradient id="bar5" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0D3060"/>
+              <stop offset="100%" stop-color="#1565C0"/>
+            </linearGradient>
+          </defs>
+
+          <!-- 背景轨道 -->
+          <rect x="200" y="24" width="560" height="32" rx="6" fill="#E3F2FD"/>
+          <rect x="200" y="76" width="560" height="32" rx="6" fill="#E3F2FD"/>
+          <rect x="200" y="128" width="560" height="32" rx="6" fill="#E3F2FD"/>
+          <rect x="200" y="180" width="560" height="32" rx="6" fill="#E3F2FD"/>
+          <rect x="200" y="232" width="560" height="32" rx="6" fill="#E3F2FD"/>
+
+          <!-- 进度条 -->
+          <!-- 80% → 560*0.80=448 -->
+          <rect x="200" y="24" width="448" height="32" rx="6" fill="url(#bar1)"/>
+          <!-- 80% → 448 -->
+          <rect x="200" y="76" width="448" height="32" rx="6" fill="url(#bar2)"/>
+          <!-- 95% → 560*0.95=532 -->
+          <rect x="200" y="128" width="532" height="32" rx="6" fill="url(#bar3)"/>
+          <!-- 75% → 560*0.75=420 -->
+          <rect x="200" y="180" width="420" height="32" rx="6" fill="url(#bar4)"/>
+          <!-- 90% → 560*0.90=504 -->
+          <rect x="200" y="232" width="504" height="32" rx="6" fill="url(#bar5)"/>
+
+          <!-- 高光 -->
+          <rect x="200" y="24" width="448" height="6" rx="6" fill="rgba(255,255,255,0.20)"/>
+          <rect x="200" y="76" width="448" height="6" rx="6" fill="rgba(255,255,255,0.20)"/>
+          <rect x="200" y="128" width="532" height="6" rx="6" fill="rgba(255,255,255,0.22)"/>
+          <rect x="200" y="180" width="420" height="6" rx="6" fill="rgba(255,255,255,0.20)"/>
+          <rect x="200" y="232" width="504" height="6" rx="6" fill="rgba(255,255,255,0.20)"/>
+
+          <!-- 标签文字 -->
+          <text x="193" y="40" text-anchor="end" font-size="12.5" fill="#2C4A6E">选国决策周期压缩</text>
+          <text x="193" y="92" text-anchor="end" font-size="12.5" fill="#2C4A6E">选品试错成本节省</text>
+          <text x="193" y="144" text-anchor="end" font-size="12.5" fill="#2C4A6E">内容生产成本降低</text>
+          <text x="193" y="196" text-anchor="end" font-size="12.5" fill="#2C4A6E">内容覆盖市场扩大</text>
+          <text x="193" y="248" text-anchor="end" font-size="12.5" fill="#2C4A6E">AI导购服务规模提升</text>
+
+          <!-- 数值标注 -->
+          <text x="656" y="40" font-size="12.5" font-weight="700" fill="white" dominant-baseline="middle">↓80% 压缩</text>
+          <text x="656" y="92" font-size="12.5" font-weight="700" fill="white" dominant-baseline="middle">↓80% 节省</text>
+          <text x="710" y="144" font-size="12.5" font-weight="700" fill="white" dominant-baseline="middle">↓95% 降低</text>
+          <text x="628" y="196" font-size="12.5" font-weight="700" fill="white" dominant-baseline="middle">扩大2–4倍</text>
+          <text x="712" y="248" font-size="12.5" font-weight="700" fill="white" dominant-baseline="middle">↑10–20倍</text>
+        </svg>
+      </div>
+
+      <div class="insight-box">
+        <p><strong>实操样例：</strong>以"防晒品类进入中东"为例，AI情报系统可在<strong>72小时内</strong>输出：沙特/UAE/埃及的TikTok内容热度对比、当地头部达人报价区间、竞品（韩国/日本品牌）的内容策略缺口——这些过去需要一个5人团队3个月才能完成的工作。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     第三章：欧莱雅路径
+══════════════════════════════════════════ -->
+<section class="section section--gradient" id="ch3">
+  <div class="page-wrapper">
+    <div class="section-header">
+      <div class="chap-num">三</div>
+      <div class="section-title-group">
+        <div class="section-eyebrow">Chapter 03 · L'Oréal Playbook</div>
+        <div class="section-title">欧莱雅路径深度拆解——<span>私域的底层逻辑</span></div>
+      </div>
+    </div>
+
+    <!-- 3.1 Skin Genius漏斗 -->
+    <div class="subsection">
+      <div class="sub-title">Skin Genius：用AI工具换用户数据的核心武器</div>
+      <p>欧莱雅在私域营销上最值得学习的不是"怎么运营企业微信"，而是<strong>找到了一个用户愿意主动给数据的场景</strong>。</p>
+
+      <!-- SVG漏斗式私域转化流程 -->
+      <div style="margin:32px 0;">
+        <svg viewBox="0 0 780 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:760px;height:auto;display:block;margin:0 auto;">
+          <defs>
+            <linearGradient id="funnelTop" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#1565C0"/>
+              <stop offset="100%" stop-color="#42A5F5"/>
+            </linearGradient>
+            <linearGradient id="funnelMid" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0D47A1"/>
+              <stop offset="100%" stop-color="#1E88E5"/>
+            </linearGradient>
+            <linearGradient id="funnelBot" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0A2D6A"/>
+              <stop offset="100%" stop-color="#0D47A1"/>
+            </linearGradient>
+            <linearGradient id="funnelArrow" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#90CAF9" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#1E88E5" stop-opacity="0.3"/>
+            </linearGradient>
+          </defs>
+
+          <!-- 顶层漏斗：用户上传 -->
+          <path d="M60,20 L720,20 L680,100 L100,100 Z" fill="url(#funnelTop)" rx="8"/>
+          <rect x="60" y="12" width="660" height="10" rx="5" fill="rgba(255,255,255,0.20)"/>
+          <text x="390" y="48" text-anchor="middle" font-size="15" font-weight="700" fill="white">① 用户主动拍照上传</text>
+          <text x="390" y="70" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.80)">AI分析肤质/肤色/问题 → 生成专业皮肤诊断报告</text>
+
+          <!-- 箭头1 -->
+          <path d="M390,100 L390,118" stroke="url(#funnelArrow)" stroke-width="3" fill="none"/>
+          <polygon points="390,118 383,108 397,108" fill="#42A5F5" opacity="0.8"/>
+
+          <!-- 中层漏斗：个性化推荐 -->
+          <path d="M100,120 L680,120 L630,200 L150,200 Z" fill="url(#funnelMid)"/>
+          <rect x="100" y="112" width="580" height="10" rx="5" fill="rgba(255,255,255,0.18)"/>
+          <text x="390" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="white">② 输出个性化产品推荐</text>
+          <text x="390" y="172" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.80)">"您的肤质适合这3款" → 直接跳转购买，转化链路极短</text>
+
+          <!-- 箭头2 -->
+          <path d="M390,200 L390,218" stroke="url(#funnelArrow)" stroke-width="3" fill="none"/>
+          <polygon points="390,218 383,208 397,208" fill="#42A5F5" opacity="0.8"/>
+
+          <!-- 底层漏斗：数据留存 -->
+          <path d="M150,220 L630,220 L570,300 L210,300 Z" fill="url(#funnelBot)"/>
+          <rect x="150" y="212" width="480" height="10" rx="5" fill="rgba(255,255,255,0.15)"/>
+          <text x="390" y="252" text-anchor="middle" font-size="15" font-weight="700" fill="white">③ 用户数据长期留存</text>
+          <text x="390" y="276" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.78)">肤质档案 + 购买偏好 + 使用反馈 → 主动赋予最合规</text>
+
+          <!-- 出口指示 -->
+          <path d="M390,300 L390,325" stroke="#90CAF9" stroke-width="2" fill="none" stroke-dasharray="4,3"/>
+          <text x="390" y="338" text-anchor="middle" font-size="12" fill="#5A7A9E">数据资产持续沉淀 → 个性化复购飞轮</text>
+
+          <!-- 左侧标注：规模漏斗 -->
+          <text x="30" y="60" text-anchor="middle" font-size="10" fill="#8AAAC4" transform="rotate(-90,30,60)">全量触达</text>
+          <text x="30" y="165" text-anchor="middle" font-size="10" fill="#8AAAC4" transform="rotate(-90,30,165)">意向留存</text>
+          <text x="30" y="262" text-anchor="middle" font-size="10" fill="#8AAAC4" transform="rotate(-90,30,262)">深度绑定</text>
+        </svg>
+      </div>
+
+      <!-- 4个指标卡片 -->
+      <div class="metrics-row">
+        <div class="metric-card">
+          <div class="m-value">百万+</div>
+          <div class="m-label">企业微信私域用户规模</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-value">3–5×</div>
+          <div class="m-label">个性化推送 vs 群发转化率</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-value">300元</div>
+          <div class="m-label">用户感知：替代专业皮肤咨询</div>
+        </div>
+        <div class="metric-card">
+          <div class="m-value">↑留存</div>
+          <div class="m-label">留存率远高于单纯促销驱动</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 3.2 为什么免费工具是最好入口 -->
+    <div class="subsection">
+      <div class="sub-title">为什么"免费工具"是最好的私域入口</div>
+
+      <!-- 对比表格 -->
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>私域入口方式</th>
+            <th>用户价值感知</th>
+            <th>留存意愿</th>
+            <th>数据质量</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>传统：扫码领券</td>
+            <td>省了5元钱</td>
+            <td class="tag-worse">极低（获取即走）</td>
+            <td class="tag-worse">差（被动采集）</td>
+          </tr>
+          <tr>
+            <td><strong>Skin Genius：AI皮肤诊断</strong></td>
+            <td><strong>替代300元护肤咨询</strong></td>
+            <td class="tag-better">高（主动留存）</td>
+            <td class="tag-better">极优（主动赋予）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert-box">
+        <p><strong>第一性原理：</strong>私域的本质不是"把用户圈进来"，而是"给用户足够的理由留下来"。AI皮肤诊断恰好提供了这个理由——它颠覆了传统的私域引流逻辑。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     第四章：AI私域落地（去掉4.3 ROI测算）
+══════════════════════════════════════════ -->
+<section class="section section--white" id="ch4">
+  <div class="page-wrapper">
+    <div class="section-header">
+      <div class="chap-num">四</div>
+      <div class="section-title-group">
+        <div class="section-eyebrow">Chapter 04 · Private Domain Execution</div>
+        <div class="section-title">自然堂AI私域——<span>落地方案全景</span></div>
+      </div>
+    </div>
+
+    <!-- 4.1 三层漏斗 -->
+    <div class="subsection">
+      <div class="sub-title">三层漏斗设计</div>
+      <p>私域运营的核心不是"加好友"，而是<strong>通过三层递进漏斗，将泛流量转化为深度绑定的高价值用户资产</strong>。</p>
+
+      <!-- CSS渐变梯形漏斗 -->
+      <div class="css-funnel">
+        <!-- 层1：流量入口（最宽） -->
+        <div class="css-funnel-layer cfl-1">
+          <div class="cfl-label">🔵 第一层：流量入口</div>
+          <div class="cfl-desc">抖音 / 天猫 / 线下门店 / 小红书 → 触发点：AI肤质测试免费体验、限时折扣码、专属顾问服务预约</div>
+        </div>
+
+        <!-- 漏斗箭头 -->
+        <div style="text-align:center;color:var(--pale);font-size:26px;padding:4px 0;letter-spacing:-2px;">▼</div>
+
+        <!-- 层2：企业微信沉淀 -->
+        <div class="css-funnel-layer cfl-2">
+          <div class="cfl-label">🟡 第二层：企业微信沉淀</div>
+          <div class="cfl-desc">扫码 / 添加AI导购 / 皮肤档案建立 → 用户完成肤质诊断后，档案自动关联账号，长期追踪护肤变化</div>
+        </div>
+
+        <!-- 用户分层三色卡片 -->
+        <div class="user-tiers" style="margin:16px 0 12px;">
+          <div class="tier-card high">
+            <div class="tier-name">🏆 高价值用户</div>
+            <div class="tier-action">月消费 &gt;300元<br>1v1 AI专属服务</div>
+          </div>
+          <div class="tier-card mid">
+            <div class="tier-name">⭐ 活跃用户</div>
+            <div class="tier-action">月活跃互动<br>精准内容推送</div>
+          </div>
+          <div class="tier-card low">
+            <div class="tier-name">💤 沉睡用户</div>
+            <div class="tier-action">90天未互动<br>专项唤醒活动</div>
+          </div>
+        </div>
+
+        <!-- 漏斗箭头 -->
+        <div style="text-align:center;color:var(--pale);font-size:26px;padding:4px 0;">▼</div>
+
+        <!-- 层3：AI千人千面运营（最窄） -->
+        <div class="css-funnel-layer cfl-3">
+          <div class="cfl-label">🔷 第三层：AI千人千面运营</div>
+          <div class="cfl-desc">基于用户肤质档案 × 购买记录 × 季节 × 地域 → 自动生成个性化推荐话术，精准触达每一位用户</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 4.2 AI导购：前后对比柱状图 -->
+    <div class="subsection">
+      <div class="sub-title">AI导购助手：核心能力与效果预测</div>
+      <p><strong>现状痛点：</strong>1个导购员每天最多服务300–500个用户，人力成本高，服务质量参差不齐。</p>
+
+      <div class="insight-box" style="margin-bottom:28px;">
+        <p><strong>AI导购示例话术（自动生成）：</strong><br>
+        "您好，换季了，上次购买的水感日霜快用完了吧？根据您的混合偏干肤质，春季建议搭配<em>活泉补水精华</em>，这周会员日可提前加购～"</p>
+      </div>
+
+      <!-- SVG前后对比柱状图 -->
+      <div class="compare-chart-wrap">
+        <div class="hbar-title">AI导购前后核心指标对比</div>
+        <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+          <defs>
+            <linearGradient id="beforeBar" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#90A4AE"/>
+              <stop offset="100%" stop-color="#607D8B"/>
+            </linearGradient>
+            <linearGradient id="afterBar" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#42A5F5"/>
+              <stop offset="100%" stop-color="#1565C0"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Y轴基线 -->
+          <line x1="60" y1="20" x2="60" y2="245" stroke="#C5DCF0" stroke-width="1.5"/>
+          <line x1="60" y1="245" x2="790" y2="245" stroke="#C5DCF0" stroke-width="1.5"/>
+
+          <!-- 网格线 -->
+          <line x1="60" y1="70" x2="790" y2="70" stroke="#E3F2FD" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="60" y1="120" x2="790" y2="120" stroke="#E3F2FD" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="60" y1="170" x2="790" y2="170" stroke="#E3F2FD" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="60" y1="220" x2="790" y2="220" stroke="#E3F2FD" stroke-width="1" stroke-dasharray="4,4"/>
+
+          <!-- 图例 -->
+          <rect x="560" y="12" width="12" height="12" rx="3" fill="#607D8B"/>
+          <text x="578" y="23" font-size="11.5" fill="#5A7A9E">AI导购前</text>
+          <rect x="650" y="12" width="12" height="12" rx="3" fill="#1565C0"/>
+          <text x="668" y="23" font-size="11.5" fill="#5A7A9E">AI导购后</text>
+
+          <!-- 组1：单客服覆盖用户数 -->
+          <!-- Before: 500/10000 = 5% → height=5%*200=10 -->
+          <rect x="100" y="235" width="44" height="10" rx="4" fill="url(#beforeBar)"/>
+          <!-- After: 10000/10000 = 100% → height=200 -->
+          <rect x="150" y="45" width="44" height="200" rx="4" fill="url(#afterBar)"/>
+          <!-- 高光 -->
+          <rect x="150" y="45" width="44" height="8" rx="4" fill="rgba(255,255,255,0.22)"/>
+          <!-- 数值 -->
+          <text x="122" y="232" text-anchor="middle" font-size="11" fill="#607D8B">500人</text>
+          <text x="172" y="38" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">10000人</text>
+          <!-- 涨幅 -->
+          <text x="147" y="270" text-anchor="middle" font-size="11" fill="#2E7D32" font-weight="600">↑20倍</text>
+          <!-- X轴标签 -->
+          <text x="147" y="285" text-anchor="middle" font-size="11" fill="#8AAAC4">覆盖用户/天</text>
+
+          <!-- 组2：点击率 -->
+          <!-- Before: 2.5/15 → height=2.5/15*200=33 -->
+          <rect x="280" y="212" width="44" height="33" rx="4" fill="url(#beforeBar)"/>
+          <!-- After: 11.5/15 → height=11.5/15*200=153 -->
+          <rect x="330" y="92" width="44" height="153" rx="4" fill="url(#afterBar)"/>
+          <rect x="330" y="92" width="44" height="8" rx="4" fill="rgba(255,255,255,0.22)"/>
+          <text x="302" y="209" text-anchor="middle" font-size="11" fill="#607D8B">2–3%</text>
+          <text x="352" y="85" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">8–15%</text>
+          <text x="327" y="270" text-anchor="middle" font-size="11" fill="#2E7D32" font-weight="600">↑3–5倍</text>
+          <text x="327" y="285" text-anchor="middle" font-size="11" fill="#8AAAC4">个性化点击率</text>
+
+          <!-- 组3：购买转化率 -->
+          <!-- Before: 1.5/8 → height=1.5/8*200=37.5≈38 -->
+          <rect x="460" y="207" width="44" height="38" rx="4" fill="url(#beforeBar)"/>
+          <!-- After: 6/8 → height=6/8*200=150 -->
+          <rect x="510" y="95" width="44" height="150" rx="4" fill="url(#afterBar)"/>
+          <rect x="510" y="95" width="44" height="8" rx="4" fill="rgba(255,255,255,0.22)"/>
+          <text x="482" y="204" text-anchor="middle" font-size="11" fill="#607D8B">1–2%</text>
+          <text x="532" y="88" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">4–8%</text>
+          <text x="507" y="270" text-anchor="middle" font-size="11" fill="#2E7D32" font-weight="600">↑3–5倍</text>
+          <text x="507" y="285" text-anchor="middle" font-size="11" fill="#8AAAC4">推送购买转化</text>
+
+          <!-- 组4：复购周期 -->
+          <!-- Before: 90/90 → height=200 (基准) -->
+          <rect x="640" y="45" width="44" height="200" rx="4" fill="url(#beforeBar)"/>
+          <!-- After: 65/90 → height=65/90*200=144 -->
+          <rect x="690" y="101" width="44" height="144" rx="4" fill="url(#afterBar)"/>
+          <rect x="690" y="101" width="44" height="8" rx="4" fill="rgba(255,255,255,0.22)"/>
+          <text x="662" y="38" text-anchor="middle" font-size="11" fill="#607D8B">90天</text>
+          <text x="712" y="94" text-anchor="middle" font-size="11" font-weight="700" fill="#1565C0">60–70天</text>
+          <text x="687" y="270" text-anchor="middle" font-size="11" fill="#2E7D32" font-weight="600">↓25%</text>
+          <text x="687" y="285" text-anchor="middle" font-size="11" fill="#8AAAC4">复购周期缩短</text>
+        </svg>
+      </div>
+
+      <!-- 效果对比表格 -->
+      <table class="data-table" style="margin-top:24px;">
+        <thead>
+          <tr><th>关键指标</th><th>AI导购前</th><th>AI导购后</th><th>提升幅度</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>单客服覆盖用户数/天</td>
+            <td>300–500人</td>
+            <td>5000–10000人</td>
+            <td><strong>10–20倍</strong></td>
+          </tr>
+          <tr>
+            <td>个性化推送点击率</td>
+            <td>约2–3%</td>
+            <td>约8–15%</td>
+            <td><strong>3–5倍</strong></td>
+          </tr>
+          <tr>
+            <td>推送后购买转化率</td>
+            <td>约1–2%</td>
+            <td>约4–8%</td>
+            <td><strong>3–5倍</strong></td>
+          </tr>
+          <tr>
+            <td>用户平均复购周期</td>
+            <td>90天</td>
+            <td>60–70天</td>
+            <td><strong>缩短约25%</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     第五章：AI底座
+══════════════════════════════════════════ -->
+<section class="section section--mist" id="ch5">
+  <div class="page-wrapper">
+    <div class="section-header">
+      <div class="chap-num">五</div>
+      <div class="section-title-group">
+        <div class="section-eyebrow">Chapter 05 · AI Infrastructure</div>
+        <div class="section-title">AI底座能力——<span>两大引擎的共享基础设施</span></div>
+      </div>
+    </div>
+
+    <p>出海增长和私域营销看似是两个独立业务，但底层技术栈高度重叠。底座建设完成后，边际成本不是线性增长——出海用的竞品分析能力直接复用于国内私域竞品监控，私域积累的用户偏好数据反向指导出海选品方向。<strong>两个引擎越跑越快，形成正向飞轮。</strong></p>
+
+    <!-- 双引擎 + 共享底座架构图 -->
+    <div class="engine-diagram">
+      <!-- SVG蝴蝶结汇聚图 -->
+      <svg viewBox="0 0 900 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin-bottom:28px;">
+        <defs>
+          <linearGradient id="eng1Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1565C0"/>
+            <stop offset="100%" stop-color="#42A5F5"/>
+          </linearGradient>
+          <linearGradient id="eng2Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#42A5F5"/>
+            <stop offset="100%" stop-color="#0D47A1"/>
+          </linearGradient>
+          <linearGradient id="centerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#C9A84C"/>
+            <stop offset="100%" stop-color="#F0D080"/>
+          </linearGradient>
+          <marker id="arrowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0 0, 8 3, 0 6" fill="#42A5F5" opacity="0.7"/>
+          </marker>
+          <marker id="arrowL" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto-start-reverse">
+            <polygon points="8 0, 0 3, 8 6" fill="#42A5F5" opacity="0.7"/>
+          </marker>
+        </defs>
+
+        <!-- 左侧：出海引擎 -->
+        <rect x="10" y="30" width="190" height="60" rx="12" fill="url(#eng1Grad)" opacity="0.9"/>
+        <rect x="10" y="30" width="190" height="14" rx="12" fill="rgba(255,255,255,0.18)"/>
+        <text x="105" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="white">🚀 出海增长引擎</text>
+        <text x="105" y="78" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.82)">市场情报 · 选品赛马 · 内容工厂</text>
+
+        <!-- 左箭头 -->
+        <path d="M200,60 C260,60 290,60 340,60" stroke="#42A5F5" stroke-width="2.5" fill="none" marker-end="url(#arrowR)" stroke-dasharray="6,3" opacity="0.7"/>
+
+        <!-- 中心：共享底座 -->
+        <rect x="340" y="15" width="220" height="90" rx="14" fill="#0D2B4E"/>
+        <rect x="340" y="15" width="220" height="14" rx="14" fill="rgba(201,168,76,0.35)"/>
+        <text x="450" y="52" text-anchor="middle" font-size="13" font-weight="700" fill="#F0D080">▲ 共享AI底座</text>
+        <text x="450" y="70" text-anchor="middle" font-size="11" fill="rgba(144,202,249,0.80)">数据中台 · LLM引擎</text>
+        <text x="450" y="88" text-anchor="middle" font-size="11" fill="rgba(144,202,249,0.80)">推荐算法 · 内容生成</text>
+
+        <!-- 右箭头 -->
+        <path d="M560,60 C610,60 640,60 700,60" stroke="#42A5F5" stroke-width="2.5" fill="none" marker-end="url(#arrowR)" stroke-dasharray="6,3" opacity="0.7"/>
+
+        <!-- 右侧：私域引擎 -->
+        <rect x="700" y="30" width="190" height="60" rx="12" fill="url(#eng2Grad)" opacity="0.9"/>
+        <rect x="700" y="30" width="190" height="14" rx="12" fill="rgba(255,255,255,0.18)"/>
+        <text x="795" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="white">💎 AI私域引擎</text>
+        <text x="795" y="78" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.82)">皮肤诊断 · 分层运营 · 千人千面</text>
+
+        <!-- 飞轮回路：底部弧线 -->
+        <path d="M105,90 C200,118 700,118 795,90" stroke="#90CAF9" stroke-width="1.5" fill="none" stroke-dasharray="5,4" opacity="0.45"/>
+        <text x="450" y="116" text-anchor="middle" font-size="10" fill="#8AAAC4">共享数据飞轮 · 边际成本趋零 · 正向强化</text>
+      </svg>
+
+      <div class="engine-top">
+        <!-- 出海引擎调用 -->
+        <div class="engine-panel">
+          <div class="engine-panel-title"><span class="dot"></span>出海引擎调用</div>
+          <ul class="engine-list">
+            <li>AI市场情报中台 → 实时"国家×品类"评分矩阵</li>
+            <li>AI赛马选品机制 → 三平台综合热度评分（0–100分）</li>
+            <li>AI内容本地化工厂 → 20+语言自动翻译配音</li>
+            <li>竞品VOC分析 → 实时评论情感提取</li>
+          </ul>
+        </div>
+
+        <!-- 中间箭头 -->
+        <div class="engine-arrows">
+          <span style="color:var(--gold);font-size:22px;">↕</span>
+          <span style="font-size:11px;color:var(--txt-muted);letter-spacing:1px;">共享</span>
+        </div>
+
+        <!-- 私域引擎调用 -->
+        <div class="engine-panel">
+          <div class="engine-panel-title"><span class="dot"></span>私域引擎调用</div>
+          <ul class="engine-list">
+            <li>AI皮肤诊断 → 用户档案建立与长期维护</li>
+            <li>千人千面推送 → 个性化话术自动生成</li>
+            <li>用户分层运营 → 高/活跃/沉睡差异化触达</li>
+            <li>复购预测模型 → 精准触达时机选择</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 共享底座标签云 -->
+      <div class="shared-base-panel">
+        <div class="shared-base-title">▲ 共享AI底座核心能力</div>
+        <div class="tags-cloud">
+          <span class="tag-chip">用户画像引擎</span>
+          <span class="tag-chip">内容生成系统</span>
+          <span class="tag-chip">全平台数据采集</span>
+          <span class="tag-chip">推荐算法模型</span>
+          <span class="tag-chip">LLM对话能力</span>
+          <span class="tag-chip">研报情报结构化</span>
+          <span class="tag-chip">多语言NLP</span>
+          <span class="tag-chip">实时行情监控</span>
+          <span class="tag-chip">A/B测试框架</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-box" style="margin-top:32px;">
+      <p><strong>研报数据能力的战略价值：</strong>借助研报摘要提取能力，可系统性地将券商研报、行业白皮书中的关键数据（市场规模、竞争格局、消费趋势）结构化提取，输入AI市场情报中台，形成<strong>机构级别的竞争情报</strong>——这是大多数品牌缺乏的深度数据支撑。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     第六章：风险识别
+══════════════════════════════════════════ -->
+<section class="section section--gradient" id="ch6">
+  <div class="page-wrapper">
+    <div class="section-header">
+      <div class="chap-num">六</div>
+      <div class="section-title-group">
+        <div class="section-eyebrow">Chapter 06 · Risk Management</div>
+        <div class="section-title">风险识别与——<span>应对策略</span></div>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>风险类型</th>
+          <th>具体风险</th>
+          <th>概率</th>
+          <th>影响</th>
+          <th>应对策略</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>平台风险</strong></td>
+          <td>TikTok Shop在美国受政策影响</td>
+          <td><span class="risk-tag mid">中</span></td>
+          <td><span class="risk-tag high">高</span></td>
+          <td>多平台布局（Amazon+Shopee+Lazada），不单押TikTok</td>
+        </tr>
+        <tr>
+          <td><strong>汇率风险</strong></td>
+          <td>美元/人民币汇率波动压缩利润</td>
+          <td><span class="risk-tag high">高</span></td>
+          <td><span class="risk-tag mid">中</span></td>
+          <td>优先高毛利市场（中东）扩张，形成自然对冲</td>
+        </tr>
+        <tr>
+          <td><strong>数据合规</strong></td>
+          <td>用户数据跨境传输合规问题</td>
+          <td><span class="risk-tag mid">中</span></td>
+          <td><span class="risk-tag high">高</span></td>
+          <td>提前布局GDPR/PDPA合规，分区域建立数据存储</td>
+        </tr>
+        <tr>
+          <td><strong>AI质量风险</strong></td>
+          <td>本地化内容出现文化冒犯</td>
+          <td><span class="risk-tag low">低</span></td>
+          <td><span class="risk-tag high">高</span></td>
+          <td>建立人工审核机制，尤其针对中东/伊斯兰文化场景</td>
+        </tr>
+        <tr>
+          <td><strong>竞争加剧</strong></td>
+          <td>其他中国品牌快速跟进</td>
+          <td><span class="risk-tag high">高</span></td>
+          <td><span class="risk-tag mid">中</span></td>
+          <td>加速先发优势建立，重点锁定KOL排他合作协议</td>
+        </tr>
+        <tr>
+          <td><strong>私域合规</strong></td>
+          <td>企业微信群发被平台限制</td>
+          <td><span class="risk-tag mid">中</span></td>
+          <td><span class="risk-tag low">低</span></td>
+          <td>转向AI主动服务模型，减少群发依赖</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 风险矩阵热力图 SVG -->
+    <div style="margin:32px 0;background:var(--white);border:1px solid var(--border-lt);border-radius:var(--radius-lg);padding:32px 28px;box-shadow:var(--shadow-sm);">
+      <div class="hbar-title" style="margin-bottom:20px;">风险矩阵：概率 × 影响可视化</div>
+      <svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;height:auto;display:block;margin:0 auto;">
+        <defs>
+          <linearGradient id="matrixBg" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#C8E6C9" stop-opacity="0.5"/>
+            <stop offset="50%" stop-color="#FFF9C4" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#FFCDD2" stop-opacity="0.6"/>
+          </linearGradient>
+        </defs>
+
+        <!-- 矩阵背景分区 -->
+        <!-- 低低（绿） -->
+        <rect x="60" y="170" width="160" height="110" rx="6" fill="#C8E6C9" opacity="0.4"/>
+        <!-- 低高（黄） -->
+        <rect x="60" y="60" width="160" height="110" rx="6" fill="#FFF9C4" opacity="0.5"/>
+        <!-- 高低（黄） -->
+        <rect x="220" y="170" width="160" height="110" rx="6" fill="#FFF9C4" opacity="0.5"/>
+        <!-- 高高（红） -->
+        <rect x="220" y="60" width="160" height="110" rx="6" fill="#FFCDD2" opacity="0.5"/>
+        <!-- 超高（深红提示） -->
+        <rect x="380" y="60" width="140" height="110" rx="6" fill="#EF9A9A" opacity="0.45"/>
+        <rect x="380" y="170" width="140" height="110" rx="6" fill="#FFF9C4" opacity="0.45"/>
+
+        <!-- 轴线 -->
+        <line x1="60" y1="60" x2="60" y2="280" stroke="#C5DCF0" stroke-width="1.5"/>
+        <line x1="60" y1="280" x2="520" y2="280" stroke="#C5DCF0" stroke-width="1.5"/>
+
+        <!-- X轴标签（影响） -->
+        <text x="60" y="298" text-anchor="middle" font-size="11" fill="#8AAAC4">低</text>
+        <text x="220" y="298" text-anchor="middle" font-size="11" fill="#8AAAC4">中</text>
+        <text x="380" y="298" text-anchor="middle" font-size="11" fill="#8AAAC4">高</text>
+        <text x="290" y="314" text-anchor="middle" font-size="12" fill="#5A7A9E" font-weight="500">影响程度 →</text>
+
+        <!-- Y轴标签（概率） -->
+        <text x="45" y="284" text-anchor="end" font-size="11" fill="#8AAAC4">低</text>
+        <text x="45" y="175" text-anchor="end" font-size="11" fill="#8AAAC4">中</text>
+        <text x="45" y="65" text-anchor="end" font-size="11" fill="#8AAAC4">高</text>
+        <text x="30" y="180" text-anchor="middle" font-size="12" fill="#5A7A9E" font-weight="500" transform="rotate(-90,30,175)">发生概率 ↑</text>
+
+        <!-- 数据点（风险） -->
+        <!-- 平台风险：概率中，影响高 → x=420, y=115 -->
+        <circle cx="420" cy="115" r="20" fill="#EF5350" opacity="0.85"/>
+        <text cx="420" cy="110" text-anchor="middle" font-size="9" fill="white" x="420" y="112">平台</text>
+        <text cx="420" cy="110" text-anchor="middle" font-size="9" fill="white" x="420" y="122">风险</text>
+
+        <!-- 汇率风险：概率高，影响中 → x=290, y=75 -->
+        <circle cx="290" cy="90" r="18" fill="#FF7043" opacity="0.80"/>
+        <text x="290" y="87" text-anchor="middle" font-size="9" fill="white">汇率</text>
+        <text x="290" y="97" text-anchor="middle" font-size="9" fill="white">风险</text>
+
+        <!-- 数据合规：概率中，影响高 → x=420, y=175 -->
+        <circle cx="420" cy="165" r="19" fill="#EF5350" opacity="0.80"/>
+        <text x="420" y="162" text-anchor="middle" font-size="9" fill="white">数据</text>
+        <text x="420" y="172" text-anchor="middle" font-size="9" fill="white">合规</text>
+
+        <!-- AI质量：概率低，影响高 → x=420, y=250 -->
+        <circle cx="420" cy="250" r="16" fill="#FF7043" opacity="0.75"/>
+        <text x="420" y="247" text-anchor="middle" font-size="9" fill="white">AI质</text>
+        <text x="420" y="257" text-anchor="middle" font-size="9" fill="white">量</text>
+
+        <!-- 竞争加剧：概率高，影响中 → x=290, y=90 -->
+        <!-- 稍微偏移避免重叠 -->
+        <circle cx="300" cy="75" r="17" fill="#FFA726" opacity="0.80"/>
+        <text x="300" y="72" text-anchor="middle" font-size="9" fill="white">竞争</text>
+        <text x="300" y="82" text-anchor="middle" font-size="9" fill="white">加剧</text>
+
+        <!-- 私域合规：概率中，影响低 → x=130, y=175 -->
+        <circle cx="130" cy="225" r="16" fill="#66BB6A" opacity="0.75"/>
+        <text x="130" y="222" text-anchor="middle" font-size="9" fill="white">私域</text>
+        <text x="130" y="232" text-anchor="middle" font-size="9" fill="white">合规</text>
+
+        <!-- 区域标注 -->
+        <text x="380" y="55" text-anchor="middle" font-size="10" fill="#C62828" font-weight="600" opacity="0.7">⚠ 高风险区</text>
+        <text x="80" y="275" text-anchor="start" font-size="10" fill="#2E7D32" opacity="0.7">✓ 可控区</text>
+      </svg>
+    </div>
+
+    <div class="danger-box" style="margin-top:28px;">
+      <p><strong>最大的风险是什么都不做：</strong>TikTok Shop的窗口期是有限的——先进入的品牌会锁定头部达人资源、建立品牌心智、积累数据资产。等待观望意味着：当自然堂准备好进入时，竞争格局已定，获取成本倍增，超额利润期已过。<strong>每一个月的延迟，都是真实的战略成本。</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     第七章：18个月路线图
+══════════════════════════════════════════ -->
+<section class="section section--ice" id="ch7">
+  <div class="page-wrapper">
+    <div class="section-header">
+      <div class="chap-num">七</div>
+      <div class="section-title-group">
+        <div class="section-eyebrow">Chapter 07 · 18-Month Roadmap</div>
+        <div class="section-title">18个月——<span>执行路线图</span></div>
+      </div>
+    </div>
+
+    <!-- 时间轴 SVG 概览 -->
+    <div style="margin:0 0 40px;background:var(--white);border:1px solid var(--border-lt);border-radius:var(--radius-xl);padding:32px 28px;box-shadow:var(--shadow-sm);">
+      <div class="hbar-title" style="margin-bottom:24px;">18个月执行路线概览</div>
+      <svg viewBox="0 0 860 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+        <defs>
+          <linearGradient id="timelineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#1565C0"/>
+            <stop offset="50%" stop-color="#1E88E5"/>
+            <stop offset="100%" stop-color="#42A5F5"/>
+          </linearGradient>
+          <linearGradient id="ph1Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1565C0"/>
+            <stop offset="100%" stop-color="#0D47A1"/>
+          </linearGradient>
+          <linearGradient id="ph2Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1E88E5"/>
+            <stop offset="100%" stop-color="#1565C0"/>
+          </linearGradient>
+          <linearGradient id="ph3Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#42A5F5"/>
+            <stop offset="100%" stop-color="#1E88E5"/>
+          </linearGradient>
+        </defs>
+
+        <!-- 主时间轴线 -->
+        <line x1="60" y1="60" x2="820" y2="60" stroke="url(#timelineGrad)" stroke-width="4" stroke-linecap="round"/>
+
+        <!-- 阶段一：0-6月 -->
+        <circle cx="200" cy="60" r="18" fill="url(#ph1Grad)" stroke="white" stroke-width="3"/>
+        <text x="200" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="white">1</text>
+        <rect x="110" y="85" width="180" height="48" rx="8" fill="url(#ph1Grad)" opacity="0.90"/>
+        <text x="200" y="105" text-anchor="middle" font-size="12.5" font-weight="600" fill="white">0–6个月</text>
+        <text x="200" y="122" text-anchor="middle" font-size="11.5" fill="rgba(255,255,255,0.82)">快速验证阶段</text>
+        <text x="200" y="25" text-anchor="middle" font-size="11" fill="#5A7A9E">市场选定</text>
+        <text x="200" y="40" text-anchor="middle" font-size="11" fill="#5A7A9E">MVP搭建</text>
+
+        <!-- 阶段二：6-12月 -->
+        <circle cx="470" cy="60" r="18" fill="url(#ph2Grad)" stroke="white" stroke-width="3"/>
+        <text x="470" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="white">2</text>
+        <rect x="380" y="85" width="180" height="48" rx="8" fill="url(#ph2Grad)" opacity="0.90"/>
+        <text x="470" y="105" text-anchor="middle" font-size="12.5" font-weight="600" fill="white">6–12个月</text>
+        <text x="470" y="122" text-anchor="middle" font-size="11.5" fill="rgba(255,255,255,0.82)">规模化阶段</text>
+        <text x="470" y="25" text-anchor="middle" font-size="11" fill="#5A7A9E">3市场扩展</text>
+        <text x="470" y="40" text-anchor="middle" font-size="11" fill="#5A7A9E">私域百万级</text>
+
+        <!-- 阶段三：12-18月 -->
+        <circle cx="720" cy="60" r="18" fill="url(#ph3Grad)" stroke="white" stroke-width="3"/>
+        <text x="720" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="white">3</text>
+        <rect x="630" y="85" width="180" height="48" rx="8" fill="url(#ph3Grad)" opacity="0.90"/>
+        <text x="720" y="105" text-anchor="middle" font-size="12.5" font-weight="600" fill="white">12–18个月</text>
+        <text x="720" y="122" text-anchor="middle" font-size="11.5" fill="rgba(255,255,255,0.82)">飞轮提速阶段</text>
+        <text x="720" y="25" text-anchor="middle" font-size="11" fill="#5A7A9E">5国覆盖</text>
+        <text x="720" y="40" text-anchor="middle" font-size="11" fill="#5A7A9E">生态闭环</text>
+
+        <!-- 起止标记 -->
+        <text x="60" y="65" text-anchor="middle" font-size="11" fill="#8AAAC4">START</text>
+        <text x="820" y="65" text-anchor="middle" font-size="11" fill="#8AAAC4">18M</text>
+      </svg>
+    </div>
+
+    <!-- 竖向时间线详情 -->
+    <div class="roadmap">
+      <div class="roadmap-line"></div>
+
+      <!-- 阶段一 -->
+      <div class="phase">
+        <div class="phase-dot">1</div>
+        <div class="phase-header">
+          <div class="phase-tag">阶段一：0–6个月</div>
+          <div class="phase-title">快速验证</div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>行动</th><th>具体内容</th><th>关键指标</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>选定出海优先市场</td>
+              <td>基于AI情报：泰国或马来西亚（TikTok成熟+美妆热度高）</td>
+              <td>完成选国决策</td>
+            </tr>
+            <tr>
+              <td>小批量赛马测试</td>
+              <td>选20个SKU，各备50件，跑TikTok带货数据7–14天</td>
+              <td>找出top3 SKU</td>
+            </tr>
+            <tr>
+              <td>搭建AI导购MVP</td>
+              <td>接入LLM API，覆盖1–2个核心服务场景</td>
+              <td>覆盖5万私域用户</td>
+            </tr>
+            <tr>
+              <td>建立数据采集基础</td>
+              <td>部署数据采集Agent，实现TikTok+Amazon+Lazada实时监控</td>
+              <td>每日情报稳定输出</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 阶段二 -->
+      <div class="phase">
+        <div class="phase-dot">2</div>
+        <div class="phase-header">
+          <div class="phase-tag">阶段二：6–12个月</div>
+          <div class="phase-title">规模化</div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>行动</th><th>具体内容</th><th>关键指标</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>出海扩展至3个市场</td>
+              <td>在验证市场基础上，拓展中东1个市场（UAE或沙特）</td>
+              <td>月GMV突破1000万</td>
+            </tr>
+            <tr>
+              <td>私域规模扩张</td>
+              <td>企业微信用户达100万，AI导购全面上线</td>
+              <td>复购率提升10pct</td>
+            </tr>
+            <tr>
+              <td>AI内容工厂投产</td>
+              <td>实现每周本地化内容自动生产，覆盖5个语言版本</td>
+              <td>内容发布效率提升5倍</td>
+            </tr>
+            <tr>
+              <td>ROI闭环验证</td>
+              <td>完整核算两引擎投入产出，调整资源配比</td>
+              <td>综合ROI &gt; 3倍</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 阶段三 -->
+      <div class="phase">
+        <div class="phase-dot">3</div>
+        <div class="phase-header">
+          <div class="phase-tag">阶段三：12–18个月</div>
+          <div class="phase-title">飞轮提速</div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr><th>行动</th><th>具体内容</th><th>关键指标</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>出海覆盖5个国家</td>
+              <td>东南亚核心市场（泰/马/印尼）+ 中东（UAE/沙特）</td>
+              <td>出海GMV年化5亿+</td>
+            </tr>
+            <tr>
+              <td>私域生态成型</td>
+              <td>AI私域用户500万，形成独立流量闭环，降低外部投流依赖</td>
+              <td>私域贡献营收2亿+</td>
+            </tr>
+            <tr>
+              <td>底座能力输出</td>
+              <td>探索向欧莱雅体系其他品牌输出AI底座能力，提升战略价值</td>
+              <td>平台化战略价值</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 4个目标指标卡片 -->
+    <div class="metrics-row" style="margin-top:24px;">
+      <div class="metric-card">
+        <div class="m-value">18<span style="font-size:14px;color:var(--txt-soft);font-weight:400;">月</span></div>
+        <div class="m-label">完整系统搭建周期</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-value">5亿+</div>
+        <div class="m-label">出海GMV年化目标</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-value">500万</div>
+        <div class="m-label">AI私域用户规模目标</div>
+      </div>
+      <div class="metric-card">
+        <div class="m-value">5–10×</div>
+        <div class="m-label">双引擎综合ROI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     页脚
+══════════════════════════════════════════ -->
+<footer class="report-footer">
+  <div class="footer-logo">自 然 堂</div>
+  <div class="footer-tagline">CHANDO · 喜马拉雅天际蓝 · 出海增长 × AI私域双引擎</div>
+  <div class="footer-gold-line"></div>
+  <div class="footer-note">
+    本报告基于公开数据、行业研究及AI智能体能力分析综合撰写。<br>
+    数据仅供战略参考，实际执行中建议结合自然堂内部数据进行精细化校准。<br>
+    © 2026 战略研究报告 · 管理层决策参考
+  </div>
+</footer>
+
+<script>
+// 导航高亮：滚动时激活对应章节
+(function() {
+  const navLinks = document.querySelectorAll('.toc-nav li a');
+  const sections = ['exec','ch1','ch2','ch3','ch4','ch5','ch6','ch7']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  function onScroll() {
+    const scrollY = window.scrollY + 80;
+    let current = '';
+    sections.forEach(sec => {
+      if (sec.offsetTop <= scrollY) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // 条形图动画：进入视口时触发
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.hbar-fill').forEach(el => {
+    el.style.animationPlayState = 'paused';
+    observer.observe(el);
+  });
+})();
+</script>
+
+</body>
+</html>
