@@ -100,7 +100,7 @@ async function callAnthropic(
     },
     body: JSON.stringify({
       model,
-      max_tokens: 512,
+      max_tokens: 1024,
       system: SYSTEM_PROMPT,
       messages,
       stream: true,
@@ -141,7 +141,7 @@ async function callOpenAI(
     },
     body: JSON.stringify({
       model,
-      max_tokens: 512,
+      max_tokens: 1024,
       messages: [{ role: 'system', content: SYSTEM_PROMPT }, ...messages],
       stream: true,
     }),

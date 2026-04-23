@@ -118,13 +118,18 @@
       }
 
       if (full) history.push({ role: 'assistant', content: full });
-      else assistantDiv.textContent = '出错了，请重试';
+      else {
+        assistantDiv.textContent = '出错了：上游无返回内容';
+        assistantDiv.classList.add('error');
+      }
     } catch (e: any) {
       if (gotAny) {
         assistantDiv.textContent = full + '（连接中断）';
         history.push({ role: 'assistant', content: full });
       } else {
-        assistantDiv.textContent = '出错了，请重试';
+        const msg = e?.message ? String(e.message).slice(0, 200) : '未知错误';
+        assistantDiv.textContent = `出错了：${msg}`;
+        assistantDiv.classList.add('error');
         history.pop();
       }
     } finally {
