@@ -202,6 +202,16 @@ main {
   background: var(--primary);
   border-radius: 2px;
 }
+.nav-links a.lang-switch {
+  margin-left: .25rem;
+  border: 1px solid var(--border, rgba(0,0,0,.1));
+  border-radius: 999px;
+  padding: .25rem .7rem;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.nav-links a.lang-switch:hover { border-color: var(--primary); color: var(--primary-ink); }
 
 /* ============================================================
    Footer

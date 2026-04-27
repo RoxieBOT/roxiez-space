@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { getLangFromUrl, useTranslations } from '../i18n/ui';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/ui';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -68,11 +68,9 @@ const links = [
 
   document.querySelectorAll<HTMLAnchorElement>('a.link-card').forEach((card) => {
     const action = card.dataset.action;
-
     if (action === 'wechat') {
       card.addEventListener('click', (e) => { e.preventDefault(); openWechat(); });
     }
-
     if (action === 'open-chat') {
       card.addEventListener('click', (e) => {
         e.preventDefault();

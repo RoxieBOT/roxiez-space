@@ -1,13 +1,18 @@
 ---
 import NavBar from '../components/NavBar.astro';
 import ChatWidget from '../components/ChatWidget.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/ui';
 import '../styles/global.css';
 
 interface Props { title?: string; description?: string; }
-const { title = "Roxiez 的数字空间 · Roxie's Space", description = 'Roxiez 的个人站点：营销、GEO、洞察报告与前沿 AI 部署。' } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { title = t('site.title'), description = t('site.description') } = Astro.props;
+const htmlLang = lang === 'en' ? 'en' : 'zh-CN';
 ---
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang={htmlLang}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,14 +22,14 @@ const { title = "Roxiez 的数字空间 · Roxie's Space", description = 'Roxiez
   <title>{title}</title>
 </head>
 <body>
-  <a href="#main" class="skip-link">跳到主内容</a>
+  <a href="#main" class="skip-link">{t('site.skipLink')}</a>
   <header class="site-header">
     <NavBar />
   </header>
   <main id="main">
     <slot />
   </main>
-  <footer>&copy; {new Date().getFullYear()} Roxiez · Roxie's Space</footer>
+  <footer>&copy; {new Date().getFullYear()} {t('site.footer')}</footer>
   <ChatWidget />
 </body>
 </html>

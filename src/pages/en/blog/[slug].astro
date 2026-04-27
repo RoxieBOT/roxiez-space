@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getLangFromUrl, useTranslations } from '../../../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const postFiles = import.meta.glob('../../../content/blog/*.md', { eager: true }) as Record<string, any>;
+const slug = Astro.params.slug;
+const entry = Object.entries(postFiles).find(([path]) => path.split('/').pop()?.replace('.md', '') === slug);
+
+if (!entry) return Astro.redirect('/en/blog');
+
+const mod = entry[1] as any;
+const Content = mod.Content;
+const { title, pubDate } = mod.frontmatter;
+---
+<BaseLayout title={`${title} · Roxie's Space`}>
+  <article class="prose">
+    <div class="lang-notice">{t('blog.postNotice')}</div>
+    <h1>{title}</h1>
+    <div class="post-meta">
+      <time datetime={new Date(pubDate).toISOString()}>
+        {new Date(pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+      </time>
+    </div>
+    <hr class="divider" />
+    <Content />
+  </article>
+</BaseLayout>
+
+<style>
+  .lang-notice {
+    background: rgba(0, 0, 0, .04);
+    border-left: 3px solid var(--primary, #c38a52);
+    padding: .75rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 6px;
+    font-size: .9rem;
+    color: var(--text-muted, #666);
+    line-height: 1.5;
+  }
+</style>

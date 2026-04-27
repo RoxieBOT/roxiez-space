@@ -1,25 +1,44 @@
 ---
+import { getLangFromUrl, useTranslations, switchLangPath, localizedPath } from '../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const currentPath = Astro.url.pathname;
+
 const links = [
-  { href: '/', label: '首页' },
-  { href: '/works', label: '作品集' },
-  { href: '/blog', label: '博客' },
-  { href: '/links', label: '链接' },
+  { key: 'nav.home' as const, path: '/' },
+  { key: 'nav.works' as const, path: '/works' },
+  { key: 'nav.blog' as const, path: '/blog' },
+  { key: 'nav.links' as const, path: '/links' },
 ];
-const isActive = (href: string) =>
-  href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+
+const isActive = (path: string) => {
+  const localized = localizedPath(path, lang);
+  return localized === '/' || localized === `/${lang === 'en' ? 'en' : ''}`
+    ? currentPath === localized
+    : currentPath === localized || currentPath.startsWith(`${localized}/`);
+};
+
+const altPath = switchLangPath(currentPath, lang);
 ---
 <nav class="navbar" aria-label="主导航">
-  <a class="logo" href="/">Roxiez<span class="logo-tail"> · Roxie's Space</span></a>
+  <a class="logo" href={localizedPath('/', lang)}>Roxiez<span class="logo-tail"> · Roxie's Space</span></a>
   <ul class="nav-links">
-    {links.map(l => (
-      <li>
-        <a
-          href={l.href}
-          class={isActive(l.href) ? 'active' : ''}
-          aria-current={isActive(l.href) ? 'page' : undefined}
-        >{l.label}</a>
-      </li>
-    ))}
+    {links.map(l => {
+      const href = localizedPath(l.path, lang);
+      const active = isActive(l.path);
+      return (
+        <li>
+          <a
+            href={href}
+            class={active ? 'active' : ''}
+            aria-current={active ? 'page' : undefined}
+          >{t(l.key)}</a>
+        </li>
+      );
+    })}
+    <li>
+      <a class="lang-switch" href={altPath} aria-label={t('nav.langSwitch.aria')}>{t('nav.langSwitch')}</a>
+    </li>
   </ul>
 </nav>

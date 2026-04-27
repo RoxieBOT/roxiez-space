@@ -1,16 +1,19 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/ui';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
-<button class="chat-bubble" id="chat-toggle" aria-label="打开聊天">💬</button>
+<button class="chat-bubble" id="chat-toggle" aria-label={t('chat.bubbleAria')}>💬</button>
 <div class="chat-window hidden" id="chat-window">
   <div class="chat-header">
-    <span>Roxiez 的 AI 分身</span>
-    <button id="chat-close" aria-label="关闭">&times;</button>
+    <span>{t('chat.title')}</span>
+    <button id="chat-close" aria-label={t('chat.closeAria')}>&times;</button>
   </div>
   <div class="chat-messages" id="chat-messages">
-    <div class="chat-msg assistant">嗨，我是 Roxiez 的 AI 分身。营销、GEO、AI 部署 —— 想聊什么直接说。</div>
+    <div class="chat-msg assistant">{t('chat.greeting')}</div>
   </div>
   <div class="chat-input-area">
-    <input id="chat-input" type="text" placeholder="输入消息..." autocomplete="off" />
+    <input id="chat-input" type="text" placeholder={t('chat.placeholder')} autocomplete="off" />
     <button id="chat-send">➤</button>
   </div>
 </div>

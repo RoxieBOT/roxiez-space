@@ -6,4 +6,11 @@ export default defineConfig({
   output: 'server',
   adapter: netlify(),
   integrations: [mdx()],
+  i18n: {
+    defaultLocale: 'zh',
+    locales: ['zh', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
 });

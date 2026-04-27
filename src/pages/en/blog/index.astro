@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { getLangFromUrl, useTranslations } from '../../../i18n/ui';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const postFiles = import.meta.glob('../../../content/blog/*.md', { eager: true }) as Record<string, any>;
+const posts = Object.entries(postFiles).map(([path, mod]) => ({
+  slug: path.split('/').pop()?.replace('.md', '') ?? '',
+  ...mod.frontmatter,
+}));
+posts.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+---
+<BaseLayout title={t('blog.metaTitle')}>
+  <h1 class="page-title">{t('blog.title')}</h1>
+  <p class="page-subtitle">{t('blog.empty')}</p>
+  <div class="card-grid">
+    {posts.map(post => (
+      <BlogCard
+        title={post.title}
+        description={post.description}
+        pubDate={new Date(post.pubDate).toLocaleDateString('en-US')}
+        slug={post.slug}
+      />
+    ))}
+  </div>
+</BaseLayout>

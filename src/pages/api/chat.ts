@@ -50,27 +50,63 @@ function jsonError(message: string, status = 500) {
   });
 }
 
+function getClientIp(request: Request): string {
+  const h = request.headers;
+  return (
+    h.get('x-nf-client-connection-ip') ||
+    h.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    h.get('x-real-ip') ||
+    'unknown'
+  );
+}
+
+function logUsage(payload: Record<string, unknown>) {
+  console.log(JSON.stringify({ tag: 'chat', ts: new Date().toISOString(), ...payload }));
+}
+
 export const POST: APIRoute = async ({ request }) => {
+  const startedAt = Date.now();
+  const ip = getClientIp(request);
+  const ua = request.headers.get('user-agent') || 'unknown';
+
   let messages: any;
   try {
     ({ messages } = await request.json());
   } catch {
+    logUsage({ event: 'bad_json', ip });
     return jsonError('请求体不是合法的 JSON', 400);
   }
   if (!Array.isArray(messages) || messages.length === 0) {
+    logUsage({ event: 'empty_messages', ip });
     return jsonError('messages 不能为空', 400);
   }
+
+  const lastMsg = messages[messages.length - 1];
+  const lastText = typeof lastMsg?.content === 'string' ? lastMsg.content : '';
+
+  logUsage({
+    event: 'request',
+    ip,
+    ua: ua.slice(0, 80),
+    provider: PROVIDER,
+    turns: messages.length,
+    lastLen: lastText.length,
+    lastPreview: lastText.slice(0, 50),
+  });
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 25_000);
 
   try {
-    if (PROVIDER === 'openai') {
-      return await callOpenAI(messages, controller, timeout);
-    }
-    return await callAnthropic(messages, controller, timeout);
+    const res =
+      PROVIDER === 'openai'
+        ? await callOpenAI(messages, controller, timeout)
+        : await callAnthropic(messages, controller, timeout);
+    logUsage({ event: 'response', ip, status: res.status, ms: Date.now() - startedAt });
+    return res;
   } catch (e: any) {
     clearTimeout(timeout);
+    logUsage({ event: 'error', ip, err: e?.message || 'unknown', ms: Date.now() - startedAt });
     if (e?.name === 'AbortError') return jsonError('上游请求超时', 504);
     return jsonError(`上游网络错误: ${e?.message || 'unknown'}`, 502);
   }

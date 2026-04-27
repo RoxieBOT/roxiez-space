@@ -1,8 +1,11 @@
 ---
+import { getLangFromUrl, localizedPath } from '../i18n/ui';
 interface Props { title: string; description: string; pubDate: string; slug: string; }
 const { title, description, pubDate, slug } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const href = localizedPath(`/blog/${slug}`, lang);
 ---
-<a href={`/blog/${slug}`} class="card blog-card">
+<a href={href} class="card blog-card">
   <time>{pubDate}</time>
   <h3>{title}</h3>
   <p>{description}</p>
