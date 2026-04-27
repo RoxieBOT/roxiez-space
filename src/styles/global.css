@@ -505,6 +505,46 @@ footer {
   font-style: italic;
 }
 
+.prose .table-wrap,
+.prose > table {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  background: var(--bg-surface);
+  -webkit-overflow-scrolling: touch;
+}
+.prose table {
+  border-collapse: collapse;
+  font-size: .92rem;
+  display: table;
+  width: auto;
+  max-width: 100%;
+}
+.prose table thead {
+  background: var(--bg-subtle);
+}
+.prose table th {
+  padding: .7rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text);
+  border-bottom: 2px solid var(--border-strong);
+  white-space: nowrap;
+}
+.prose table td {
+  padding: .65rem 1rem;
+  color: var(--text-soft);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.prose table tbody tr:last-child td {
+  border-bottom: none;
+}
+.prose table tbody tr:hover {
+  background: var(--bg-hover);
+}
+
 /* ============================================================
    Chat Widget
    ============================================================ */
